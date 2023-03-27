@@ -169,7 +169,7 @@
         /* Style the accordion panel. Note: hidden by default */
         .panel {
             padding: 0px 40px;
-            width: 500px;
+            width: 100%;
             background-color: #29292f;
             color: #e6e6e6;
             font-size: 15px;
@@ -178,6 +178,12 @@
             line-height: 20px;
         }
         
+        .float-child {
+            width: 400px;
+            float: left;
+            padding: 25px;
+        }  
+
     </style>
     
 </head>
@@ -214,35 +220,43 @@
             line-height: 24px;
             padding-bottom:100px;"
             >
-
+            
             <button class="accordion">Capital One <span class="alt_text"><br>Data Analyst · May 2023 - Aug 2023</span></button>
             <div class="panel">
-                <p>Upcoming co-op role.</p>
+                <div class="float-child">Upcoming co-op role.
+                </div>
             </div>
             <button class="accordion">BA Consulting Group Ltd. <span class="alt_text"><br>Spatial Data Analyst · Jan 2023 - Apr 2023</span></button>
             <div class="panel">
-                <p>• Developing methodologies and tools utilizing an interactive webapp developed with Javascript and Mapbox GL JS to aid transportation planners in making informed decisions through the use of spatial analysis.</p>
+                <div class="float-child">Developing methodologies and tools utilizing an interactive webapp developed with Javascript and Mapbox GL JS to aid transportation planners in making informed decisions through the use of spatial analysis.
+                </div>
             </div>
             <button class="accordion">École polytechnique fédérale de Lausanne (EPFL) <span class="alt_text"><br>Research Intern · May 2022 - Jul 2022</span></button>
             <div class="panel">
-                <p>• Collaborated with Prof. Mathias Lerch in the Urban Demography lab to conduct in-depth exploratory spatial analysis using R and various packages such as sf, raster, and ggplot, utilizing a combination of raster and microdata to analyze demographic trends over different temporal periods.
-                <br><br>• Developed a methodology to categorize and assign sets of census polygons to functional urban areas in developing countries, resulting in a more accurate representation of demographic data, to be used in a future research publication.</p>
+                <div class="float-child">Collaborated with Prof. Mathias Lerch in the Urban Demography lab to conduct in-depth exploratory spatial analysis using R and various packages such as sf, raster, and ggplot, utilizing a combination of raster and microdata to analyze demographic trends over different temporal periods.
+                </div>
+                <div class="float-child">Developed a methodology to categorize and assign sets of census polygons to functional urban areas in developing countries, resulting in a more accurate representation of demographic data, to be used in a future research publication.
+                </div>
             </div>
             <button class="accordion">Region of Waterloo <span class="alt_text"><br>Engineering and Planning Student Coordinator · Sep 2021 - Dec 2021</span></button>
             <div class="panel">
-                <p>• Developed efficient workflows and methods using ArcGIS Pro to automate the identification and removal of extraneous line segments, reducing the runtime of water distribution model simulations and improving overall performance.
-                    <br><br>• Conducted data analysis using Python to compare and validate the accuracy of predicted discharge flow against calculated discharge flow, as well as identify deviations in discharge flow during water break events.</p>
+                <div class="float-child">Developed efficient workflows and methods using ArcGIS Pro to automate the identification and removal of extraneous line segments, reducing the runtime of water distribution model simulations and improving overall performance.
+                </div>
+                <div class="float-child">Conducted data analysis using Python to compare and validate the accuracy of predicted discharge flow against calculated discharge flow, as well as identify deviations in discharge flow during water break events.
+                </div>
             </div>
             <button class="accordion">Environment and Climate Change Canada <span class="alt_text"><br>Geospatial Technician · Jan 2021 - Apr 2021</span></button>
             <div class="panel">
-                <p>• Created multiple geoprocessing tools using ArcGIS ModelBuilder to streamline the analysis of vector features, and incorporated the results into an interactive dashboard using PowerBI for easy visualization and interpretation.
-                    <br><br>• Utilized NDVI and EVI rasters, accessed through NASA Earthdata, to assess vegetation levels in the wintering ranges of migratory birds. This research was <a href="https://doi.org/10.1139/cjz-2021-0207" class ='alt_link' target="_blank">published</a>, providing valuable insights on the habitats of these species.</p>
+                <div class="float-child"> Created multiple geoprocessing tools using ArcGIS ModelBuilder to streamline the analysis of vector features, and incorporated the results into an interactive dashboard using PowerBI for easy visualization and interpretation.
+                </div>
+                <div class="float-child">Utilized NDVI and EVI rasters, accessed through NASA Earthdata, to assess vegetation levels in the wintering ranges of migratory birds. This research was <a href="https://doi.org/10.1139/cjz-2021-0207" class ='alt_link' target="_blank">published</a>, providing valuable insights on the habitats of these species.
+                </div>
             </div>
             <button class="accordion">City of Peterborough <span class="alt_text"><br>Heritage GIS Student · May 2020 - Aug 2020</span></button>
             <div class="panel">
-                <p>
-                    • Refined and deployed an <a href="https://webmap.peterborough.ca/heritagewalkingtour/" class ='alt_link' target="_blank">interactive walking tour webapp</a> using ArcGIS Webapp Builder and ArcGIS Online, providing users with a dynamic and engaging way to explore a given historical interest.
-                </p>
+                <div class="float-child">
+                    Refined and deployed an <a href="https://webmap.peterborough.ca/heritagewalkingtour/" class ='alt_link' target="_blank">interactive walking tour webapp</a> using ArcGIS Webapp Builder and ArcGIS Online, providing users with a dynamic and engaging way to explore a given historical interest.
+                </div>
             </div>
         </div>
         
