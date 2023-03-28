@@ -4,7 +4,7 @@
     
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Andrew Ding</title>
     
@@ -37,11 +37,11 @@
         .alt_text { color: #949794;
             font-size: 15px; 
         } 
-
+        
         .alt_link { color: #949794;
             text-decoration:none;
         } 
-
+        
         .alt_link:hover { color: #e6e6e6;
         } 
         
@@ -127,7 +127,7 @@
             font-weight: 300;
             font-size: 20px;
             line-height: 24px;
-
+            
             animation: fadeIn 1.4s; 
         }
         
@@ -151,7 +151,7 @@
             line-height: 0.0em;
             margin-left: 5px;
         }
-
+        
         .accordion:hover::after {
             content: '+'; /* Unicode character for "plus" sign (+) */
             color: #e6e6e6;
@@ -160,7 +160,7 @@
         .active:after {
             content: "-"; /* Unicode character for "minus" sign (-) */
         }
-
+        
         .active:hover::after {
             content: "-";
             color: #e6e6e6;
@@ -183,7 +183,14 @@
             float: left;
             padding: 25px;
         }  
-
+        
+        @media only screen and (max-width: 600px) {
+            .float-child{
+                width:300px !important;
+                padding: 25px !important;
+            }
+        }
+        
     </style>
     
 </head>

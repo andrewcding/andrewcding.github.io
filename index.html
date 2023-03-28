@@ -32,23 +32,31 @@
         
         .link:hover { color: #949794; 
         }
+
+        .link2 { color: #e6e6e6; 
+            text-decoration:none;
+            line-height: 90px;
+        } 
+        
+        .link2:hover { color: #949794; 
+        }
         
         .more_btn { color: #949794; 
             text-decoration:none;
             cursor: default;
         } 
-
+        
         .more_btn:hover { color: #e6e6e6; 
         }
-
+        
         .more_btn_open { color: #949794; 
             text-decoration:none;
             cursor: pointer;
         } 
-
+        
         .more_btn_open:hover { color: #e6e6e6; 
         }
-
+        
         .side_open {
             position: absolute;
             left: 40px;
@@ -146,7 +154,71 @@
             20% { opacity: 0.02; }
             100% { opacity: 1; }
         }
-        
+
+        .big_links {
+            position: absolute;
+                width: 340px;
+                height: 77px;
+                left: 68.75%;
+                top: max(182px, 35%);
+                
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 30px;
+                line-height: 39px;
+                
+                color: #E6E6E6;
+        }
+
+        .desc {
+            position: absolute;
+                    width: 287px;
+                    height: 341px;
+                    left: 17.71%;
+                    top: max(150px, 32.1%);
+                    
+                    font-family: 'Inter';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 24px;
+                    
+                    color: #E6E6E6;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            .desc {
+                    top: max(100px, 15%);
+                    font-size: 20px;
+        }
+            .big_links{
+                left: 17.71%;
+                top: max(380px, calc(15% + 280px));
+                font-size: 20px;
+            }
+
+            .more_btn {
+                display: none;
+            } 
+
+            .bonus_btns {
+                display: block;
+                padding-bottom:30px;
+            } 
+            .link2 {
+            line-height: 50px;
+            } 
+
+            .side_open {
+            position: absolute;
+            left: 14%;
+            top: max(630px, calc(100% - 50px));
+            width: 400px;
+            height: 30px;
+            
+        } 
+        }
         
         
     </style>
@@ -154,7 +226,6 @@
 </head>
 <body>
     <main>
-        <div>
             <a href="./" class="link">
                 <div class ='text_down fade-in-text'>
                     <p style="position: absolute;
@@ -172,90 +243,68 @@
                     
                 </div>
             </a>
-            
-            <div class="text_up fade-in-text">
-                <p style="
-                position: absolute;
-                width: 287px;
-                height: 341px;
-                left: 17.71%;
-                top: 32.1%;
+            <div>
+                <div class="text_up fade-in-text desc">
+                    <p>
+                    I am currently a 4th year student at the University of Waterloo studying geomatics and mathematics.<br><br>
+                    My passion involves using data to enhance our society through a <span class="alt_text">geographic approach.</span>
+                </p>
+                </div>
                 
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 24px;
-                line-height: 29px;
-                
-                color: #E6E6E6;">
-                I am currently a 4th year student at the University of Waterloo studying geomatics and mathematics.<br><br>
-                My passion involves using data to enhance our society through a <span class="alt_text">geographic approach.</span> </p>
+                <div class="text_up fade-in-text big_links">
+
+                    <a class="link2 fade-in-text" href="./aboutme">
+                        about me
+                    </a> 
+                    <br>
+                    <a class="link2 fade-in-text" href="./experience">
+                        experience
+                    </a>
+                    <br>
+                    <a class="link2 fade-in-text" href="./achievements">
+                        achievements
+                    </a>
+
+                </div>
             </div>
-            
-            <span style="position: absolute;
-            width: 340px;
-            height: 77px;
-            left: 68.75%;
-            top: 35%;
-            
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 30px;
-            line-height: 39px;
-            
-            color: #E6E6E6;">
-            <a class="link fade-in-text" href="./aboutme">
-                about me
-            </a> 
-            <br><br><br>
-            <a class="link fade-in-text" href="./experience">
-                experience
+        <div class ='text_down fade-in-text'>
+            <a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
+                style="position: absolute;
+                width: 15px;
+                height: 15px;
+                right: 50px;
+                top: 40px;"></i>
             </a>
-            <br><br><br>
-            <a class="link fade-in-text" href="./achievements">
-                achievements
+            
+            <a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
+                style="position: absolute;
+                width: 15px;
+                height: 15px;
+                right: 90px;
+                top: 40px;"></i>
             </a>
-        </span>
-    </div>
-    <div class ='text_down fade-in-text'>
-        <a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
-            style="position: absolute;
-            width: 15px;
-            height: 15px;
-            right: 50px;
-            top: 40px;"></i>
-        </a>
+            
+        </div>
         
-        <a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
-            style="position: absolute;
-            width: 15px;
-            height: 15px;
-            right: 90px;
-            top: 40px;"></i>
-        </a>
+        <div class = 'side_open fade-in-text'>
+            <div class = 'more_btn'>
+                <span style = 'position: absolute;
+                left: 0px;
+                bottom: 0px;'>
+                +  
+            </span>
+            
+            </div>
         
-    </div>
-    
-<div class = 'side_open fade-in-text'>
-    <div class = 'more_btn'>
-        <span style = 'position: absolute;
-        left: 0px;
-        bottom: 0px;'>
-        +  
-    </span>
-
-    </div>
-
-<div class = 'bonus_btns' style = 'position: absolute;
-left: 20px;
-bottom: 0px;'>
-    <a class = 'more_btn_open' href="Resume (Mar 2023).pdf">resume</a>
-    <a class = 'more_btn_open' href="#">maps</a>
-    <a class = 'more_btn_open' href="#">travel</a>
-    <a class = 'more_btn_open' href="#">photo</a>
-    </div>
-</div>
+            <div class = 'bonus_btns' style = 'position: absolute;
+            left: 20px;
+            bottom: 0px;'>
+                <a class = 'more_btn_open' href="Resume (Mar 2023).pdf">resume</a>
+                <a class = 'more_btn_open' href="#">maps</a>
+                <a class = 'more_btn_open' href="#">travel</a>
+                <a class = 'more_btn_open' href="#">photo</a>
+            </div>
+        </div>
 
 
 </main>
