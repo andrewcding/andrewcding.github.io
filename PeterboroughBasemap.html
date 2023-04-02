@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Andrew Ding</title>
+	
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+	
+	<!-- Font Awesome-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
+	
+	<style>
+		:root { font-family: 'Inter', sans-serif; }
+		@supports (font-variation-settings: light) {
+			:root { font-family: 'Inter var', sans-serif; }
+		}
+		
+		body {
+			background-color: #29292f;
+			color: #e6e6e6;
+		}
+		
+		canvas {position: absolute; display:block; background:#29292f; top: max(100px, 9%); left: 7%; border:0px solid #949794}
+		
+		.link { color: #e6e6e6; 
+			text-decoration:none;
+		} 
+		
+		.link:hover { color: #949794; 
+		}
+		
+		.link2 { color: #e6e6e6; 
+			text-decoration:none;
+			line-height: 90px;
+		} 
+		
+		.link2:hover { color: #949794; 
+		}
+		
+		
+		
+		.alt_text { color: #949794; } 
+		
+		
+		.text_up p {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_up 1s ease-out; 
+		}
+		
+		.text_up hr {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_up 1s ease-out; 
+		}
+		
+		.text_down p {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_down 1s ease-out; 
+		}
+		
+		.text_down i {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_down 1s ease-out; 
+		}
+		
+		/* Move it (define the animation) */
+		@keyframes text_up {
+			0%   { 
+				transform: translateY(50%); 		
+			}
+			100% { 
+				transform: translateY(0%); 
+			}
+		}
+		
+		/* Move it (define the animation) */
+		@keyframes text_down {
+			0%   { 
+				transform: translateY(-100%); 		
+			}
+			100% { 
+				transform: translateY(0%); 
+			}
+		}
+		
+		.fade-in-text { animation: fadeIn 1.4s; }
+		
+		@keyframes fadeIn {
+			0% { opacity: 0.00; }
+			20% { opacity: 0.02; }
+			100% { opacity: 1; }
+		}
+		
+		.back_button {
+			background-color: #29292f;
+			color: #949794;
+			cursor: pointer;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 300;
+			font-size: 20px;
+			line-height: 24px;
+			border: none;
+			outline: none;
+			
+			animation: fadeIn 1.4s; 
+		}
+		
+		.back_button:hover {
+			color: #e6e6e6;
+		}
+		
+		/* Center the loader */
+		#loader {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 999;
+			width: 60px;
+			height: 60px;
+			margin: -76px 0 0 -76px;
+			border: 6px solid #f3f3f3;
+			border-radius: 50%;
+			border-top: 6px solid #3498db;
+			-webkit-animation: spin 2s linear infinite;
+			animation: spin 2s linear infinite;
+		}
+		
+		#cover-spin {
+			position:fixed;
+			width:100%;
+			left:0;right:0;top:0;bottom:0;
+			background-color: rgba(255,255,255,0.2);
+			z-index:998;
+		}
+		
+		@-webkit-keyframes spin {
+			0% { -webkit-transform: rotate(0deg); }
+			100% { -webkit-transform: rotate(360deg); }
+		}
+		
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		
+	</style>
+	
+</head>
+<body>
+		
+		<div id="cover-spin"></div>
+		<div id="loader"></div>
+		
+		<main>
+			<a href="./" class="link">
+				<div class ='text_down fade-in-text'>
+					<p style="position: absolute;
+					width: 186px;
+					height: 76px;
+					left: 38px;
+					top: 5px;
+					
+					font-family: 'Inter';
+					font-style: normal;
+					font-weight: 300;
+					font-size: 20px;
+					line-height: 24px;"
+					>Andrew<br>Ding.</p>
+					
+				</div>
+			</a>
+			
+			<div class ='text_down fade-in-text'>
+				<a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
+					style="position: absolute;
+					width: 15px;
+					height: 15px;
+					right: 50px;
+					top: 40px;"></i>
+				</a>
+				
+				<a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
+					style="position: absolute;
+					width: 15px;
+					height: 15px;
+					right: 90px;
+					top: 40px;"></i>
+				</a>
+				
+			</div>
+			
+			<canvas></canvas>
+			
+			<button style = 'position: absolute;
+			left: 20px;
+			bottom: 20px;
+			font-weight: 200;
+			font-size: 20px;
+			' class = 'back_button'
+			onclick="location.href='./maps'">
+			← </button> 
+			
+			
+			
+		</main>
+
+		<script>
+			
+			setTimeout(showPage, 1000);
+
+			function showPage() {
+				document.getElementById("loader").style.display = "none";
+				document.getElementById("cover-spin").style.display = "none";
+			}
+			
+			
+			var canvas = document.getElementsByTagName('canvas')[0];
+			canvas.width = window.innerWidth-0.15*window.innerWidth;
+			canvas.height = window.innerHeight-0.15*window.innerHeight;
+			
+			var gkhead = new Image;
+			
+			window.onresize = function(){
+				canvas.width = window.innerWidth-0.15*window.innerWidth;
+				canvas.height = window.innerHeight-0.15*window.innerHeight;
+				var ctx = canvas.getContext('2d');
+				trackTransforms(ctx);
+				ctx.scale(0.07,0.07);
+				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
+				
+				// Clear the entire canvas
+				var p1 = ctx.transformedPoint(0,0);
+				var p2 = ctx.transformedPoint(canvas.width,canvas.height);
+				ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
+				ctx.save();
+				ctx.setTransform(1,0,0,1,0,0);
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				ctx.restore();
+				
+				ctx.drawImage(gkhead,0,0);
+			}
+			
+			window.onload = function(){		
+				console.log(gkhead.width)
+				console.log(canvas.width)
+				var ctx = canvas.getContext('2d');
+				trackTransforms(ctx);
+				ctx.scale(0.07,0.07);
+				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
+				
+				function redraw(){
+					
+					// Clear the entire canvas
+					var p1 = ctx.transformedPoint(0,0);
+					var p2 = ctx.transformedPoint(canvas.width,canvas.height);
+					ctx.clearRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
+					ctx.save();
+					ctx.setTransform(1,0,0,1,0,0);
+					ctx.clearRect(0,0,canvas.width,canvas.height);
+					ctx.restore();
+					
+					ctx.drawImage(gkhead,0,0);
+					
+				}
+				redraw();
+				
+				var lastX=canvas.width/2, lastY=canvas.height/2;
+				
+				var dragStart,dragged;
+				
+				canvas.addEventListener('mousedown',function(evt){
+					document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+					lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+					lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+					dragStart = ctx.transformedPoint(lastX,lastY);
+					dragged = false;
+				},false);
+				
+				canvas.addEventListener('mousemove',function(evt){
+					lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+					lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+					dragged = true;
+					if (dragStart){
+						var pt = ctx.transformedPoint(lastX,lastY);
+						ctx.translate(pt.x-dragStart.x,pt.y-dragStart.y);
+						redraw();
+					}
+				},false);
+				
+				canvas.addEventListener('mouseup',function(evt){
+					dragStart = null;
+					if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
+				},false);
+				
+				var scaleFactor = 1.1;
+				
+				var zoom = function(clicks){
+					var pt = ctx.transformedPoint(lastX,lastY);
+					ctx.translate(pt.x,pt.y);
+					var factor = Math.pow(scaleFactor,clicks);
+					ctx.scale(factor,factor);
+					ctx.translate(-pt.x,-pt.y);
+					redraw();
+				}
+				
+				var handleScroll = function(evt){
+					var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.detail ? -evt.detail : 0;
+					if (delta) zoom(delta);
+					return evt.preventDefault() && false;
+				};
+				
+				canvas.addEventListener('DOMMouseScroll',handleScroll,false);
+				canvas.addEventListener('mousewheel',handleScroll,false);
+			};
+			
+			gkhead.src = 'https://github.com/andrewcding/andrewcding.github.io/raw/main/PeterboroughHeritageBaseMap.tif';
+			
+			// Adds ctx.getTransform() - returns an SVGMatrix
+			// Adds ctx.transformedPoint(x,y) - returns an SVGPoint
+			function trackTransforms(ctx){
+				var svg = document.createElementNS("http://www.w3.org/2000/svg",'svg');
+				var xform = svg.createSVGMatrix();
+				ctx.getTransform = function(){ return xform; };
+				
+				var savedTransforms = [];
+				var save = ctx.save;
+				ctx.save = function(){
+					savedTransforms.push(xform.translate(0,0));
+					return save.call(ctx);
+				};
+				
+				var restore = ctx.restore;
+				ctx.restore = function(){
+					xform = savedTransforms.pop();
+					return restore.call(ctx);
+				};
+				
+				var scale = ctx.scale;
+				ctx.scale = function(sx,sy){
+					xform = xform.scaleNonUniform(sx,sy);
+					return scale.call(ctx,sx,sy);
+				};
+				
+				var rotate = ctx.rotate;
+				ctx.rotate = function(radians){
+					xform = xform.rotate(radians*180/Math.PI);
+					return rotate.call(ctx,radians);
+				};
+				
+				var translate = ctx.translate;
+				ctx.translate = function(dx,dy){
+					xform = xform.translate(dx,dy);
+					return translate.call(ctx,dx,dy);
+				};
+				
+				var transform = ctx.transform;
+				ctx.transform = function(a,b,c,d,e,f){
+					var m2 = svg.createSVGMatrix();
+					m2.a=a; m2.b=b; m2.c=c; m2.d=d; m2.e=e; m2.f=f;
+					xform = xform.multiply(m2);
+					return transform.call(ctx,a,b,c,d,e,f);
+				};
+				
+				var setTransform = ctx.setTransform;
+				ctx.setTransform = function(a,b,c,d,e,f){
+					xform.a = a;
+					xform.b = b;
+					xform.c = c;
+					xform.d = d;
+					xform.e = e;
+					xform.f = f;
+					return setTransform.call(ctx,a,b,c,d,e,f);
+				};
+				
+				var pt  = svg.createSVGPoint();
+				ctx.transformedPoint = function(x,y){
+					pt.x=x; pt.y=y;
+					return pt.matrixTransform(xform.inverse());
+				}
+			}
+		</script>
+	</body>
+	</html>
