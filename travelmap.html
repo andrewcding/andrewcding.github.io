@@ -238,7 +238,7 @@
 		font-weight: 250;
 		font-size: 16px;
 		' class = 'control_buttons'
-		onclick="zoom = map.getZoom(); zoom = zoom += 1; map.setZoom(zoom);">
+		onclick="zoom = map.getZoom(); zoom = zoom += 1; map.flyTo({zoom: zoom});">
 		<i class="fa fa-magnifying-glass-plus"></i></button> 
 		
 		<button style = 'position: absolute;
@@ -247,7 +247,7 @@
 		font-weight: 250;
 		font-size: 16px;
 		' class = 'control_buttons'
-		onclick="zoom = map.getZoom(); zoom = zoom -= 1; map.setZoom(zoom);">
+		onclick="zoom = map.getZoom(); zoom = zoom -= 1; map.flyTo({zoom: zoom});">
 		<i class="fa fa-magnifying-glass-minus"></i></button> 
 		
 		<button style = 'position: absolute;
