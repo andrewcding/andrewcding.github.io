@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Andrew Ding</title>
+	
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+	
+	<!-- Font Awesome-->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
+	
+	<!-- Mapbox-->
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+	
+	<style>
+		:root { font-family: 'Inter', sans-serif; }
+		@supports (font-variation-settings: light) {
+			:root { font-family: 'Inter var', sans-serif; }
+		}
+		
+		body {
+			background-color: #29292f;
+			color: #e6e6e6;
+		}
+		
+		#map { position: absolute; top: 10%; bottom: 0%; width: 99%; }
+		
+		.link { color: #e6e6e6; 
+			text-decoration:none;
+		} 
+		
+		.link:hover { color: #949794; 
+		}
+		
+		.link2 { color: #e6e6e6; 
+			text-decoration:none;
+			line-height: 90px;
+		} 
+		
+		.link2:hover { color: #949794; 
+		}
+		
+		
+		
+		.alt_text { color: #949794; } 
+		
+		
+		.text_up p {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_up 1s ease-out; 
+		}
+		
+		.text_up hr {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_up 1s ease-out; 
+		}
+		
+		.text_down p {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_down 1s ease-out; 
+		}
+		
+		.text_down i {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			
+			/* Apply animation to this element */	
+			animation: text_down 1s ease-out; 
+		}
+		
+		/* Move it (define the animation) */
+		@keyframes text_up {
+			0%   { 
+				transform: translateY(50%); 		
+			}
+			100% { 
+				transform: translateY(0%); 
+			}
+		}
+		
+		/* Move it (define the animation) */
+		@keyframes text_down {
+			0%   { 
+				transform: translateY(-100%); 		
+			}
+			100% { 
+				transform: translateY(0%); 
+			}
+		}
+		
+		.fade-in-text { animation: fadeIn 1.4s; }
+		
+		@keyframes fadeIn {
+			0% { opacity: 0.00; }
+			20% { opacity: 0.02; }
+			100% { opacity: 1; }
+		}
+		
+		
+		
+	</style>
+	
+</head>
+<body>
+	<main>
+		<a href="./" class="link">
+			<div class ='text_down fade-in-text'>
+				<p style="position: absolute;
+				width: 186px;
+				height: 76px;
+				left: 38px;
+				top: 5px;
+				
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 300;
+				font-size: 20px;
+				line-height: 24px;"
+				>Andrew<br>Ding.</p>
+				
+			</div>
+		</a>
+		
+		<div class ='text_down fade-in-text'>
+			<a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
+				style="position: absolute;
+				width: 15px;
+				height: 15px;
+				right: 50px;
+				top: 40px;"></i>
+			</a>
+			
+			<a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
+				style="position: absolute;
+				width: 15px;
+				height: 15px;
+				right: 90px;
+				top: 40px;"></i>
+			</a>
+			
+		</div>
+		
+		<div id="map"></div>
+		
+		
+	</main>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kd29vIiwiYSI6ImNrMjlnYnNkdTEwMHozaG5wamJvZHJyangifQ.6M4eeri_Ubmo7NedQT7NuQ';
+		
+		const map = new mapboxgl.Map({
+			container: 'map', // container ID
+			// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+			style: 'mapbox://styles/mapbox/light-v11', // style URL
+			center: [0, 20], // starting position [lng, lat]
+			zoom: 2, // starting zoom
+			attributionControl: false
+		});
+		
+		map.on('style.load', () => {
+			map.setFog({
+				color: 'rgb(186, 210, 235)', // Lower atmosphere
+				'high-color': '#29292f', // Upper atmosphere
+				'horizon-blend': 0.02, // Atmosphere thickness (default 0.2 at low zooms)
+				'space-color': '#29292f', // Background color
+				'star-intensity': 0. // Background star brightness (default 0.35 at low zoooms )
+			});
+		});
+		
+		// The following values can be changed to control rotation speed:
+		
+		// At low zooms, complete a revolution every two minutes.
+		const secondsPerRevolution = 50;
+		// Above zoom level 5, do not rotate.
+		const maxSpinZoom = 5;
+		// Rotate at intermediate speeds between zoom levels 3 and 5.
+		const slowSpinZoom = 3;
+		
+		let userInteracting = false;
+		let spinEnabled = true;
+		
+		function spinGlobe() {
+			const zoom = map.getZoom();
+			if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+				let distancePerSecond = 360 / secondsPerRevolution;
+				if (zoom > slowSpinZoom) {
+					// Slow spinning at higher zooms
+					const zoomDif =
+					(maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+					distancePerSecond *= zoomDif;
+				}
+				const center = map.getCenter();
+				center.lng -= distancePerSecond;
+				// Smoothly animate the map over one second.
+				// When this animation is complete, it calls a 'moveend' event.
+				map.easeTo({ center, duration: 1000, easing: (n) => n });
+			}
+		}
+		
+		// Pause spinning on interaction
+		map.on('mousedown', () => {
+			userInteracting = true;
+		});
+		
+		// Restart spinning the globe when interaction is complete
+		map.on('mouseup', () => {
+			userInteracting = false;
+			spinGlobe();
+		});
+		
+		// These events account for cases where the mouse has moved
+		// off the map, so 'mouseup' will not be fired.
+		map.on('dragend', () => {
+			userInteracting = false;
+			spinGlobe();
+		});
+		map.on('pitchend', () => {
+			userInteracting = false;
+			spinGlobe();
+		});
+		map.on('rotateend', () => {
+			userInteracting = false;
+			spinGlobe();
+		});
+		
+		// When animation is complete, start spinning if there is no ongoing interaction
+		map.on('moveend', () => {
+			spinGlobe();
+		});
+
+		spinGlobe();
+	</script>
+</body>
+</html>
