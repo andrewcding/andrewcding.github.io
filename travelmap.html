@@ -48,7 +48,7 @@
 		.back_button:hover {
 			color: #e6e6e6;
 		}
-
+		
 		.control_buttons {
 			color: #949794;
 			cursor: pointer;
@@ -62,7 +62,7 @@
 		.control_buttons:hover {
 			color: #e6e6e6;
 		}
-
+		
 		#btn-spin {
 			background-color: #29292f;
 			color: #949794;
@@ -167,6 +167,14 @@
 			20% { opacity: 0.02; }
 			100% { opacity: 1; }
 		}
+
+		.map_label{
+            font-family: "Inter";
+            font-style: normal;
+			color: #29292f;
+            font-weight: 350;
+            font-size: 17px;
+		}
 		
 		
 	</style>
@@ -223,7 +231,7 @@
 		' class = 'back_button'
 		onclick="location.href='./maps'">
 		← </button> 
-
+		
 		<button style = 'position: absolute;
 		right: 95px;
 		bottom: 20px;
@@ -232,7 +240,7 @@
 		' class = 'control_buttons'
 		onclick="zoom = map.getZoom(); zoom = zoom += 1; map.setZoom(zoom);">
 		<i class="fa fa-magnifying-glass-plus"></i></button> 
-
+		
 		<button style = 'position: absolute;
 		right: 70px;
 		bottom: 20px;
@@ -241,7 +249,7 @@
 		' class = 'control_buttons'
 		onclick="zoom = map.getZoom(); zoom = zoom -= 1; map.setZoom(zoom);">
 		<i class="fa fa-magnifying-glass-minus"></i></button> 
-
+		
 		<button style = 'position: absolute;
 		right: 45px;
 		bottom: 20px;
@@ -250,7 +258,7 @@
 		' class = 'control_buttons'
 		onclick="spinEnabled = true; spinGlobe(); ">
 		<i class="fa fa-play"></i></button> 
-
+		
 		<button style = 'position: absolute;
 		right: 20px;
 		bottom: 20px;
@@ -274,7 +282,7 @@
 			zoom: zoom, // starting zoom
 			attributionControl: false,
 			maxZoom: 6,
-  			minZoom: 0
+			minZoom: 0
 			
 		});
 		
@@ -308,7 +316,12 @@
 					'fill-color' : ['match', ['get', 'Visited'], // get the property
 					0, '#e6e6e6',              
 					1, '#d6c8ae',              
-					'black']   
+					'black'] ,
+					"fill-opacity": ["case",
+					["boolean", ["feature-state", "hover"], false],
+					0.6,
+					1
+					] 
 				}         
 			});
 			
@@ -362,7 +375,7 @@
 				map.easeTo({ center, duration: 1000, easing: (n) => n });
 			}
 		}
-
+		
 		function resumeSpin() {
 			userInteracting = false;
 			spinGlobe();
@@ -403,10 +416,63 @@
 		map.on('moveend', () => {
 			spinGlobe();
 		});
-
+		
 		spinGlobe();
 		
+		// popups
+		
+		var popup = new mapboxgl.Popup({
+			closeButton: false,
+			closeOnClick: false
+		});
+		
+		var hoveredStateId = null;
 
+		map.on('mousemove', 'countries-fill', function (e) {
+			map.getCanvas().style.cursor = "pointer";
+			
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var country_name = e.features[0].properties.COUNTRY;
+			
+			// Populate the popup and set its coordinates
+			// based on the feature found.
+			popup.setLngLat(e.lngLat).setHTML(
+				"<span class = 'map_label'>"+country_name+"</span>").addTo(map);
+			
+			
+			if (hoveredStateId) {
+				map.setFeatureState({
+					source: 'countries_source',
+					id: hoveredStateId
+				}, {
+					hover: false
+				});
+			}
+			hoveredStateId = e.features[0].id;
+			map.setFeatureState({
+				source: 'countries_source',
+				id: hoveredStateId
+			}, {
+				hover: true
+			});
+			
+			
+		});
+		
+		map.on('mouseleave', 'countries-fill', function () {
+			map.getCanvas().style.cursor = '';
+			if (hoveredStateId) {
+				map.setFeatureState({
+					source: 'countries_source',
+					id: hoveredStateId
+				}, {
+					hover: false
+				});
+			}
+			hoveredStateId = null;
+			popup.remove();
+		});
+		
 		
 	</script>
 </body>
