@@ -249,7 +249,7 @@
 		font-size: 16px;
 		' class = 'control_buttons'
 		data-toggle="tooltip" data-html="true" data-placement = "left" title="<b>Map Information:</b><br>
-		<p>  This map was created as a side project to visualize the batheymetry of the 
+		<p>  This map was created as a side project to visualize the bathymetry of the 
 			<br> Great Lakes using a realistic style by incorporating water texture into the map.
 			<br>
 			<br> This page is fully interactive and can be zoomed and panned using the mouse.
@@ -284,14 +284,14 @@
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
 			});
-			
+
 			
 			var canvas = document.getElementsByTagName('canvas')[0];
 			canvas.width = window.innerWidth-0.15*window.innerWidth;
 			canvas.height = window.innerHeight-0.15*window.innerHeight;
 			
 			var gkhead = new Image;
-			
+
 			window.onresize = function(){
 				canvas.width = window.innerWidth-0.15*window.innerWidth;
 				canvas.height = window.innerHeight-0.15*window.innerHeight;
