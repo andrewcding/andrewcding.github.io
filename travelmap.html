@@ -167,15 +167,28 @@
 			20% { opacity: 0.02; }
 			100% { opacity: 1; }
 		}
-
+		
 		.map_label{
-            font-family: "Inter";
-            font-style: normal;
+			font-family: "Inter";
+			font-style: normal;
 			color: #29292f;
-            font-weight: 350;
-            font-size: 17px;
+			font-weight: 450;
+			font-size: 19px;
 		}
 		
+		.map_label2{
+			font-family: "Inter";
+			font-style: normal;
+			color: #29292f;
+			font-weight: 450;
+			font-size: 14px;
+		}
+		
+		.tooltip-inner {
+			background-color: #29292f;
+			opacity: 1 !important;
+			padding: 10px;
+		}
 		
 	</style>
 	
@@ -233,7 +246,7 @@
 		← </button> 
 		
 		<button style = 'position: absolute;
-		right: 95px;
+		right: 120px;
 		bottom: 20px;
 		font-weight: 250;
 		font-size: 16px;
@@ -242,7 +255,7 @@
 		<i class="fa fa-magnifying-glass-plus"></i></button> 
 		
 		<button style = 'position: absolute;
-		right: 70px;
+		right: 95px;
 		bottom: 20px;
 		font-weight: 250;
 		font-size: 16px;
@@ -251,7 +264,7 @@
 		<i class="fa fa-magnifying-glass-minus"></i></button> 
 		
 		<button style = 'position: absolute;
-		right: 45px;
+		right: 70px;
 		bottom: 20px;
 		font-weight: 250;
 		font-size: 16px;
@@ -260,17 +273,50 @@
 		<i class="fa fa-play"></i></button> 
 		
 		<button style = 'position: absolute;
-		right: 20px;
+		right: 45px;
 		bottom: 20px;
 		font-weight: 250;
 		font-size: 16px;
 		' class = 'control_buttons'
 		onclick="spinEnabled = false; spinGlobe();">
 		<i class="fa fa-pause"></i></button> 
+
+		<button style = 'position: absolute;
+		right: 20px;
+		bottom: 20px;
+		font-weight: 250;
+		font-size: 16px;
+		' class = 'control_buttons'
+		data-toggle="tooltip" data-html="true" data-placement = "left" title="<b>Map Information:</b><br>
+		<p>Welcome to my travel map! This map shows all the places I have visited.
+			<br> The ✦ symbol denotes places I have lived in. 
+			<br>
+			<br> Pause the rotation by pressing space or clicking the pause button. 
+			<br> Alternatively, the rotation will automatically be paused past a certain zoom.
+			<br> Use the scroll wheel or the zoom buttons to zoom in and out of the map. 
+			<br> For more info on a point or country, hover over it.</p>">
+		<i class="fa-solid fa-question"></i></button> 
 		
 		
 	</main>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+
+
 	<script>
+
+$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();   
+		});
+
 		mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kd29vIiwiYSI6ImNrMjlnYnNkdTEwMHozaG5wamJvZHJyangifQ.6M4eeri_Ubmo7NedQT7NuQ';
 		
 		var zoom = 2;
@@ -299,6 +345,7 @@
 		
 		map.on('load', async () => {
 			
+			// COUNTRIES -----------------------------------
 			map.addSource("countries_source", {
 				"type": "geojson",
 				"data": "https://andrewding.ca/jsons/Countries_Visited.geojson"
@@ -344,14 +391,79 @@
 				}
 			});
 			
+			// PLACES -----------------------------------
+			
+			map.addSource("places_source", {
+				"type": "geojson",
+				"data": "https://andrewding.ca/jsons/Places_Visited.geojson"
+			});
+			
+			map.addLayer({
+				'id': 'places_point',
+				'type': 'circle',	
+				'source': 'places_source',
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					'circle-color': '#736854',
+					'circle-radius': 2
+				}
+			});
+
+			// this layer makes it easier to hover over a point, by making an invisible point with larger radius
+			map.addLayer({
+				'id': 'places_visited',
+				'type': 'circle',	
+				'source': 'places_source',
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					// if lived, make it match background colour (colour of country) to hide popup
+					'circle-color': ['match', ['get', 'Lived'], // get the property
+					0, '#736854',              
+					1, '#d6c8ae',              
+					'#736854'],
+					'circle-radius': ["case",
+					["boolean", ["feature-state", "hover"], false],
+					8,
+					8
+					],
+					'circle-opacity': ["case",
+					["boolean", ["feature-state", "hover"], false],
+					1,
+					0
+					]  
+				}
+			});
+			
+			map.addLayer({
+				'id': 'places_lived',
+				'type': 'symbol',	
+				'source': 'places_source',
+				'layout': {
+					'visibility': 'visible',
+					'text-field': '✦',
+					'text-size': 12
+				},
+				'paint': {
+					'text-color': '#fff',
+					'text-halo-color': '#000',
+					'text-halo-width': 0.5
+				}
+			});
+			
+			map.setFilter('places_lived', ['==', ['get', 'Lived'], 1]);
+			
 		});
 		
 		// The following values can be changed to control rotation speed:
 		
 		// At low zooms, complete a revolution every two minutes.
-		const secondsPerRevolution = 50;
+		const secondsPerRevolution = 60;
 		// Above zoom level 8, do not rotate.
-		const maxSpinZoom = 8;
+		const maxSpinZoom = 5;
 		// Rotate at intermediate speeds between zoom levels 3 and 5.
 		const slowSpinZoom = 3;
 		
@@ -379,6 +491,22 @@
 		function resumeSpin() {
 			userInteracting = false;
 			spinGlobe();
+		}
+		
+		document.body.onkeyup = function(e) {
+			if (e.key == " " ||
+			e.code == "Space" ||      
+			e.keyCode == 32      
+			) {
+
+				if(spinEnabled){
+					spinEnabled = false;
+					spinGlobe();
+				} else {
+					spinEnabled = true;
+					resumeSpin()	
+				}
+			}
 		}
 		
 		// Pause spinning on interaction
@@ -427,51 +555,107 @@
 		});
 		
 		var hoveredStateId = null;
-
+		var hoveredStateId2 = null;
+		
+		
 		map.on('mousemove', 'countries-fill', function (e) {
-			map.getCanvas().style.cursor = "pointer";
-			
-			var coordinates = e.features[0].geometry.coordinates.slice();
-			var country_name = e.features[0].properties.COUNTRY;
-			
-			// Populate the popup and set its coordinates
-			// based on the feature found.
-			popup.setLngLat(e.lngLat).setHTML(
+
+				map.getCanvas().style.cursor = "pointer";
+				
+				var coordinates = e.features[0].geometry.coordinates.slice();
+				var country_name = e.features[0].properties.COUNTRY;
+				
+				// Populate the popup and set its coordinates
+				// based on the feature found.
+				popup.setLngLat(e.lngLat).setHTML(
 				"<span class = 'map_label'>"+country_name+"</span>").addTo(map);
-			
-			
-			if (hoveredStateId) {
+				
+				
+				if (hoveredStateId) {
+					map.setFeatureState({
+						source: 'countries_source',
+						id: hoveredStateId
+					}, {
+						hover: false
+					});
+				}
+				hoveredStateId = e.features[0].id;
 				map.setFeatureState({
 					source: 'countries_source',
 					id: hoveredStateId
 				}, {
-					hover: false
+					hover: true
 				});
-			}
-			hoveredStateId = e.features[0].id;
-			map.setFeatureState({
-				source: 'countries_source',
-				id: hoveredStateId
-			}, {
-				hover: true
-			});
+				
+			
+		});
+		
+		
+		map.on('mouseleave', 'countries-fill', function () {
+
+				map.getCanvas().style.cursor = '';
+				if (hoveredStateId) {
+					map.setFeatureState({
+						source: 'countries_source',
+						id: hoveredStateId
+					}, {
+						hover: false
+					});
+				}
+				hoveredStateId = null;
+				popup.remove();
+
+		});
+		
+		
+		map.on('mousemove', 'places_visited', function (e) {
+
+				map.getCanvas().style.cursor = "pointer";
+				
+				var coordinates = e.features[0].geometry.coordinates.slice();
+				var place_name = e.features[0].properties.PlaceName;
+				
+				// Populate the popup and set its coordinates
+				// based on the feature found.
+				popup.setLngLat(e.lngLat).setHTML(
+				"<b class = 'map_label2'>"+place_name+"</b>").addTo(map);
+				
+				if (hoveredStateId2) {
+					map.setFeatureState({
+						source: 'places_source',
+						id: hoveredStateId2
+					}, {
+						hover: false
+					});
+				}
+				hoveredStateId2 = e.features[0].id;
+				map.setFeatureState({
+					source: 'places_source',
+					id: hoveredStateId2
+				}, {
+					hover: true
+				});
 			
 			
 		});
 		
-		map.on('mouseleave', 'countries-fill', function () {
-			map.getCanvas().style.cursor = '';
-			if (hoveredStateId) {
-				map.setFeatureState({
-					source: 'countries_source',
-					id: hoveredStateId
-				}, {
-					hover: false
-				});
-			}
-			hoveredStateId = null;
-			popup.remove();
+		map.on('mouseleave', 'places_visited', function () {
+
+				map.getCanvas().style.cursor = '';
+				if (hoveredStateId2) {
+					map.setFeatureState({
+						source: 'places_source',
+						id: hoveredStateId2
+					}, {
+						hover: false
+					});
+				}
+				hoveredStateId2 = null;
+				popup.remove();
+			
 		});
+		
+		
 		
 		
 	</script>
