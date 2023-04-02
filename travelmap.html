@@ -248,7 +248,7 @@
 		font-weight: 250;
 		font-size: 16px;
 		' class = 'control_buttons'
-		onclick="spinEnabled = true; spinGlobe(); map.scrollZoom.disable();">
+		onclick="spinEnabled = true; spinGlobe(); ">
 		<i class="fa fa-play"></i></button> 
 
 		<button style = 'position: absolute;
@@ -257,7 +257,7 @@
 		font-weight: 250;
 		font-size: 16px;
 		' class = 'control_buttons'
-		onclick="spinEnabled = false; spinGlobe(); map.scrollZoom.enable();">
+		onclick="spinEnabled = false; spinGlobe();">
 		<i class="fa fa-pause"></i></button> 
 		
 		
@@ -333,8 +333,6 @@
 			
 		});
 		
-		map.scrollZoom.disable();
-		
 		// The following values can be changed to control rotation speed:
 		
 		// At low zooms, complete a revolution every two minutes.
@@ -364,10 +362,20 @@
 				map.easeTo({ center, duration: 1000, easing: (n) => n });
 			}
 		}
+
+		function resumeSpin() {
+			userInteracting = false;
+			spinGlobe();
+		}
 		
 		// Pause spinning on interaction
 		map.on('mousedown', () => {
 			userInteracting = true;
+		});
+		
+		map.on('wheel', (e) => {
+			userInteracting = true;
+			setTimeout(resumeSpin, 200);
 		});
 		
 		// Restart spinning the globe when interaction is complete
