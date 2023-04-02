@@ -242,13 +242,15 @@
 			
 			var gkhead = new Image;
 			
+            var scaleInit = 0.4;
+
 			window.onresize = function(){
 				canvas.width = window.innerWidth-0.15*window.innerWidth;
 				canvas.height = window.innerHeight-0.15*window.innerHeight;
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
-				ctx.scale(0.07,0.07);
-				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
+				ctx.scale(scaleInit,scaleInit);
+				ctx.translate((canvas.width-gkhead.width*scaleInit)*2, -canvas.height*2);
 				
 				// Clear the entire canvas
 				var p1 = ctx.transformedPoint(0,0);
@@ -267,8 +269,8 @@
 				console.log(canvas.width)
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
-				ctx.scale(0.07,0.07);
-				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
+				ctx.scale(scaleInit,scaleInit);
+				ctx.translate((canvas.width-gkhead.width*scaleInit)*2, -canvas.height*2);
 				
 				function redraw(){
 					
@@ -315,6 +317,7 @@
 				},false);
 				
 				var scaleFactor = 1.1;
+                var minFactor = 0.2;
 				
 				var zoom = function(clicks){
 					var pt = ctx.transformedPoint(lastX,lastY);

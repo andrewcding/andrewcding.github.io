@@ -205,6 +205,8 @@
 			zoom: 2, // starting zoom
 			attributionControl: false
 		});
+
+		map.scrollZoom.disable();
 		
 		map.on('style.load', () => {
 			map.setFog({
