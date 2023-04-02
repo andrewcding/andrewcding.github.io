@@ -164,6 +164,27 @@
 			0% { transform: rotate(0deg); }
 			100% { transform: rotate(360deg); }
 		}
+
+				
+		.control_buttons {
+			color: #949794;
+			cursor: pointer;
+			border: none;
+			background: none;
+			outline: none;
+			
+			animation: fadeIn 1.4s; 
+		}
+		
+		.control_buttons:hover {
+			color: #e6e6e6;
+		}
+
+		.tooltip-inner {
+			background-color: #29292f;
+			opacity: 1 !important;
+			padding: 10px;
+		}
 		
 	</style>
 	
@@ -221,19 +242,51 @@
 			' class = 'back_button'
 			onclick="location.href='./maps'">
 			← </button> 
+
+			<button style = 'position: absolute;
+			right: 20px;
+			bottom: 20px;
+			font-weight: 250;
+			font-size: 16px;
+			' class = 'control_buttons'
+			data-toggle="tooltip" data-html="true" data-placement = "left" title="<b>Map Information:</b><br>
+				<p>  This historical styled basemap was created during my work term as a 
+				<br> Heritage GIS Student while working at the City of Peterborough.
+				<br> 
+				<br> Due to file size constraints, only a portion of the basemap is shown.
+				<br> This page is fully interactive and can be zoomed and panned using the mouse.
+				<br> This map was created in Summer 2020 using ArcGIS Pro and Photoshop.</p>">
+			<i class="fa-solid fa-question"></i></button> 
 			
 			
 			
 		</main>
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
 		<script>
+
 			
+
 			setTimeout(showPage, 1000);
 
 			function showPage() {
 				document.getElementById("loader").style.display = "none";
 				document.getElementById("cover-spin").style.display = "none";
 			}
+
+			$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();   
+		});
+			
 			
 			
 			var canvas = document.getElementsByTagName('canvas')[0];

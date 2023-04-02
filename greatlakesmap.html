@@ -165,75 +165,125 @@
 			100% { transform: rotate(360deg); }
 		}
 		
+		.control_buttons {
+			color: #949794;
+			cursor: pointer;
+			border: none;
+			background: none;
+			outline: none;
+			
+			animation: fadeIn 1.4s; 
+		}
+		
+		.control_buttons:hover {
+			color: #e6e6e6;
+		}
+		
+		.tooltip-inner {
+			background-color: #29292f;
+			opacity: 1 !important;
+			padding: 10px;
+		}
+		
 	</style>
 	
 </head>
 <body>
-		
-		<div id="cover-spin"></div>
-		<div id="loader"></div>
-		
-		<main>
-			<a href="./" class="link">
-				<div class ='text_down fade-in-text'>
-					<p style="position: absolute;
-					width: 186px;
-					height: 76px;
-					left: 38px;
-					top: 5px;
-					
-					font-family: 'Inter';
-					font-style: normal;
-					font-weight: 300;
-					font-size: 20px;
-					line-height: 24px;"
-					>Andrew<br>Ding.</p>
-					
-				</div>
-			</a>
-			
+	
+	<div id="cover-spin"></div>
+	<div id="loader"></div>
+	
+	<main>
+		<a href="./" class="link">
 			<div class ='text_down fade-in-text'>
-				<a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
-					style="position: absolute;
-					width: 15px;
-					height: 15px;
-					right: 50px;
-					top: 40px;"></i>
-				</a>
+				<p style="position: absolute;
+				width: 186px;
+				height: 76px;
+				left: 38px;
+				top: 5px;
 				
-				<a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
-					style="position: absolute;
-					width: 15px;
-					height: 15px;
-					right: 90px;
-					top: 40px;"></i>
-				</a>
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 300;
+				font-size: 20px;
+				line-height: 24px;"
+				>Andrew<br>Ding.</p>
 				
 			</div>
+		</a>
+		
+		<div class ='text_down fade-in-text'>
+			<a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
+				style="position: absolute;
+				width: 15px;
+				height: 15px;
+				right: 50px;
+				top: 40px;"></i>
+			</a>
 			
-			<canvas></canvas>
+			<a class="link" href="mailto:a8ding@uwaterloo.ca"><i class="fa-solid fa-envelope fa-lg"  
+				style="position: absolute;
+				width: 15px;
+				height: 15px;
+				right: 90px;
+				top: 40px;"></i>
+			</a>
 			
-			<button style = 'position: absolute;
-			left: 20px;
-			bottom: 20px;
-			font-weight: 200;
-			font-size: 20px;
-			' class = 'back_button'
-			onclick="location.href='./maps'">
-			← </button> 
+		</div>
+		
+		<canvas></canvas>
+		
+		<button style = 'position: absolute;
+		left: 20px;
+		bottom: 20px;
+		font-weight: 200;
+		font-size: 20px;
+		' class = 'back_button'
+		onclick="location.href='./maps'">
+		← </button> 
+		
+		<button style = 'position: absolute;
+		right: 20px;
+		bottom: 20px;
+		font-weight: 250;
+		font-size: 16px;
+		' class = 'control_buttons'
+		data-toggle="tooltip" data-html="true" data-placement = "left" title="<b>Map Information:</b><br>
+		<p>  This map was created as a side project to visualize the batheymetry of the 
+			<br> Great Lakes using a realistic style by incorporating water texture into the map.
+			<br>
+			<br> This page is fully interactive and can be zoomed and panned using the mouse.
+			<br> This map was created in December 2020 using ArcGIS Pro and Photoshop.</p>">
+			<i class="fa-solid fa-question"></i></button> 
 			
 			
 			
 		</main>
-
+		
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+		
+		
 		<script>
 			
 			setTimeout(showPage, 1000);
-
+			
 			function showPage() {
 				document.getElementById("loader").style.display = "none";
 				document.getElementById("cover-spin").style.display = "none";
 			}
+			
+			$(document).ready(function(){
+				$('[data-toggle="tooltip"]').tooltip();   
+			});
 			
 			
 			var canvas = document.getElementsByTagName('canvas')[0];
@@ -263,8 +313,6 @@
 			}
 			
 			window.onload = function(){		
-				console.log(gkhead.width)
-				console.log(canvas.width)
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
 				ctx.scale(0.07,0.07);
