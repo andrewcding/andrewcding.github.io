@@ -29,8 +29,27 @@
 			background-color: #29292f;
 			color: #e6e6e6;
 		}
+
+		.back_button {
+			background-color: #29292f;
+			color: #949794;
+			cursor: pointer;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 300;
+			font-size: 20px;
+			line-height: 24px;
+			border: none;
+			outline: none;
+			
+			animation: fadeIn 1.4s; 
+		}
 		
-		#map { position: absolute; top: 10%; bottom: 0%; width: 99%; }
+		.back_button:hover {
+			color: #e6e6e6;
+		}
+		
+		#map { position: absolute; top: 0; bottom: 0; width: 99%; }
 		
 		.link { color: #e6e6e6; 
 			text-decoration:none;
@@ -123,6 +142,8 @@
 </head>
 <body>
 	<main>
+		<div id="map"></div>
+
 		<a href="./" class="link">
 			<div class ='text_down fade-in-text'>
 				<p style="position: absolute;
@@ -160,7 +181,16 @@
 			
 		</div>
 		
-		<div id="map"></div>
+
+
+		<button style = 'position: absolute;
+		left: 15px;
+		bottom: 35px;
+		font-weight: 200;
+		font-size: 20px;
+		' class = 'back_button'
+		onclick="location.href='./maps'">
+		← </button> 
 		
 		
 	</main>
@@ -170,7 +200,7 @@
 		const map = new mapboxgl.Map({
 			container: 'map', // container ID
 			// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-			style: 'mapbox://styles/mapbox/light-v11', // style URL
+			style: 'mapbox://styles/andwoo/clfyuy060000701p957fa8iwz', // style URL w labels( mapbox://styles/mapbox/light-v11)
 			center: [0, 20], // starting position [lng, lat]
 			zoom: 2, // starting zoom
 			attributionControl: false
