@@ -26,7 +26,7 @@
 			color: #e6e6e6;
 		}
 		
-        canvas {position: absolute; display:block; margin:1em auto; background:#fff; border:1px solid #ccc; top: 20%; }
+        canvas {position: absolute; display:block; background:#29292f; top: 9%; left: 8%; }
 		
 		.link { color: #e6e6e6; 
 			text-decoration:none;
@@ -162,8 +162,8 @@
 	</main>
 	<script>
 		var canvas = document.getElementsByTagName('canvas')[0];
-	canvas.width = 800;
-canvas.height = 600;
+	    canvas.width = window.innerWidth-0.2*window.innerWidth;
+        canvas.height = window.innerHeight-0.15*window.innerHeight;
 
 	var gkhead = new Image;
 
@@ -171,6 +171,8 @@ canvas.height = 600;
     
 		    var ctx = canvas.getContext('2d');
 		    trackTransforms(ctx);
+            ctx.scale(0.07,0.07);
+            ctx.translate(canvas.width*2.7,canvas.height*0.8);
 		  
     function redraw(){
 
@@ -238,7 +240,7 @@ canvas.height = 600;
       canvas.addEventListener('mousewheel',handleScroll,false);
 	};
 
-	gkhead.src = 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png';
+	gkhead.src = 'https://github.com/andrewcding/andrewcding.github.io/raw/main/finalposter.jpg';
 	
 	// Adds ctx.getTransform() - returns an SVGMatrix
 	// Adds ctx.transformedPoint(x,y) - returns an SVGPoint
