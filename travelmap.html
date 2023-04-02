@@ -29,7 +29,7 @@
 			background-color: #29292f;
 			color: #e6e6e6;
 		}
-
+		
 		.back_button {
 			background-color: #29292f;
 			color: #949794;
@@ -46,6 +46,25 @@
 		}
 		
 		.back_button:hover {
+			color: #e6e6e6;
+		}
+
+		#btn-spin {
+			background-color: #29292f;
+			color: #949794;
+			cursor: pointer;
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 300;
+			font-size: 20px;
+			line-height: 24px;
+			border: none;
+			outline: none;
+			
+			animation: fadeIn 1.4s; 
+		}
+		
+		#btn-spin:hover {
 			color: #e6e6e6;
 		}
 		
@@ -136,14 +155,13 @@
 		}
 		
 		
-		
 	</style>
 	
 </head>
 <body>
 	<main>
 		<div id="map"></div>
-
+		
 		<a href="./" class="link">
 			<div class ='text_down fade-in-text'>
 				<p style="position: absolute;
@@ -181,8 +199,8 @@
 			
 		</div>
 		
-
-
+		
+		
 		<button style = 'position: absolute;
 		left: 15px;
 		bottom: 35px;
@@ -205,8 +223,7 @@
 			zoom: 2, // starting zoom
 			attributionControl: false
 		});
-
-		map.scrollZoom.disable();
+		
 		
 		map.on('style.load', () => {
 			map.setFog({
@@ -217,6 +234,52 @@
 				'star-intensity': 0. // Background star brightness (default 0.35 at low zoooms )
 			});
 		});
+		
+		map.on('load', async () => {
+			
+			map.addSource("countries_source", {
+				"type": "geojson",
+				"data": "https://andrewding.ca/jsons/Countries_Visited.geojson"
+			});
+			
+			map.addLayer(
+			{
+				'id': 'countries-fill',
+				'type': 'fill',
+				'source': 'countries_source',
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					'fill-color' : ['match', ['get', 'Visited'], // get the property
+					0, '#e6e6e6',              
+					1, '#d6c8ae',              
+					'black']   
+				}         
+			});
+			
+			map.addLayer({
+				'id': 'countries-border',
+				'type': 'line',	
+				'source': 'countries_source',
+				'layout': {
+					'visibility': 'visible'
+				},
+				'paint': {
+					'line-color': '#FFFFFF',
+					'line-width': [
+					'interpolate', 
+					['linear'], 
+					['zoom'],
+					10, 0.4, 
+					19, 1
+					]
+				}
+			});
+			
+		});
+		
+		map.scrollZoom.disable();
 		
 		// The following values can be changed to control rotation speed:
 		
@@ -280,6 +343,9 @@
 		});
 
 		spinGlobe();
+		
+
+		
 	</script>
 </body>
 </html>
