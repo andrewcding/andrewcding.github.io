@@ -3124,8 +3124,8 @@
       },
       "properties" : {
         "OBJECTID" : 187,
-        "PlaceName" : null,
-        "Country" : null,
+        "PlaceName" : "Neuschwanstein Castle",
+        "Country" : "Germany",
         "Lived" : 0
       }
     }

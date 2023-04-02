@@ -614,11 +614,12 @@ $(document).ready(function(){
 				
 				var coordinates = e.features[0].geometry.coordinates.slice();
 				var place_name = e.features[0].properties.PlaceName;
+				var country_name = e.features[0].properties.Country;
 				
 				// Populate the popup and set its coordinates
 				// based on the feature found.
 				popup.setLngLat(e.lngLat).setHTML(
-				"<b class = 'map_label2'>"+place_name+"</b>").addTo(map);
+				"<b class = 'map_label2'>"+place_name+', ' + country_name + "</b>").addTo(map);
 				
 				if (hoveredStateId2) {
 					map.setFeatureState({
