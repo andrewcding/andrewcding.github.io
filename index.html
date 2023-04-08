@@ -41,14 +41,6 @@
         .link2:hover { color: #949794; 
         }
         
-        .more_btn { color: #949794; 
-            text-decoration:none;
-            cursor: default;
-        } 
-        
-        .more_btn:hover { color: #e6e6e6; 
-        }
-        
         .more_btn_open { color: #949794; 
             text-decoration:none;
             cursor: pointer;
@@ -60,18 +52,18 @@
         .side_open {
             position: absolute;
             left: 40px;
-            bottom: 30px;
+            top: max(630px, calc(100% - 40px));
             width: 220px;
-            height: 30px;
+            height: 40px;
         } 
         
         .bonus_btns { color: #949794; 
             text-decoration:none;
             cursor: default;
-            display: none;
+            display: block;
             position: absolute;
-            left: 70px;
-            bottom: 40px;
+            left: 40px;
+            padding-bottom: 30px;
             z-index: 1;
         } 
         
@@ -186,6 +178,17 @@
             color: #E6E6E6;
         }
         
+        @media only screen and (max-width: 1000px) {
+            .desc {
+                font-size: 20px !important;
+                width: 210px !important;
+            }
+            .big_links{
+                top: max(152px, 32%);
+                font-size: 20px;
+            }
+        }
+
         @media only screen and (max-width: 700px) {
             
             .desc {
@@ -200,25 +203,15 @@
                 font-size: 20px;
             }
             
-            .more_btn {
-                display: none;
-            } 
-            
-            .bonus_btns {
-                display: block;
-                padding-bottom:30px;
-            } 
             .link2 {
                 line-height: 50px;
             } 
             
             .side_open {
                 position: absolute;
-                left: 12%;
-                top: max(630px, calc(100% - 50px));
+                left: 17.71%;
                 width: 218px;
                 height: 30px;
-                
             } 
         }
         
@@ -269,6 +262,7 @@
                 
             </div>
         </div>
+
         <div class ='text_down fade-in-text'>
             <a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
                 style="position: absolute;
@@ -289,17 +283,10 @@
         </div>
         
         <div class = 'side_open fade-in-text'>
-            <div class = 'more_btn'>
-                <span style = 'position: absolute;
-                left: 0px;
-                bottom: 0px;'>
-                +  
-            </span>
-            
-        </div>
+
         
         <div class = 'bonus_btns' style = 'position: absolute;
-        left: 20px;
+        left: 0px;
         bottom: 0px;'>
         <a class = 'more_btn_open' href="./pdfs/Resume (Mar 2023).pdf">resume</a>
         <a class = 'more_btn_open' href="./maps">maps</a>

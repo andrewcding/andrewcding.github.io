@@ -283,8 +283,12 @@
 			
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
-			});
 
+				$('button').tooltip().mouseover();
+				$("main").mousedown(function () {
+          			$('[data-toggle="tooltip"]').tooltip("hide");
+       			});
+			});
 			
 			var canvas = document.getElementsByTagName('canvas')[0];
 			canvas.width = window.innerWidth-0.15*window.innerWidth;
