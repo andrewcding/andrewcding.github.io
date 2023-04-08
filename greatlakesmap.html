@@ -253,6 +253,8 @@
 			<br> Great Lakes using a realistic style by incorporating water texture into the map.
 			<br>
 			<br> This page is fully interactive and can be zoomed and panned using the mouse.
+			<br> For optimal experience, it is recommended to access this page on a computer.
+			<br>
 			<br> This map was created in December 2020 using ArcGIS Pro and Photoshop.</p>">
 			<i class="fa-solid fa-question"></i></button> 
 			
@@ -283,11 +285,11 @@
 			
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
-
+				
 				$('button').tooltip().mouseover();
 				$("main").mousedown(function () {
-          			$('[data-toggle="tooltip"]').tooltip("hide");
-       			});
+					$('[data-toggle="tooltip"]').tooltip("hide");
+				});
 			});
 			
 			var canvas = document.getElementsByTagName('canvas')[0];
@@ -295,7 +297,7 @@
 			canvas.height = window.innerHeight-0.15*window.innerHeight;
 			
 			var gkhead = new Image;
-
+			
 			window.onresize = function(){
 				canvas.width = window.innerWidth-0.15*window.innerWidth;
 				canvas.height = window.innerHeight-0.15*window.innerHeight;
@@ -336,11 +338,10 @@
 					ctx.drawImage(gkhead,0,0);
 					
 				}
-				redraw();
 				
-				var lastX=canvas.width/2, lastY=canvas.height/2;
-				
-				var dragStart,dragged;
+				var lastX = canvas.width/2, lastY = canvas.height/2;
+				var lastTranslateX = 0, lastTranslateY = 0;
+				var dragStart, dragged;
 				
 				canvas.addEventListener('mousedown',function(evt){
 					document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
@@ -366,14 +367,37 @@
 					if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
 				},false);
 				
+				
 				var scaleFactor = 1.1;
+				var minFactor = 0.2;
+				
+				var maxScaleFactor = 1.2;
+				var minScaleFactor = 0.05;
+				
+				var lastTranslate = {
+					x: 0,
+					y: 0
+				};
 				
 				var zoom = function(clicks){
 					var pt = ctx.transformedPoint(lastX,lastY);
-					ctx.translate(pt.x,pt.y);
 					var factor = Math.pow(scaleFactor,clicks);
+					var currentScaleFactor = ctx.getTransform().a;
+					
+					if (factor * currentScaleFactor > maxScaleFactor || factor * currentScaleFactor < minScaleFactor) {
+						return;
+					}
+					
+					ctx.translate(pt.x,pt.y);
 					ctx.scale(factor,factor);
 					ctx.translate(-pt.x,-pt.y);
+					
+					if (factor * currentScaleFactor === maxScaleFactor || factor * currentScaleFactor === minScaleFactor) {
+						var translatePoint = ctx.transformedPoint(lastX, lastY);
+						lastTranslateX = translatePoint.x;
+						lastTranslateY = translatePoint.y;
+					}
+					
 					redraw();
 				}
 				
