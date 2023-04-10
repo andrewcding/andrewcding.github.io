@@ -73,6 +73,42 @@
             animation: text_down 1s ease-out; 
         }
         
+        .side_open {
+            position: relative;
+            left: 100.2%;
+            bottom: 187px;
+            width: 220px;
+            height: 30px;
+        } 
+        
+        
+        .more_btn { color: #949794; 
+            text-decoration:none;
+            cursor: pointer;
+        } 
+        
+        .more_btn:hover { color: #e6e6e6; 
+        }
+        
+        .top_button {
+            background-color: transparent;
+            color: #949794;
+            cursor: pointer;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 20px;
+            line-height: 24px;
+            border: none;
+            outline: none;
+            
+            animation: fadeIn 1.4s; 
+        }
+        
+        .top_button:hover {
+            color: #e6e6e6;
+        }
+        
         /* Move it (define the animation) */
         @keyframes text_up {
             0%   { 
@@ -142,42 +178,7 @@
             padding: 0;
             position: absolute;
         }
-        .carousel > input:nth-of-type(6):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: -500%;
-        }
-        .carousel > input:nth-of-type(5):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: -400%;
-        }
-        .carousel > input:nth-of-type(4):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: -300%;
-        }
-        .carousel > input:nth-of-type(3):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: -200%;
-        }
-        .carousel > input:nth-of-type(2):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: -100%;
-        }
-        .carousel > input:nth-of-type(1):checked ~ .carousel__slides .carousel__slide:first-of-type {
-            margin-left: 0%;
-        }
-        .carousel > input:nth-of-type(1):checked ~ .carousel__thumbnails li:nth-of-type(1) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
-        .carousel > input:nth-of-type(2):checked ~ .carousel__thumbnails li:nth-of-type(2) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
-        .carousel > input:nth-of-type(3):checked ~ .carousel__thumbnails li:nth-of-type(3) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
-        .carousel > input:nth-of-type(4):checked ~ .carousel__thumbnails li:nth-of-type(4) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
-        .carousel > input:nth-of-type(5):checked ~ .carousel__thumbnails li:nth-of-type(5) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
-        .carousel > input:nth-of-type(6):checked ~ .carousel__thumbnails li:nth-of-type(6) {
-            box-shadow: 0px 0px 0px 2px #e6e6e6;
-        }
+        
         .carousel__slides {
             position: relative;
             z-index: 1;
@@ -292,6 +293,10 @@
             object-fit: cover;
         }
         
+        .carousel__thumbnails label.active img {
+            box-shadow: 0px 0px 0px 2px #e6e6e6;
+        }
+        
         
     </style>
     
@@ -301,14 +306,9 @@
         <section>
             <div class="container">
                 <div class="carousel">
-                    <input type="radio" name="slides" checked="checked" id="slide-1">
-                    <input type="radio" name="slides" id="slide-2">
-                    <input type="radio" name="slides" id="slide-3">
-                    <input type="radio" name="slides" id="slide-4">
-                    <input type="radio" name="slides" id="slide-5">
-                    <input type="radio" name="slides" id="slide-6">
-                    <input type="radio" name="slides" id="slide-7">
                     <ul class="carousel__slides">
+
+                        <!-- ROW 1 -->
                         <li class="carousel__slide">
                             <figure>
                                 <div>
@@ -375,30 +375,227 @@
                                 </figcaption>
                             </figure>
                         </li>
-                    </ul>    
-                    <ul class="carousel__thumbnails">
-                        <li>
-                            <label for="slide-1"><img src="https://picsum.photos/id/1041/150/150" alt=""></label>
-                        </li>
-                        <li>
-                            <label for="slide-2"><img src="https://picsum.photos/id/1043/150/150" alt=""></label>
-                        </li>
-                        <li>
-                            <label for="slide-3"><img src="https://picsum.photos/id/1044/150/150" alt=""></label>
-                        </li>
-                        <li>
-                            <label for="slide-4"><img src="https://picsum.photos/id/1045/150/150" alt=""></label>
-                        </li>
-                        <li>
-                            <label for="slide-5"><img src="https://picsum.photos/id/1049/150/150" alt=""></label>
-                        </li>
-                        <li>
-                            <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt=""></label>
-                        </li>
                         
+                        <!-- ROW 2 -->
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1042/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    7Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Tim Marshall</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1047/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    8Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Christian Joudrey</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1044/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    9Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Steve Carter</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1045/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    10Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Aleksandra Boguslawska</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1049/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    11Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Rosan Harmens</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1052/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    12Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Annie Spratt</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+
+                        <!-- ROW 3 -->
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1040/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    13Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Tim Marshall</span>
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1049/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    14Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Christian Joudrey</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1041/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    15Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Steve Carter</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1045/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    16Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Aleksandra Boguslawska</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1049/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    17Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Rosan Harmens</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                        <li class="carousel__slide">
+                            <figure>
+                                <div>
+                                    <img src="https://picsum.photos/id/1052/800/450" alt="">
+                                </div>
+                                <figcaption>
+                                    18Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    <span class="credit">Photo: Annie Spratt</span>                            
+                                </figcaption>
+                            </figure>
+                        </li>
+                    </ul>    
+                    <ul class="carousel__thumbnails" id="row1">
+                        <li>
+                            <label for="slide-1"><img src="https://picsum.photos/id/1041/150/150" alt="" onclick="goToSlide(1); setActiveThumbnail(1);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-2"><img src="https://picsum.photos/id/1043/150/150" alt="" onclick="goToSlide(2); setActiveThumbnail(2);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-3"><img src="https://picsum.photos/id/1044/150/150" alt="" onclick="goToSlide(3); setActiveThumbnail(3); "></label>
+                        </li>
+                        <li>
+                            <label for="slide-4"><img src="https://picsum.photos/id/1045/150/150" alt="" onclick="goToSlide(4); setActiveThumbnail(4);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-5"><img src="https://picsum.photos/id/1049/150/150" alt="" onclick="goToSlide(5); setActiveThumbnail(5);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-6"><img src="https://picsum.photos/id/1052/150/150" alt="" onclick="goToSlide(6); setActiveThumbnail(6);"></label>
+                        </li>
+                    </ul>
+                    
+                    <ul class="carousel__thumbnails" id="row2" style="display: none;">
+                        <li>
+                            <label for="slide-7"><img src="https://picsum.photos/id/1042/150/150" alt="" onclick="goToSlide(7); setActiveThumbnail(7);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-8"><img src="https://picsum.photos/id/1047/150/150" alt="" onclick="goToSlide(8); setActiveThumbnail(8);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-9"><img src="https://picsum.photos/id/1044/150/150" alt="" onclick="goToSlide(9); setActiveThumbnail(9);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-10"><img src="https://picsum.photos/id/1045/150/150" alt="" onclick="goToSlide(10); setActiveThumbnail(10);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-11"><img src="https://picsum.photos/id/1049/150/150" alt="" onclick="goToSlide(11); setActiveThumbnail(11);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-12"><img src="https://picsum.photos/id/1052/150/150" alt="" onclick="goToSlide(12); setActiveThumbnail(12);"></label>
+                        </li>
+                    </ul>
+
+                    <ul class="carousel__thumbnails" id="row3" style="display: none;">
+                        <li>
+                            <label for="slide-7"><img src="https://picsum.photos/id/1040/150/150" alt="" onclick="goToSlide(13); setActiveThumbnail(13);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-8"><img src="https://picsum.photos/id/1049/150/150" alt="" onclick="goToSlide(14); setActiveThumbnail(14);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-9"><img src="https://picsum.photos/id/1041/150/150" alt="" onclick="goToSlide(15); setActiveThumbnail(15);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-10"><img src="https://picsum.photos/id/1045/150/150" alt="" onclick="goToSlide(16); setActiveThumbnail(16);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-11"><img src="https://picsum.photos/id/1049/150/150" alt="" onclick="goToSlide(17); setActiveThumbnail(17);"></label>
+                        </li>
+                        <li>
+                            <label for="slide-12"><img src="https://picsum.photos/id/1052/150/150" alt="" onclick="goToSlide(18); setActiveThumbnail(18);"></label>
+                        </li>
                     </ul>
                 </div>
-            </div>
+                
+                
+                <div class = 'side_open fade-in-text'>
+                    <button style = 'position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    font-weight: 200;
+                    font-size: 20px;
+                    ' class = 'top_button'
+                    onclick="row_up();">
+                    ↑ </button>
+                    <button style='position: absolute;
+                    left: 0px;
+                    bottom: -140px;
+                    font-weight: 200;
+                    font-size: 20px;
+                    ' class='top_button'
+                    onclick="row_down();">
+                    ↓
+                </button>
+            </div>    
         </section>
         
         
@@ -440,7 +637,77 @@
             
         </main>
         <script>
+            function goToSlide(index, disableAnimation) {
+                const slideContainer = document.querySelector('.carousel__slides');
+                const slideWidth = document.querySelector('.carousel__slide').clientWidth;
+                const newMarginLeft = (index - 1) * -slideWidth;
+                const firstSlide = document.querySelector('.carousel__slide:first-of-type');
+                
+                if (disableAnimation) {
+                    firstSlide.style.transition = 'none';
+                } else {
+                    firstSlide.style.transition = 'margin-left 0.5s ease-in-out';
+                }
+                
+                firstSlide.style.marginLeft = `${newMarginLeft}px`;
+            }
             
+            function setActiveThumbnail(slideIndex) {
+                const thumbnails = document.querySelectorAll('.carousel__thumbnails label');
+                const activeThumbnail = thumbnails[slideIndex - 1];
+                for (let i = 0; i < thumbnails.length; i++) {
+                    thumbnails[i].classList.remove('active');
+                }
+                activeThumbnail.classList.add('active');
+            }
+            
+            setActiveThumbnail(1);
+
+            var cur_row = 1;
+            function row_down(){
+                slide_under = getCurrentSlideIndex() + 6
+                if (cur_row == 1){
+                    row1.style.display = 'none';  row2.style.display = 'flex'; row2.style.marginTop = '20px';  goToSlide(slide_under, true); setActiveThumbnail(slide_under);
+                    cur_row = 2;
+                } else if (cur_row == 2){
+                    row2.style.display = 'none';  row3.style.display = 'flex'; row3.style.marginTop = '20px';  goToSlide(slide_under, true); setActiveThumbnail(slide_under);
+                    cur_row = 3;
+                } else if (cur_row == 2){
+                    return
+                }
+            }
+
+            function row_up(){
+                slide_up = getCurrentSlideIndex() - 6
+                if (cur_row == 1){
+                    return
+                } else if (cur_row == 2){
+                    row2.style.display = 'none'; row1.style.display = 'flex'; row1.style.marginTop = '20px'; goToSlide(slide_up, true); setActiveThumbnail(slide_up);
+                    cur_row = 1;
+                } else if (cur_row == 3){
+                    row3.style.display = 'none'; row2.style.display = 'flex'; row2.style.marginTop = '20px'; goToSlide(slide_up, true); setActiveThumbnail(slide_up);
+                    cur_row = 2;
+                }
+            }
+            
+            // Add event listener for window resize
+            window.addEventListener('resize', handleResize);
+            
+            function getCurrentSlideIndex() {
+                const slideWidth = document.querySelector('.carousel__slide').clientWidth;
+                const marginLeft = parseInt(window.getComputedStyle(document.querySelector('.carousel__slide:first-of-type')).marginLeft);
+                const currentIndex = Math.round(marginLeft / -slideWidth) + 1;
+                return currentIndex;
+            }
+            
+            function handleResize() {
+                // Get the current slide index
+                const activeSlide = document.querySelector('.carousel__slide:not(.carousel__slide--hidden)');
+                currentSlide = getCurrentSlideIndex();
+                
+                // Call goToSlide passing the current slide index
+                goToSlide(currentSlide, true);
+            }
         </script>
     </body>
     </html>
