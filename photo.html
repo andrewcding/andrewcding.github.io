@@ -25,7 +25,6 @@
         body {
             background-color: #29292f;
             color: #e6e6e6;
-            min-width:1000px;  
         }
         
         .link { color: #e6e6e6; 
@@ -147,6 +146,8 @@
         }
         
         section {
+            margin: 0 auto; /* center the body horizontally */
+            min-width:767px;  
             top: 12%;
             position: absolute;
             left: 50%;
@@ -297,6 +298,7 @@
         }
         
         
+        
     </style>
     
 </head>
@@ -383,7 +385,7 @@
                                     <img src="./imgs/photo/IMG_1177.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    7Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Pink blossoms in focus, set in front of a bridge in a traditional Chinese garden.
                                     <span class="credit">Xi'an, China · 2018</span>
                                 </figcaption>
                             </figure>
@@ -394,7 +396,7 @@
                                     <img src="./imgs/photo/IMG_0313.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    8Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Crystal blue lake nestled in mountains with Mont Blanc in the distance, captured after a rewarding hike.
                                     <span class="credit">Mont Blanc, France · 2022</span>                            
                                 </figcaption>
                             </figure>
@@ -405,7 +407,7 @@
                                     <img src="./imgs/photo/IMG_0561.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    9Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Silhouetted figures traverse a lantern-lit tunnel, creating a captivating contrast of light and shadow.
                                     <span class="credit">Xi'an, China · 2018</span>                            
                                 </figcaption>
                             </figure>
@@ -416,7 +418,7 @@
                                     <img src="./imgs/photo/IMG_0342.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    10Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    A powerful display of Icelandic nature, a view of Skógafoss up close.
                                     <span class="credit">Skógafoss, Iceland · 2018</span>                            
                                 </figcaption>
                             </figure>
@@ -438,7 +440,7 @@
                                     <img src="./imgs/photo/IMG_0165.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    12Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    An idyllic Swiss town overlooking Lac de Joux, captured during a scenic hike.
                                     <span class="credit">Le Pont, Switzerland · 2022</span>                            
                                 </figcaption>
                             </figure>
@@ -451,7 +453,7 @@
                                     <img src="./imgs/photo/IMG_0033.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    13Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    A serene view of a distant lighthouse and sailboats over the calm waters of Lake Ontario.
                                     <span class="credit">Mississauga, Canada · 2018</span>
                                 </figcaption>
                             </figure>
@@ -462,7 +464,7 @@
                                     <img src="./imgs/photo/IMG_0748.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    14Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    A moody and captivating view of mountains and water while off the coast of Akureyri.
                                     <span class="credit">Off the Coast of Akureyri, Iceland · 2018</span>                            
                                 </figcaption>
                             </figure>
@@ -473,7 +475,7 @@
                                     <img src="./imgs/photo/IMG_0768.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    15Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    A scarlet vessel teeming with eager observers pause to admire a surfacing whale.
                                     <span class="credit">Off the Coast of Akureyri, Iceland · 2018</span>                            
                                 </figcaption>
                             </figure>
@@ -484,7 +486,7 @@
                                     <img src="./imgs/photo/IMG_0616.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    16Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    As the sun sets over the horizon, a row of people sit serenely along the waterfront, basking in the tranquility of the moment.
                                     <span class="credit">West Coast Park, Singapore · 2022</span>                            
                                 </figcaption>
                             </figure>
@@ -495,7 +497,9 @@
                                     <img src="./imgs/photo/IMG_0449.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    17Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    This idyllic view showcases Lake Geneva and the French Alps, framed by a cozy table for two adorned with vibrant red flowers.
+
+                                    Runner Up of the 2022 Where in the world?! Co-op Photo Contest.
                                     <span class="credit">Yvoire, France · 2022</span>                            
                                 </figcaption>
                             </figure>
@@ -506,7 +510,7 @@
                                     <img src="./imgs/photo/IMG_0392.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    18Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                    Château de Sion standing tall amidst the picturesque mountain valley.
                                     <span class="credit">Sion, Switzerland · 2022</span>                            
                                 </figcaption>
                             </figure>
@@ -1421,9 +1425,9 @@
                     ' class='top_button'
                     onclick="row_down();">
                     ↓
-                </button>
-            </div>
-        </div>   
+                    </button>
+                </div>
+            </div>   
         </section>
         
         
@@ -1550,6 +1554,11 @@
 
             function open_grid(){
                 grid = true;
+                
+                row_now =  Math.ceil(getCurrentSlideIndex()/6);
+
+                
+
                 document.getElementById("main_slide").style.display = "none";
                 document.getElementById("row_buttons").style.display = "none";
                 
@@ -1557,6 +1566,11 @@
                     document.getElementById("row"+i).style.display = "flex";
                     document.getElementById("row"+i).style.marginTop = '20px';
                 }
+                // scroll back to where was before
+                const scrollRow = document.getElementById('row'+row_now);
+                scrollRow.scrollIntoView({block: 'center' });
+                const offset = window.innerHeight / 2 - element.offsetHeight / 2;
+                window.scrollBy(0, -offset);
             }
             
             // Add event listener for window resize
