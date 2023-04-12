@@ -305,7 +305,7 @@
         <section>
             <div class="container">
                 <div class="carousel">
-                    <ul class="carousel__slides" id="main_slide">
+                    <ul class="carousel__slides" id="main_slide" style = 'display: none;'>
 
                         <!-- ROW 1 -->
                         <li class="carousel__slide">
@@ -1150,7 +1150,7 @@
                         </li>
                     </ul>
                     
-                    <ul class="carousel__thumbnails" id="row2" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row2" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/flowers.jpg" alt="" onclick="goToSlide(7); setActiveThumbnail(7);"></label>
                         </li>
@@ -1171,7 +1171,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row3" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row3" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/sail.jpg" alt="" onclick="goToSlide(13); setActiveThumbnail(13);"></label>
                         </li>
@@ -1192,7 +1192,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row4" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row4" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/toronto.jpg" alt="" onclick="goToSlide(19); setActiveThumbnail(19);"></label>
                         </li>
@@ -1213,7 +1213,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row5" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row5" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/stanley2.jpg" alt="" onclick="goToSlide(25); setActiveThumbnail(25);"></label>
                         </li>
@@ -1234,7 +1234,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row6" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row6" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/mountainhouse.jpg" alt="" onclick="goToSlide(31); setActiveThumbnail(31);"></label>
                         </li>
@@ -1255,7 +1255,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row7" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row7" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/como2.jpg" alt="" onclick="goToSlide(37); setActiveThumbnail(37);"></label>
                         </li>
@@ -1276,7 +1276,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row8" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row8" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/souk.jpg" alt="" onclick="goToSlide(43); setActiveThumbnail(43);"></label>
                         </li>
@@ -1297,7 +1297,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row9" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row9" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/neon.jpg" alt="" onclick="goToSlide(49); setActiveThumbnail(49);"></label>
                         </li>
@@ -1318,7 +1318,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row10" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row10" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/newyork.jpg" alt="" onclick="goToSlide(55); setActiveThumbnail(55);"></label>
                         </li>
@@ -1339,7 +1339,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row11" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row11" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/lavaux2.jpg" alt="" onclick="goToSlide(61); setActiveThumbnail(61);"></label>
                         </li>
@@ -1360,7 +1360,7 @@
                         </li>
                     </ul>
 
-                    <ul class="carousel__thumbnails" id="row12" style="display: none;">
+                    <ul class="carousel__thumbnails" id="row12" style="margin-top: 20px;">
                         <li>
                             <label><img src="./imgs/photo/thumbnails/porthole.jpg" alt="" onclick="goToSlide(67); setActiveThumbnail(67);"></label>
                         </li>
@@ -1382,13 +1382,14 @@
                     </ul>
                 </div>
                 
-                <div id="row_buttons">
+                <div id="row_buttons" style = 'display: none;'>
                 <div style = 
                 'font-size: 14px;
                 color: #949794;
                 float: right;
                 margin-left: 0px;
-                margin-top: -15px;'>
+                margin-top: -15px;
+                '>
                     <span id='active_row'></span>/12
                 </div>
                 
@@ -1507,13 +1508,7 @@
                 }
                 activeThumbnail.classList.add('active');
             }
-            
-            //setActiveThumbnail(1);
-
-            var cur_row = 1;
-            document.getElementById('active_row').innerHTML = cur_row;
-
-            var grid = false;
+            var grid = true;
 
             function row_down(){
 
@@ -1582,8 +1577,6 @@
                     goToSlide(currentSlide, true);
                 }
             }
-
-            open_grid();
         </script>
     </body>
     </html>
