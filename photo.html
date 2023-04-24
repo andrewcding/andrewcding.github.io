@@ -73,13 +73,6 @@
             animation: text_down 1s ease-out; 
         }
         
-        .side_open {
-            width: 30px;
-            position: relative;
-            left: 95%;
-            bottom: 150px;
-        } 
-        
         
         .more_btn { color: #949794; 
             text-decoration:none;
@@ -300,7 +293,11 @@
             display:block
         }
         .mobile_view{
-            display:none
+            display:none;
+            float:center;
+            position:relative;
+            left:35px;
+            width: 95%
         }
 
         .up_button{
@@ -326,11 +323,19 @@
             font-weight: 200;
             font-size: 25px;
         }
+
+        .side_open {
+            width: 30px;
+            position: relative;
+            left: 95%;
+            bottom: 150px;
+        } 
         
         /* use for debug */
         /* * {
             outline: 1px solid black;
         } */
+
         @media only screen and (max-width: 767px) {
 
             .carousel__slide div {
@@ -346,6 +351,39 @@
                 font-size: 12px;
             }
 
+
+
+
+
+        }
+
+        @media only screen and (max-width: 420px) {
+            .side_open {
+            left: 87%;
+        } 
+
+        .up_button{
+            position: relative;
+            left: 0px;
+            bottom: -40px;
+            font-size: 15px;
+        }
+
+        .open_grid_button{
+            position: relative;
+            left: 2px;
+            bottom: -48px;
+
+            font-size: 20px;
+
+        }
+
+        .down_button{
+            position: relative;
+        left: 0px;
+        bottom: -54px;
+        font-size: 15px;
+        }
         }
         
         
@@ -446,7 +484,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_0313.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption  class="long_desc">
                                     Crystal blue lake nestled in mountains with Mont Blanc in the distance, captured after a rewarding hike.
                                     <span class="credit">Mont Blanc, France · 2022</span>                            
                                 </figcaption>
@@ -536,7 +574,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_0616.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption class="long_desc">
                                     As the sun sets over the horizon, a row of people sit serenely along the waterfront, basking in the tranquility of the moment.
                                     <span class="credit">West Coast Park, Singapore · 2022</span>                            
                                 </figcaption>
@@ -676,7 +714,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_3316.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption class="long_desc">
                                     A picturesque view of Bern, featuring the turquoise-green waters of the Aare River and charming medieval buildings lining its banks.
                                     <span class="credit">Bern, Switzerland · 2019</span>                            
                                 </figcaption>
@@ -687,7 +725,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_3358.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption class="long_desc">
                                     A stunning golden hour view of the Swiss countryside, captured along a scenic path flanked by verdant fields and majestic mountains
                                     <span class="credit">Buchholterberg, Switzerland · 2019</span>                            
                                 </figcaption>
@@ -712,7 +750,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_3484.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption class="long_desc">
                                     A solitary black house stands amidst the expansive Swiss Alps, nestled in a valley and overlooking the breathtaking landscape below.
                                     <span class="credit">Wengen, Switzerland · 2019</span>
                                 </figcaption>
@@ -849,7 +887,7 @@
                                 <div>
                                     <img src="./imgs/photo/IMG_9002.JPEG" alt="">
                                 </div>
-                                <figcaption>
+                                <figcaption class="long_desc">
                                     Amidst the hustle and bustle of the Moroccan souk, vendors display their wares for sale, with a towering minaret in the background.
                                     <span class="credit">Fes, Morocco · 2022</span>
                                 </figcaption>
@@ -2031,7 +2069,6 @@
                 for (let i = 1; i < 28 + 1; i++) {
                     document.getElementById("row"+i+'m').style.display = "none";
                 }
-                console.log("row"+row_num+'m')
                 document.getElementById("row"+row_num+'m').style.display = "flex";
                 document.getElementById("row"+row_num+'m').style.marginTop = '20px'; 
             } else {
@@ -2073,7 +2110,6 @@
                 row_num = Math.ceil(index/6)  
             }
             
-            console.log("row"+row_num+device)
             document.getElementById("row"+row_num+device).style.display = "flex";
             document.getElementById("row"+row_num+device).style.marginTop = '20px'; 
             cur_row = row_num;
@@ -2110,14 +2146,10 @@
         const thumbnails = document.querySelectorAll('.carousel__thumbnails label');
         const activeThumbnail = thumbnails[slideIndex - 1 + buffer];
 
-        console.log(activeThumbnail)
-
         for (let i = 0; i < thumbnails.length; i++) {
             thumbnails[i].classList.remove('active');
         }
         activeThumbnail.classList.add('active');
-        
-        console.log(activeThumbnail)
 
         currentSlide = slideIndex;
     }
