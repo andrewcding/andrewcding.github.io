@@ -2043,6 +2043,7 @@
 </main>
 <script>
     var currentSlide = 1;
+    var imageLoaded = 0;
     var tot_row = 14;
     var device ='d';
     document.getElementById('total_rows').innerHTML = tot_row
@@ -2097,7 +2098,10 @@
 
     function goToSlide(index, disableAnimation) {
 
-        loadMainImages();
+        if (!imageLoaded) {
+            loadMainImages(index);
+        }
+        
         
         if (grid){
             grid = false;
@@ -2251,13 +2255,25 @@
     }
 
 
-    function loadMainImages() {
-    const carouselSlides = document.querySelectorAll('.carousel__slide img[data-src]');
-    carouselSlides.forEach((slide) => {
-        slide.src = slide.dataset.src;
-        slide.removeAttribute('data-src');
-    });
-}
+    function loadMainImages(index) {
+
+        imageLoaded = 1;
+
+        const carouselSlides = document.querySelectorAll('.carousel__slide img[data-src]');
+        
+        // Load clicked image
+        const clickedImage = carouselSlides[index];
+        clickedImage.src = clickedImage.dataset.src;
+        clickedImage.removeAttribute('data-src');
+        
+        // Load remaining images
+        carouselSlides.forEach((slide, slideIndex) => {
+            if (slideIndex !== index) {
+                slide.src = slide.dataset.src;
+                slide.removeAttribute('data-src');
+            }
+        });
+    }
 
 </script>
 </body>
