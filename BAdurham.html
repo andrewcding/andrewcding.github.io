@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html>
+<!-- ADD A SUMMARY TABLE TO THE LAYER TAB
+	ON CLICK POPUP HAS ADDITIONAL INFO BUTTON THAT OPENS A MODAL-->
+	
+	<head>
+		<meta charset="utf-8">
+		<title>Durham Regional Development</title>
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+		
+		<!-- Turf.js-->
+		<script src="https://npmcdn.com/@turf/turf@5.1.6/turf.min.js"></script>
+		
+		<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+		<script src="https://kit.fontawesome.com/055a8d9660.js" crossorigin="anonymous"></script>
+		<script src="https://kit.fontawesome.com/071bd9a918.js" crossorigin="anonymous"></script>
+		
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			#map {
+				height: 100%;
+				width: 100%;
+			}
+			
+			.info{
+				position:relative; /*this is the key*/
+			}
+			
+			.info:hover{
+				z-index:25;
+				background-color:#eeeeee;
+			}
+			
+			.info span{display: none
+			}
+			
+			.info:hover span{ /*the span will display just on :hover state*/
+				display:block;
+				position:absolute;
+				top:2em; left:2em; width:20em;
+				border:1px solid #838383;
+				border-radius: 6px;
+				background-color: #fcfcfc;
+				text-align: left
+			}
+			
+			.mapboxgl-popup {
+				max-width: 400px;
+				font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+			}
+			#clicksidediv:hover {
+				background-color: rgba(100, 100, 100, 0.5);
+			}
+			#sidediv1:hover {
+				background-color: rgba(100, 100, 100, 0.5);
+			}
+			#sidediv2:hover {
+				background-color: rgba(100, 100, 100, 0.5);
+			}
+			#sidediv3:hover {
+				background-color: rgba(100, 100, 100, 0.5);
+			}
+			#sidediv4:hover {
+				background-color: rgba(100, 100, 100, 0.5);
+			}
+			
+			/*  Legend */
+			.heatmap_legend {
+				background-color: #fff;
+				border-radius: 3px;
+				bottom: 40px;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+				font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+				padding: 10px;
+				position: absolute;
+				left: 15px;
+				z-index: 1;
+			}
+			
+			.mapboxgl-popup {
+            max-width: 400px;
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+		.distance-container {
+            position: absolute;
+            top: 100px;
+            left: 40px;
+            z-index: 1;
+        }
+        
+        .distance-container>* {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            display: block;
+            margin: 0;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+			
+			
+		</style>
+	</head>
+	
+	
+	<body>
+		<div class="container-fluid" style="height: 100%; display: flex; flex-direction: column; padding:0;">
+			
+			<div class="container-fluid" style="padding: 0;">
+				<nav class="navbar navbar-dark" style="background: linear-gradient(to right, #ccafca, #727bce, #a9c7f0);">
+					<a class="navbar-brand" href="/">
+						<img src="https://bagroup.app/BA-legs-icon-a.png" width="30" height="30" class="d-inline-block align-top" alt="">
+						&nbsp; BA Group &nbsp; <span>|</span> &nbsp; <em>Movement in Urban Environments</em>
+					</a>
+					<ul class="navbar-nav ml-auto mr-4" style="display: inline-block;">
+							<li class="nav-item mr-3" style="display: inline-block;">
+								<a class="nav-link" data-toggle="modal" data-target="#ReportBugModal" href="#">Report Bug</a>
+							</li>
+							<li class="nav-item mr-3" style="font-size: 1.25rem; line-height: 0; display: inline-block;"><a class="nav-link" href="#">|</a></li>
+						
+							<li class="nav-item" style="display: inline-block;"><a class="nav-link" href="#">Login</a></li>
+						
+					</ul>
+				</nav>
+			</div>
+			
+			<div class="row" style="height: 100%; margin-right: 0; margin-left: 0; overflow: hidden;">
+				
+				<div id="colleft" class="col-11 col-fluid"
+				style="padding-right: 0; padding-left: 0; flex: 0 0 97%; max-width: 97%;">
+				<div class="container-fluid" style="padding:0; height: 100%; width: 100%; position: relative;" id='map'>
+					
+				</div>
+			</div>
+			
+			
+			<div id="colright" class="col-1 col-fluid"
+			style="background-color:#ffffff; height: 100%; padding-right: 0px; padding-left: 0px; flex: 0 0 3%; max-width: 3%;">
+			<div class="container-fluid" id="SegInfo"
+			style="height: 100%; display: flex; flex-direction: column; padding:0; flex-wrap: nowrap;">
+			<div class="row" style="height:100%; margin-right: 0; margin-left: 0;">
+				
+				<div id="colrightleft" class="col-6 col-fluid"
+				style="border-right-style:solid; border-right-width:thin; border-right-color:grey; height:100%; flex: 0 0 100%; max-width: 100%; padding-right: 0px; padding-left: 0px;">
+				<div class="container-fluid"
+				style="height: 100%; display: flex; flex-direction: column; padding:0; flex-wrap: nowrap;">
+				<div id="sidediv1"
+				style="margin-bottom: 5px; margin-top:10px; font-size: 25px; text-align: center;">
+				<i class="fas fa-info-circle"></i>
+			</div>
+			<div id="sidediv2"
+			style="padding-bottom:10px; margin-right:5px; margin-left: 5px; border-bottom-style:solid; border-bottom-width:thin; border-bottom-color:lightgray; font-size: 25px; text-align: center;">
+			<i class="fas fa-layer-group"></i>
+		</div>
+
+<div id="filler" style="text-align: center; height: 90%;"></div>
+
+<!-- <div id="open_modal" style="font-size: 25px; text-align: center;">
+	<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Open Modal</button>
+</div> -->
+
+<div id="clicksidediv" style="font-size: 25px; text-align: center;">
+	<i id="arrows" class="fas fa-angle-double-left"></i>
+</div>
+</div>
+</div>
+
+<div id="colrightright" class="col-6 col-fluid"
+style="flex-direction: column; display:none; background-color:#ffffff; height:100%; flex: 0 0 0%; max-width: 0%; padding-right: 0px; padding-left: 0px;">
+<div class="container-fluid"
+style="height: 100%; display: flex; flex-direction: column; padding:0; flex-wrap: nowrap;">
+<div class="row" style="height:100%; margin-right: 0; margin-left: 0;">
+	
+	<div id="infotab" class="col-3 col-fluid"
+	style="flex-direction: column; display:none; background-color:#ffffff; height:100%; flex: 0 0 100%; max-width: 100%; padding-right: 0px; padding-left: 0px;overflow-y:auto;">
+	<div class="modal-header">
+		<h3 class="modal-title"> Durham Regional Development</h3>
+	</div>
+	<div class="modal-body">
+		<h5> Welcome to the Durham Regional Development module on the BA Group Web App.</h5>
+		<p class="pt-4 mb-1">Hover over a location for more information.</p>
+		<h6 class="pt-4">Developed by the BA Web App Committee</h6>
+	</div>
+</div>
+
+
+<div id="layerstab" class="col-3 col-fluid"
+style="flex-direction: column; display:none; background-color:#ffffff; height:100%; flex: 0 0 100%; max-width: 100%; padding-right: 0px; padding-left: 0px;overflow-y:auto;">
+<div class="modal-header">
+	<h3 class="modal-title">Layers</h3>
+</div>
+<div class="modal-body">
+	<h5>Select Layers to Display</h5>
+	<h6><i class="fas fa-location-dot"></i> By Type:</h6>
+	
+	<div class="custom-control custom-checkbox pl-6 info">
+		<input type="checkbox" class="custom-control-input" id="switch3"
+		checked>
+		<label class="custom-control-label" for="switch3">Greenbelt (updated January 2023)
+			<small>
+				<a href='https://data.ontario.ca/dataset/greenbelt-plan-mapping/resource/19e53abf-6642-4e59-af20-e279b2ffa250'
+					target="_blank" class="navlink">Source</a>
+			</small>
+		</label>
+		<span>	&nbsp; <b>Legend</b><br>
+			<div style="
+			border: 1px solid  #556a22;
+			height: 15px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 5px;
+			margin-bottom: 10px;
+			margin-left: 10px;
+			background-color: #d8e6d4;">
+		</div> 	&nbsp; Greenbelt<br>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch4"
+	checked>
+	<label class="custom-control-label" for="switch4">Durham Regional Boundary
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::regional-boundary/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 2px dashed  #999999;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Durham Regional Boundary<br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch2"
+	checked>
+	<label class="custom-control-label" for="switch2">Pickering Municipal Boundary
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::municipal-boundaries/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 2px dashed  #5E376D;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Pickering Municipal Boundary<br>
+		</div>
+	</span>
+</div>
+<h6><br><i class="fas fa-person-digging"></i> Development Areas</h6>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch1"
+	checked>
+	<label class="custom-control-label" for="switch1">Seaton</label>
+	<span>	&nbsp; <b>Legend</b><br>
+		<div style="
+		border: 1px solid  #FFA500;
+		height: 15px;
+		width: 25px;
+		position: relative;
+		float: left;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+		background-color: #f6dea8;">
+	</div> 	&nbsp; Seaton Development Area<br>
+</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch8"
+	checked>
+	<label class="custom-control-label" for="switch8">Cherrywood/Duffins Rouge Agricultural Preserve</label>
+	<span>	&nbsp; <b>Legend</b><br>
+		<div style="
+		border: 1px solid  #E56997;
+		height: 15px;
+		width: 25px;
+		position: relative;
+		float: left;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+		background-color: #eeccd8;">
+	</div> 	&nbsp; Cherrywood/Duffins<br>
+</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch9"
+	checked>
+	<label class="custom-control-label" for="switch9">Northeast Pickering/Veraine</label>
+	<span>	&nbsp; <b>Legend</b><br>
+		<div style="
+		border: 1px solid  #71278a;
+		height: 15px;
+		width: 25px;
+		position: relative;
+		float: left;
+		margin-top: 5px;
+		margin-bottom: 10px;
+		margin-left: 10px;
+		background-color: #ccb8d5;">
+	</div> 	&nbsp; Northeast Pickering/Veraine<br>
+</span>
+</div>
+
+<h6><br><i class="fas fa-road"></i> Roads (by Jurisdiction)</h6>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch5">
+	<label class="custom-control-label" for="switch5">Provincial Roads & Highways
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::road-network/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 3px solid  #8e1a20;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Provincial Road / Highway<br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch6">
+	<label class="custom-control-label" for="switch6">Regional Roads
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::road-network/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 2px solid  #ca2a3c;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Regional Road<br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch7">
+	<label class="custom-control-label" for="switch7">Municipal Roads
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::road-network/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 1px solid  #f3694f;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Municipal Road<br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch7.5">
+	<label class="custom-control-label" for="switch7.5">2031 Road Expansion
+		<small>
+			<a href='https://durhamtmp.files.wordpress.com/2018/07/durhamtmp_finalreport_2018-07-09-web-accessible.pdf#page=229'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 2px solid  #0051a4;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; 2 Lane Expansion <br>
+		</div>
+		<div>
+			<hr style="border: 2px solid #ff009c;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -29px;
+			background-color: #fcfcfc;">	&nbsp; 3 Lane Expansion <br>
+		</div>
+		<div>
+			<hr style="border: 2px solid #fad503;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; 4/5 Lane Expansion <br>
+		</div>
+		<div>
+			<hr style="border: 2px solid #7dd25e;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -29px;
+			background-color: #fcfcfc;">	&nbsp; 5 Lane Expansion <br>
+		</div>
+		<div>
+			<hr style="border: 2px solid #00cbff;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; 6/7 Lane Expansion <br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch7.6">
+	<label class="custom-control-label" for="switch7.6">Beyond 2031 Road Expansion
+		<small>
+			<a href='https://durhamtmp.files.wordpress.com/2018/07/durhamtmp_finalreport_2018-07-09-web-accessible.pdf#page=231'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 3px dashed  #ff1100;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Regional Road Expansion<br>
+		</div>
+		<div>
+			<hr style="border: 3px dashed #2688f0;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -30px;
+			background-color: #fcfcfc;">	&nbsp; Non-Regional Road Expansion <br>
+		</div>
+		<div>
+			<hr style="border: 1px dashed #ff1100;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -29px;
+			background-color: #fcfcfc;">	&nbsp; Regional Road Improvements <br>
+		</div>
+	</span>
+</div>
+<h6><br><i class="fas fa-droplet"></i> Water Services</h6>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch10">
+	<label class="custom-control-label" for="switch10">Water Mains (updated August 2022)
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::works-water-distribution-system-water-main/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 1px solid  #1643ab;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Watermain<br>
+		</div>
+	</span>
+</div>
+<h6><br><i class="fas fa-train"></i> Railways</h6>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch11">
+	<label class="custom-control-label" for="switch11">Ontario Rail Corridors
+		<small>
+			<a href='https://geohub.lio.gov.on.ca/maps/mnrf::ontario-railway-network-orwn/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 1px solid  #777777;
+			border-radius: 2px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Rail Corridor<br>
+		</div>
+		<div>				
+			<hr style="border: 2px dotted  #777777;
+			border-radius: 2px;
+			width: 25px;
+			position: absolute;
+			margin-top: -15px;
+			margin-left: 10px;">
+		</div>
+	</span>
+</div>
+<h6><br><i class="fas fa-bus"></i> Transit</h6>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch12">
+	<label class="custom-control-label" for="switch12">2031 Higher-Order Transit Network
+		<small>
+			<a href='https://durhamtmp.files.wordpress.com/2018/07/durhamtmp_finalreport_2018-07-09-web-accessible.pdf#page=223'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 3.5px solid  #ff1100;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Rapid Transit (Exclusive Lanes) <br>
+		</div>
+		<div>
+			<hr style="border: 3px solid #ffbd02;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -31px;
+			background-color: #fcfcfc;">	&nbsp; High Frequency Bus in HOV Lane <br>
+		</div>
+		<div>
+			<hr style="border: 2px solid #0156d0;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 11px;
+			background-color: #fcfcfc;">	&nbsp; High Frequency Bus in Shared Lane <br>
+		</div>
+		<div>
+			<hr style="border: 1px solid #04cae5;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -27px;
+			background-color: #fcfcfc;">	&nbsp; Other Transit Spine <br>
+		</div>
+		<div>
+			<hr style="border: 3.5px dashed #ff1100;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 11px;
+			background-color: #fcfcfc;">	&nbsp; Protect for Future Rapid Transit <br>
+		</div>
+		<div>
+			<hr style="border: 3px dashed #ffbd02;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -31px;
+			background-color: #fcfcfc;">	&nbsp; Protect for Future HOV <br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch13">
+	<label class="custom-control-label" for="switch13">GO Train
+		<small>
+			<a href='https://durhamtmp.files.wordpress.com/2018/07/durhamtmp_finalreport_2018-07-09-web-accessible.pdf#page=223'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		<div>
+			<hr style="border: 2px solid  #1a9407;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Existing <br>
+		</div>
+		<div>
+			<hr style="border: 2px dashed #1a9407;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -30px;
+			background-color: #fcfcfc;">	&nbsp; Future <br>
+		</div>
+		<div>
+			<hr style="border: 2px dashed #889985;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Protect for Future <br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch14">
+	<label class="custom-control-label" for="switch14">407 Corridor
+		<small>
+			<a href='https://opendata.durham.ca/datasets/DurhamRegion::road-network/about'
+				target="_blank" class="navlink">Source</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		
+		<div>
+			<hr style="border: 2px dashed #ffbd02;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Highway 407 BRT <br>
+		</div>
+		<div>
+			<hr style="border: 2px dashed #889985;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -30px;
+			background-color: #fcfcfc;">	&nbsp; Highway 407 Rail Corridor <br>
+		</div>
+	</span>
+</div>
+<div class="custom-control custom-checkbox pl-6 info">
+	<input type="checkbox" class="custom-control-input" id="switch15">
+	<label class="custom-control-label" for="switch15">Toronto Rapid Transit
+		<small>
+			<a href='https://open.toronto.ca/dataset/ttc-routes-and-schedules/'
+				target="_blank" class="navlink">Existing, </a>
+				<a href='https://www.metrolinx.com/en/about-us/open-data'
+				target="_blank" class="navlink">Future</a>
+		</small>
+	</label>
+	<span>	&nbsp; <b>Legend</b>
+		
+		<div>
+			<hr style="border: 2px solid #000;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: 10px;
+			background-color: #fcfcfc;">	&nbsp; Existing <br>
+		</div>
+		<div>
+			<hr style="border: 2px dashed #000;
+			border-radius: 3px;
+			width: 25px;
+			position: relative;
+			float: left;
+			margin-top: 10px;
+			margin-left: -30px;
+			background-color: #fcfcfc;">	&nbsp; Proposed / Future <br>
+		</div>
+	</span>
+</div>
+<br>
+<hr>
+<h6 class="pt-4">Tools</h6>
+<p class="modal-label ml-2 mt-2">Click points on a map to create lines that measure distance. Re-select a point to remove it.</p>
+<div class="custom-control custom-checkbox pl-6">
+	<input type="checkbox" class="custom-control-input" id="measure-btn">
+	<label class="custom-control-label" for="measure-btn">Measuring Tool
+	</label>
+</div>
+<br>
+<br>
+<!--<div id='open-table'>
+	<button type="button" class="btn btn-danger btn-sm" data-toggle='modal'
+	data-target='#summary_table_modal'> Open Summary Table</button>
+</div> -->
+</div>
+</div>
+
+
+<div id="locationtab" class="col-3 col-fluid"
+style="flex-direction: column; display:none; background-color:#ffffff; height:100%; flex: 0 0 100%; max-width: 100%; padding-right: 0px; padding-left: 0px;overflow-y:auto;">
+<div class="modal-header">
+	<h3 class="modal-title"><span id="location"></span></h3>
+</div>
+<div class="modal-body">
+	
+	<p><span id="description"></span></p>
+	<div class="row d-flex flex-column pl-2 pb-0">
+		<span id="link">
+		</div>
+	</div>
+</div>
+
+
+<!-- Charts Tab -->
+<div id="chartstab" class="col-3 col-fluid"
+style="flex-direction: column; display:none; background-color:#ffffff; height:100%; flex: 0 0 100%; max-width: 100%; padding-right: 0px; padding-left: 0px; overflow-y:auto;">
+<div class="modal-content">
+	<div class="modal-header">
+		<h3 class="modal-title">Charts</h3>
+	</div>
+	<div class="modal-body">
+		<div class="pb-5">
+			<h6>Histogram of Population Density of DA in Toronto</h6>
+			<div class="ct-chart ct-minor-sixth" id="chart1"
+			style="padding-top:1rem"></div>
+		</div>
+		<div class="py-5">
+			<h6>BA Projects by GTHA Municipality <small>(Top 20 outside
+				Toronto)</small></h6>
+				<div class="ct-chart ct-minor-sixth" id="chart2"
+				style="padding-top:1rem"></div>
+			</div>
+		</div>
+		<!--modal body end-->
+	</div>
+	<!--modal content end-->
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- -----------------------------------------------------Popup Modal ----------------------------------------------------------------------------->
+
+
+<div id="popupModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		
+		<!-- Modal content-->
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<div class="d-flex p-2 mr-auto">
+					<h4 class="modal-title"><span id="popup_modal_title"></span></h4>
+				</div>
+				
+				<div class="d-flex p-2 bd-highlight">
+					<button type="button" class="close justify-content-right" data-dismiss="modal">&times;</button>
+				</div>
+			</div>
+			
+			<div class="modal-body">
+				<p><span id="modal_description"></span></p>
+			</div>
+			
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<!-- -----------------------------------------------------Summary Table Modal ----------------------------------------------------------------------------->
+
+
+<div id="summary_table_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="max-width: 90%;">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+		
+		<div class="modal-header">
+			<div class="d-flex p-2 mr-auto">
+				<h4 class="modal-title">Places I want to go in Toronto</h4>
+				<!-- title of the summary table modal -->
+			</div>
+			
+			<div class="d-flex p-2 bd-highlight">
+				<button type="button" class="close justify-content-right" data-dismiss="modal">&times;</button>
+			</div>
+		</div>
+		
+		<div class="modal-body">
+			<div id="table-query">
+			</div>
+		</div>
+		
+		<div class="modal-footer">
+			<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+	
+</div>
+</div>
+
+<div id="distance" class="distance-container"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8"
+src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>
+
+
+
+<script>
+
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYWRyaWFubG9yaW9uIiwiYSI6ImNqeW5oc3ExbzBkdWczbGxmcDA0dmp6bmgifQ.XIK5Ql3kdrzZR3x14hAyrw';
+	var map = new mapboxgl.Map({
+		container: 'map', // container id
+		style: 'mapbox://styles/adrianlorion/cjyexmd9m4ee21coeptyy4581', // style URL
+		center: [-78.912526, 43.997539], // starting position [lng, lat]
+		pitch: 0,
+		bearing: 0,
+		zoom: 10 // starting zoom
+	});
+	applySwitches();
+	var food_geojson = {
+		type: "FeatureCollection",
+		features: [],
+	};
+	var place_geojson = {
+		type: "FeatureCollection",
+		features: [],
+	};
+	map.on('load', function () {
+		
+		setTimeout(addLayers, 500);
+	});
+	// Add a layer showing the places.
+	function addLayers() {
+		var visibilityWards = 'visible'
+		var visibilityCensus = 'none'
+		
+		
+		//----------------------------------------------------Greenbelt Layer (Greenbelt_Source)----------------------------------------------------------
+		map.addSource("Greenbelt_Boundary_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/greenbelt-outer-boundary.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Greenbelt_Boundary_Line_Layer',
+			//'minzoom': 14,
+			'type': 'line',
+			'source': 'Greenbelt_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#556a22',
+				'line-width': 1.1,
+				"line-opacity": 0.4,
+			}
+		});
+		map.addLayer({
+			'id': 'Greenbelt_Fill_Layer',
+			'type': 'fill',
+			'source': 'Greenbelt_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				"fill-color": "#8dbf8c",
+				"fill-opacity": 0.3,
+				//"fill-sort-key": 1
+			}
+		});
+		
+		//----------------------------------------------------Seaton Layer (Seaton_Source)----------------------------------------------------------
+		map.addSource("Seaton_Boundary_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Seaton_Boundary.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Seaton_Boundary_Line_Layer',
+			'type': 'line',
+			'source': 'Seaton_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#FFA500',
+				//"line-sort-key": 2,
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+			'id': 'Seaton_Fill_Layer',
+			'type': 'fill',
+			'source': 'Seaton_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				"fill-color": "#FFA500",
+				"fill-opacity": ["case",
+				["boolean", ["feature-state", "hover"], false],
+				0.5,
+				0.3
+				]
+				//"fill-sort-key": 1
+			}
+		});
+		
+		//----------------------------------------------------Cherrywood/Duffins Agricultural Preserve Lans (Cherrywodd/Duffins_Ag_Preserve_Source)----------------------------------------------------------
+		map.addSource("Seaton_Boundary_Source2", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/cherrywood-ag-preserve2.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Seaton_Boundary_Line_Layer2',
+			'type': 'line',
+			'source': 'Seaton_Boundary_Source2',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#E56997',
+				//"line-sort-key": 2,
+				'line-width': 2
+			}
+		});
+		map.addLayer({
+			'id': 'Seaton_Fill_Layer2',
+			'type': 'fill',
+			'source': 'Seaton_Boundary_Source2',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				"fill-color": "#E56997",
+				"fill-opacity": ["case",
+				["boolean", ["feature-state", "hover"], false],
+				0.5,
+				0.3
+				]
+				//"fill-sort-key": 1
+			}
+		});
+		//----------------------------------------------------Northeast Pickering/Veraine Lands ----------------------------------------------------------
+		map.addSource("Veraine_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/northeast-pickering-veraine.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Veraine_Boundary_Line_Layer',
+			'type': 'line',
+			'source': 'Veraine_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#71278a',
+				//"line-sort-key": 2,
+				'line-width': 2
+			}
+		});
+		
+		map.addLayer({
+			'id': 'Veraine_Fill_Layer',
+			'type': 'fill',
+			'source': 'Veraine_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				"fill-color": "#71278a",
+				"fill-opacity": ["case",
+				["boolean", ["feature-state", "hover"], false],
+				0.5,
+				0.3
+				]
+			}
+		});
+		
+		//----------------------------------------------------Durham Provincial Roads Layer (Durham_Roads_Provincial_Source)----------------------------------------------------------
+		map.addSource("Durham_Roads_Provincial_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/durham-road-network-provincial.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Durham_Roads_Provincial_Line_Layer',
+			'type': 'line',
+			'source': 'Durham_Roads_Provincial_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#8e1a20',
+				//"line-sort-key": 1,
+				'line-width': {
+					stops: [
+					[0, 3],
+					[20, 3]
+					]
+				}
+			}
+		});
+		//----------------------------------------------------Durham Regional Roads Layer (Durham_Roads_Regional_Source)----------------------------------------------------------
+		map.addSource("Durham_Roads_Regional_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/durham-road-network-regional.geojson"
+		});
+		
+		map.addLayer({
+			
+			'id': 'Durham_Roads_Regional_Line_Layer',
+			'type': 'line',
+			'source': 'Durham_Roads_Regional_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#ca2a3c',
+				//"line-sort-key": 1,
+				'line-width': {
+					stops: [
+					[0, 1.5],
+					[20, 1.5]
+					]
+				}
+			}
+		});
+		
+		//----------------------------------------------------Durham Municipal Roads Layer (Durham_Roads_Municipal_Source)----------------------------------------------------------
+		map.addSource("Durham_Roads_Municipal_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/durham-road-network-municipal.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Durham_Roads_Municicpal_Line_Layer',
+			'type': 'line',
+			'source': 'Durham_Roads_Municipal_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#f3694f',
+				//"line-sort-key": 1,
+				'line-width': {
+					stops: [
+					[0, 1],
+					[20, 1]
+					]
+				}
+			}
+		});
+		
+		
+		
+		//----------------------------------------------------Future Roads----------------------------------------------------------
+		map.addSource("Future_Roads_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Map4B_2031RoadExpansion.geojson"
+		});
+		
+		
+		map.addLayer({
+			'id': 'Future_Roads_Layer',
+			'type': 'line',
+			'source': 'Future_Roads_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'NumLanes'], // get the property
+				'2', '#0051a4',              
+				'3', '#ff009c',
+				'4/5', '#fad503',  
+				'5', '#7dd25e',  
+				'6/7', '#00cbff',                
+				'black']                     
+				,
+				//'line-sort-key': 100,
+				'line-width': 3.5
+			}
+		});
+		
+		//---------------------------------------------------- Beyond Future Roads----------------------------------------------------------
+		map.addSource("BeyondFuture_Roads_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Map5B_Beyond2031RoadExpansion.geojson"
+		});
+		
+		
+		map.addLayer({
+			'id': 'BeyondFuture_Roads_Layer',
+			'type': 'line',
+			'source': 'BeyondFuture_Roads_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'RoadType'], // get the property
+				'Regional', '#ff1100',              
+				'Non-Regional', '#2688f0',             
+				'black']                     
+				,
+				'line-dasharray': [3, 1],
+				//'line-sort-key': 100,
+				'line-width': ['match', ['get', 'ExpansionType'], // get the property
+				'Road Expansion', 3, 
+				'Future Connection', 3,             
+				'Regional Road Improvements', 1.5,             
+				1.5]        
+			}
+		});
+		
+		
+		//----------------------------------------------------Durham Water Mains----------------------------------------------------------
+		map.addSource("Durham_Water_Mains_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Works_-_Water_Distribution_System_-_Water_Main.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Durham_Water_Mains_Layer',
+			'type': 'line',
+			'source': 'Durham_Water_Mains_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#1643ab',
+				//"line-sort-key": 1,
+				'line-width': 1
+			}
+		});
+		
+		
+		
+		//----------------------------------------------------Ontario Rail Corridors----------------------------------------------------------
+		map.addSource("Ontario_Railways", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/rail.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Ontario_Railways_Layer',
+			'type': 'line',
+			'source': 'Ontario_Railways',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#777777',
+				//"line-sort-key": 1,
+				'line-width': 2
+			}
+		});
+		
+		map.addLayer({
+			'id': 'Ontario_Railways_Layer2',
+			'type': 'line',
+			'source': 'Ontario_Railways',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#777777',
+				'line-dasharray': [0.25, 8],
+				'line-width': 5
+			}
+		});
+		
+		//---------------------------------------------------- GO Rail----------------------------------------------------------
+		map.addSource("GO_Rail_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Durham_GO_Rail.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'GO_Rail_Future',
+			'type': 'line',
+			'source': 'GO_Rail_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'Status'], // get the property
+				'Future', '#1a9407',              
+				'Protect for Future', '#889985',             
+				'#1a9407']                     
+				,
+				'line-dasharray': [3, 1],
+				'line-width': 3    
+			}
+		});
+		
+		map.addLayer({
+			'id': 'GO_Rail_Existing',
+			'type': 'line',
+			'source': 'GO_Rail_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': '#1a9407',
+				//'line-sort-key': 100,
+				'line-width': 3    
+			}
+		});
+		
+		
+		map.setFilter('GO_Rail_Existing', ['==', ['get', 'Status'], 'Existing']);
+		map.setFilter('GO_Rail_Future', ['!=', ['get', 'Status'], 'Existing']);
+		
+		
+		//---------------------------------------------------- Future Bus----------------------------------------------------------
+		map.addSource("Future_Bus_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Map1B_2031HigherOrderTransitNetworkBus.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Future_Bus_Layer_Future',
+			'type': 'line',
+			'source': 'Future_Bus_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'Type'], // get the property
+				'Rapid Transit (Exclusive Lanes)', '#ff1100',              
+				'Protect for Future Rapid Transit', '#ff1100',
+				'Protect for Future HOV', '#ffbd02',              
+				'Other Transit Spine', '#04cae5',   
+				'High Frequency Bus in Shared Lane', '#0156d0',              
+				'High Frequency Bus in HOV Lane', '#ffbd02',                
+				'black']                     
+				,
+				'line-dasharray': [2, 2],
+				'line-width': ['match', ['get', 'PeakHeadway'], // get the property
+				5, 5, 
+				10, 4,             
+				20, 3,       
+				50, 2,       
+				2]        
+			}
+		});
+		
+		map.addLayer({
+			'id': 'Future_Bus_Layer_Existing',
+			'type': 'line',
+			'source': 'Future_Bus_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'Type'], // get the property
+				'Rapid Transit (Exclusive Lanes)', '#ff1100',              
+				'Protect for Future Rapid Transit', '#ff1100',
+				'Protect for Future HOV', '#ffbd02',              
+				'Other Transit Spine', '#04cae5',   
+				'High Frequency Bus in Shared Lane', '#0156d0',              
+				'High Frequency Bus in HOV Lane', '#ffbd02',                
+				'black']                     
+				,
+				'line-width': ['match', ['get', 'PeakHeadway'], // get the property
+				5, 4, 
+				10, 3,             
+				20, 2,       
+				50, 1,       
+				1]        
+			}
+		});
+		
+		map.setFilter('Future_Bus_Layer_Existing', ['==', ['get', 'Status'], 'Existing']);
+		map.setFilter('Future_Bus_Layer_Future', ['==', ['get', 'Status'], 'Future']);
+		
+		//---------------------------------------------------- Hwy 407----------------------------------------------------------
+		map.addSource("Hwy407_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/Durham_407_Corridor.geojson"
+		});
+		
+		
+		map.addLayer({
+			'id': 'Hwy407_Layer',
+			'type': 'line',
+			'source': 'Hwy407_Source',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': ['match', ['get', 'Description'], // get the property
+				'Hwy 407 BRT', '#ffbd02',              
+				'Hwy 407 Rail Corridor', '#889985',             
+				'black']                     
+				,
+				'line-dasharray': [2, 1],
+				//'line-sort-key': 100,
+				'line-width': 2     
+			}
+		});
+		
+		//---------------------------------------------------- Toronto Future Transit---------------------------------------------------------
+		map.addSource("TO_Transit", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/BLUE_FutureTransitCombined.json"
+		});
+		
+		map.addSource("TO_Transit_Existing", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/TTC_Subway_Existing.json"
+		});
+		
+		
+		
+		
+		map.addLayer({
+			'id': 'TO_Transit_Layer',
+			'type': 'line',
+			'source': 'TO_Transit',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': 'black',
+				//'line-sort-key': 100,
+				'line-width': 2,
+				'line-dasharray': [2, 3]     
+			}
+		});
+		
+		map.addLayer({
+			'id': 'TO_Transit_Existing_Layer',
+			'type': 'line',
+			'source': 'TO_Transit_Existing',
+			'layout': {
+				'visibility': 'none'
+			},
+			'paint': {
+				'line-color': 'black',
+				//'line-sort-key': 100,
+				'line-width': 2 
+			}
+		});
+		
+		//----------------------------------------------------Regional Boundary Layer (Regional_Boundary_Source)----------------------------------------------------------
+		map.addSource("Regional_Boundary_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/durham-regional-boundary4.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Regional_Boundary_Line_Layer',
+			'type': 'line',
+			'source': 'Regional_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#999999',
+				//'line-sort-key': 100,
+				'line-width': 3,
+				'line-dasharray': [2,2],
+			}
+		});
+		
+		//----------------------------------------------------Pickering Boundary Layer (Pickering_Boundary_Source)----------------------------------------------------------
+		map.addSource("Pickering_Boundary_Source", {
+			"type": "geojson",
+			"data": "/jsons/DurhamData/pickering-boundary.geojson"
+		});
+		
+		map.addLayer({
+			'id': 'Pickering_Boundary_Line_Layer',
+			'type': 'line',
+			'source': 'Pickering_Boundary_Source',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'line-color': '#5E376D',
+				//'line-sort-key': 100,
+				'line-width': 2,
+				'line-dasharray': [2,2],
+			}
+		});
+		
+	}
+	// ------------------------- Hover effect for Seaton area ----------------------------
+	// When a click event occurs on a feature in the states layer, // open a popup at the location of the click, with description
+	// HTML from the click event's properties. // Change the cursor to a pointer when // the mouse is over the states layer.
+	var hoveredStateId = null;
+	map.on('mousemove', 'Seaton_Fill_Layer', (e) => {
+		map.getCanvas().style.cursor = 'pointer';
+		console.log("mousemove")
+		if (e.features.length > 0) {
+			if (hoveredStateId) {
+				map.setFeatureState({
+					source: 'Seaton_Boundary_Source',
+					id: hoveredStateId
+				}, {
+					hover: false
+				});
+			}
+			hoveredStateId = e.features[0].id;
+			map.setFeatureState({
+				source: 'Seaton_Boundary_Source',
+				id: hoveredStateId
+			}, {
+				hover: true
+			});
+		}
+	});
+	// Change the cursor back to a pointer
+	// when it leaves the states layer.
+	map.on('mouseleave', 'Seaton_Fill_Layer', () => {
+		map.getCanvas().style.cursor = '';
+		if (hoveredStateId) {
+			map.setFeatureState({
+				source: 'Seaton_Boundary_Source',
+				id: hoveredStateId
+			}, {
+				hover: false
+			});
+		}
+		hoveredStateId = null;
+		//popup.remove();
+	});
+	
+	// ------------------------- Hover effect for Cherrywood area ----------------------------
+	// When a click event occurs on a feature in the states layer, // open a popup at the location of the click, with description
+	// HTML from the click event's properties. // Change the cursor to a pointer when // the mouse is over the states layer.
+	var hoveredStateId2 = null;
+	map.on('mousemove', 'Seaton_Fill_Layer2', (e) => {
+		map.getCanvas().style.cursor = 'pointer';
+		console.log("mousemove")
+		if (e.features.length > 0) {
+			if (hoveredStateId2) {
+				map.setFeatureState({
+					source: 'Seaton_Boundary_Source2',
+					id: hoveredStateId2
+				}, {
+					hover: false
+				});
+			}
+			hoveredStateId2 = e.features[0].id;
+			map.setFeatureState({
+				source: 'Seaton_Boundary_Source2',
+				id: hoveredStateId2
+			}, {
+				hover: true
+			});
+		}
+	});
+	// Change the cursor back to a pointer
+	// when it leaves the states layer.
+	map.on('mouseleave', 'Seaton_Fill_Layer2', () => {
+		map.getCanvas().style.cursor = '';
+		if (hoveredStateId2) {
+			map.setFeatureState({
+				source: 'Seaton_Boundary_Source2',
+				id: hoveredStateId2
+			}, {
+				hover: false
+			});
+		}
+		hoveredStateId2 = null;
+		//popup.remove();
+	});
+	var hoveredStateId3 = null;
+	
+	map.on('mousemove', 'Veraine_Fill_Layer', (e) => {
+		map.getCanvas().style.cursor = 'pointer';
+		console.log("mousemove")
+		if (e.features.length > 0) {
+			if (hoveredStateId3) {
+				map.setFeatureState({
+					source: 'Veraine_Source',
+					id: hoveredStateId3
+				}, {
+					hover: false
+				});
+			}
+			hoveredStateId3 = e.features[0].id;
+			map.setFeatureState({
+				source: 'Veraine_Source',
+				id: hoveredStateId3
+			}, {
+				hover: true
+			});
+		}
+	});
+	
+	// Change the cursor back to a pointer
+	// when it leaves the states layer.
+	map.on('mouseleave', 'Veraine_Fill_Layer', () => {
+		map.getCanvas().style.cursor = '';
+		if (hoveredStateId3) {
+			map.setFeatureState({
+				source: 'Veraine_Source',
+				id: hoveredStateId3
+			}, {
+				hover: false
+			});
+		}
+		hoveredStateId3 = null;
+	});
+	
+	map.on('click', 'Veraine_Fill_Layer', (e) => {
+		map.flyTo({
+			center: [-79.04731505203762,43.947226536338434],
+			zoom: 13,
+			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+		});
+	});
+	
+	map.on('click', 'Seaton_Fill_Layer2', (e) => {
+		map.flyTo({
+			center: [-79.15217378863599,43.86474544981027],
+			zoom: 13,
+			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+		});
+	});
+	
+	map.on('click', 'Seaton_Fill_Layer', (e) => {
+		map.flyTo({
+			center: [-79.13286188372939,43.890699299141744],
+			zoom: 13,
+			essential: true // this animation is considered essential with respect to prefers-reduced-motion
+		});
+	});
+	
+	// ------------------------------ wider on hover -----------------------------------------------------------
+
+	// go rail
+	map.on("mouseenter", "GO_Rail_Future", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("GO_Rail_Future", "line-width", ["case", ["==", ["id"], e.features[0].id], 5, 3])
+		}
+	});
+	
+	map.on("mouseleave", "GO_Rail_Future", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("GO_Rail_Future", "line-width", 3)
+	});
+
+	map.on("mouseenter", "GO_Rail_Existing", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("GO_Rail_Existing", "line-width", ["case", ["==", ["id"], e.features[0].id], 5, 3])
+		}
+	});
+	
+	map.on("mouseleave", "GO_Rail_Existing", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("GO_Rail_Existing", "line-width", 3)
+	});
+
+	// hwy 407
+	map.on("mouseenter", "Hwy407_Layer", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("Hwy407_Layer", "line-width", ["case", ["==", ["id"], e.features[0].id], 4, 2])
+		}
+	});
+	
+	map.on("mouseleave", "Hwy407_Layer", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("Hwy407_Layer", "line-width", 2)
+	});
+
+	// future roads
+	map.on("mouseenter", "Future_Roads_Layer", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("Future_Roads_Layer", "line-width", ["case", ["==", ["id"], e.features[0].id], 7, 3.5])
+		}
+	});
+	
+	map.on("mouseleave", "Future_Roads_Layer", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("Future_Roads_Layer", "line-width", 3.5)
+	});
+
+	map.on("mouseenter", "BeyondFuture_Roads_Layer", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("BeyondFuture_Roads_Layer", "line-width", ["case", ["==", ["id"], e.features[0].id], ['match', ['get', 'ExpansionType'], // get the property
+				'Road Expansion', 6, 
+				'Future Connection', 6,             
+				'Regional Road Improvements', 4,             
+				1.5], ['match', ['get', 'ExpansionType'], // get the property
+				'Road Expansion', 3, 
+				'Future Connection', 3,             
+				'Regional Road Improvements', 1.5,             
+				1.5]])
+		}
+	});
+	
+	map.on("mouseleave", "BeyondFuture_Roads_Layer", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("BeyondFuture_Roads_Layer", "line-width", ['match', ['get', 'ExpansionType'], // get the property
+				'Road Expansion', 3, 
+				'Future Connection', 3,             
+				'Regional Road Improvements', 1.5,             
+				1.5])
+	});
+
+	// future bus
+	map.on("mouseenter", "Future_Bus_Layer_Future", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("Future_Bus_Layer_Future", "line-width", ["case", ["==", ["id"], e.features[0].id], 
+			['match', ['get', 'PeakHeadway'], // get the property
+				5, 8, 
+				10, 7,             
+				20, 6,       
+				50, 4,       
+				2]  , 
+			['match', ['get', 'PeakHeadway'], // get the property
+				5, 5, 
+				10, 4,             
+				20, 3,       
+				50, 2,       
+				2]  ])
+		}
+	});
+	
+	map.on("mouseleave", "Future_Bus_Layer_Future", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("Future_Bus_Layer_Future", "line-width", ['match', ['get', 'PeakHeadway'], // get the property
+				5, 5, 
+				10, 4,             
+				20, 3,       
+				50, 2,       
+				2]  )
+	});
+
+	map.on("mouseenter", "Future_Bus_Layer_Existing", function (e) {
+		if (e.features.length) {
+			map.getCanvas().style.cursor = 'pointer';
+			map.setPaintProperty("Future_Bus_Layer_Existing", "line-width", ["case", ["==", ["id"], e.features[0].id], 
+			['match', ['get', 'PeakHeadway'], // get the property
+				5, 8, 
+				10, 7,             
+				20, 6,       
+				50, 4,       
+				2]  , 
+			['match', ['get', 'PeakHeadway'], // get the property
+				5, 5, 
+				10, 4,             
+				20, 3,       
+				50, 2,       
+				2]  ])
+		}
+	});
+	
+	map.on("mouseleave", "Future_Bus_Layer_Existing", function (e) {
+		map.getCanvas().style.cursor = '';
+		map.setPaintProperty("Future_Bus_Layer_Existing", "line-width", ['match', ['get', 'PeakHeadway'], // get the property
+				5, 5, 
+				10, 4,             
+				20, 3,       
+				50, 2,       
+				2]  )
+	});
+
+	//https://docs.mapbox.com/mapbox-gl-js/example/queryrenderedfeatures/ look at this
+
+	// ------------------------------ popups -----------------------------------------------------------
+
+	// ------------------------------ future bus -----------------------------------------------------------
+	var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        });
+
+		map.on("mouseenter", "Future_Bus_Layer_Future", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var type = e.features[0].properties.Type;
+            var headway = e.features[0].properties.PeakHeadway;
+            var status = e.features[0].properties.Status;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Status: </strong>' + status + '<br><strong>Type: </strong>' + type + '<br><strong>Peak Headway: </strong>' + headway + ' minutes')
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "Future_Bus_Layer_Future", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+		map.on("mouseenter", "Future_Bus_Layer_Existing", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var type = e.features[0].properties.Type;
+            var headway = e.features[0].properties.PeakHeadway;
+            var status = e.features[0].properties.Status;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Status: </strong>' + status + '<br><strong>Type: </strong>' + type + '<br><strong>Peak Headway: </strong>' + headway + ' minutes')
+            popup.addTo(map);
+        });
+
+		map.on("mouseleave", "Future_Bus_Layer_Existing", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+		// ------------------------------ go rail -----------------------------------------------------------
+
+		map.on("mouseenter", "GO_Rail_Future", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var status = e.features[0].properties.Status;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Status: </strong>' + status)
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "GO_Rail_Future", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+		map.on("mouseenter", "GO_Rail_Existing", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var status = e.features[0].properties.Status;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Status: </strong>' + status)
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "GO_Rail_Existing", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+	
+		// ------------------------------ hwy 407 -----------------------------------------------------------
+
+		map.on("mouseenter", "Hwy407_Layer", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var Description = e.features[0].properties.Description;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>' + Description +'</strong>')
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "Hwy407_Layer", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+	
+		// ------------------------------ future roads-----------------------------------------------------------
+
+		map.on("mouseenter", "Future_Roads_Layer", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var roadname = e.features[0].properties.RoadName;
+            var status = e.features[0].properties.RoadStatus;
+            var numlanes = e.features[0].properties.NumLanes;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Road Name: </strong>' + roadname + '<br><strong>Status: </strong>' + status + '<br><strong>Number of Lanes: </strong>' + numlanes + ' lanes')
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "Future_Roads_Layer", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+		map.on("mouseenter", "BeyondFuture_Roads_Layer", function (e) {
+            map.getCanvas().style.cursor = 'default';
+            var roadname = e.features[0].properties.RoadName;
+            var RoadType = e.features[0].properties.RoadType;
+            var ExpansionType = e.features[0].properties.ExpansionType;
+
+            popup.remove();
+            popup.setLngLat(e.lngLat)
+            popup.setHTML('<strong>Road Name: </strong>' + roadname + '<br><strong>Ownership: </strong>' + RoadType + '<br><strong>Expansion: </strong>' + ExpansionType)
+            popup.addTo(map);
+        });
+
+        map.on("mouseleave", "BeyondFuture_Roads_Layer", function (e) {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+        });
+
+
+// measure
+
+document.getElementById('measure-btn').addEventListener('change', function() {
+                var isChecked = this.checked;
+                var dist_container = document.getElementById('distance');
+                toggleLayer(isChecked, "measure-lines")
+                toggleLayer(isChecked, "measure-points")
+                if (isChecked) {
+                    dist_container.style.display = "block";
+                } else {
+                    dist_container.style.display = "none";
+
+                }
+                addMeasureLayers();
+            });
+
+var distanceContainer = document.getElementById('distance');
+        var isMeasure = false;
+
+        var measure_pts_ids = [];
+
+        // GeoJSON object to hold our measurement features
+        var measure_geojson = {
+            'type': 'FeatureCollection',
+            'features': []
+        };
+
+        // Used to draw a line between points
+        var linestring = {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': []
+            }
+        };
+
+        map.on('click', function(e) {
+            if (isMeasure) {
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['measure-points']
+                });
+
+                // Remove the linestring from the group
+                // So we can redraw it based on the points collection
+                if (measure_geojson.features.length > 1) measure_geojson.features.pop();
+
+                // Clear the Distance container to populate it with a new value
+                distanceContainer.innerHTML = '';
+
+                // If a feature was clicked, remove it from the map
+                if (features.length) {
+                    var id = features[0].properties.id;
+                    measure_geojson.features = measure_geojson.features.filter(function(point) {
+                        return point.properties.id !== id;
+                    });
+                } else {
+                    var pt_ID = String(new Date().getTime())
+                    var point = {
+                        'type': 'Feature',
+                        'geometry': {
+                            'type': 'Point',
+                            'coordinates': [e.lngLat.lng, e.lngLat.lat]
+                        },
+                        'properties': {
+                            'id': pt_ID
+                        }
+                    };
+                    measure_geojson.features.push(point);
+                    measure_pts_ids.push(pt_ID);
+                }
+
+                if (measure_geojson.features.length > 1) {
+                    linestring.geometry.coordinates = measure_geojson.features.map(
+                        function(point) {
+                            return point.geometry.coordinates;
+                        }
+                    );
+                    measure_geojson.features.push(linestring);
+
+                    // Populate the distanceContainer with total distance
+                    var value = document.createElement('pre');
+                    value.textContent =
+                        'Total distance: ' +
+                        turf.length(linestring).toLocaleString() +
+                        'km';
+                    distanceContainer.appendChild(value);
+                }
+                map.getSource('measure-geojson').setData(measure_geojson);
+            } else {
+                map.getCanvas().style.cursor = '';
+                //popup.remove();
+                flymarker.remove();
+            }
+        });
+
+        map.on('mousemove', function(e) {
+            if (isMeasure) {
+                var features = map.queryRenderedFeatures(e.point, {
+                    layers: ['measure-points']
+                });
+                // UI indicator for clicking/hovering a point on the map
+                map.getCanvas().style.cursor = features.length ?
+                    'pointer' :
+                    'crosshair';
+            }
+        });
+
+        $("#measure-btn").click(function() {
+            if (isMeasure) {
+                isMeasure = false;
+                map.getCanvas().style.cursor = '';
+            } else {
+                isMeasure = true;
+                console.log(measure_geojson)
+            }
+        });
+
+        function addMeasureLayers() {
+            // Add layers for measuring distances
+            map.addSource(
+                'measure-geojson', {
+                    'type': 'geojson',
+                    'data': measure_geojson
+                });
+            map.addLayer({
+                id: 'measure-points',
+                type: 'circle',
+                source: 'measure-geojson',
+                paint: {
+                    'circle-radius': 5,
+                    'circle-color': '#000'
+                },
+                filter: ['in', '$type', 'Point']
+            });
+
+            map.addLayer({
+                id: 'measure-lines',
+                type: 'line',
+                source: 'measure-geojson',
+                layout: {
+                    'line-cap': 'round',
+                    'line-join': 'round'
+                },
+                paint: {
+                    'line-color': '#000',
+                    'line-width': 2.5
+                },
+                filter: ['in', '$type', 'LineString']
+            });
+            console.log(measure_geojson)
+        }
+
+
+	// ----------------------------------------------------------------------------Sidebar Javascript Functions------------------------------------------------------------------
+	var colrightsmall = true;
+		var sdiv1 = document.getElementById("infotab");
+		var sdiv2 = document.getElementById("layerstab");
+		
+		$("#clicksidediv").click(function () {
+			sidedivsize();
+		});
+		
+		$("#sidediv1").click(function () {
+			sidedivsize_toggle(sdiv1, sdiv2);
+		});
+		
+		$("#sidediv2").click(function() {
+			sidedivsize_toggle(sdiv2, sdiv1);
+		});
+		
+		
+		
+		function sidedivsize () {
+			var left = document.getElementById("colleft");
+			var right = document.getElementById("colright");
+			var rightleft = document.getElementById("colrightleft");
+			var rightright = document.getElementById("colrightright");
+			var expand_button = document.getElementById("arrows");
+			var sdiv1 = document.getElementById("infotab");
+			var sdiv2 = document.getElementById("locationtab");
+			
+			
+			if (colrightsmall) {
+				colrightsmall = false;
+				
+				left.style.flex = "0 0 70%";
+				left.style.maxWidth = "70%";
+				right.style.flex = "0 0 30%";
+				right.style.maxWidth = "30%";
+				rightleft.style.flex = "0 0 10%";
+				rightleft.style.maxWidth = "10%";
+				rightright.style.flex = "0 0 90%";
+				rightright.style.maxWidth = "90%";
+				rightright.style.display = "flex";
+				sdiv1.style.display = "flex";
+				sdiv2.style.display = "none";
+				expand_button.classList.remove("fa-angle-double-left");
+				expand_button.classList.add("fa-angle-double-right");
+			}
+			
+			else {
+				colrightsmall = true;
+				
+				left.style.flex = "0 0 97%";
+				left.style.maxWidth = "97%";
+				right.style.flex = "0 0 3%";
+				right.style.maxWidth = "3%";
+				rightleft.style.flex = "0 0 100%";
+				rightleft.style.maxWidth = "100%";
+				rightright.style.flex = "0 0 0%";
+				rightright.style.maxWidth = "0%";
+				rightright.style.display = "none";
+				sdiv1.style.display = "none";
+				sdiv2.style.display = "none";
+				expand_button.classList.remove("fa-angle-double-right");
+				expand_button.classList.add("fa-angle-double-left");
+			}
+			
+			var mapcanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
+			mapcanvas.style.width = '100%';
+			map.resize();
+		}
+		
+		
+		function sidedivsize_toggle(open_div, close_div1) {
+			var left = document.getElementById("colleft");
+			var right = document.getElementById("colright");
+			var rightleft = document.getElementById("colrightleft");
+			var rightright = document.getElementById("colrightright");
+			var expand_button = document.getElementById("arrows");
+			
+			if (colrightsmall) {
+				colrightsmall = false;
+				right.style.flex = "0 0 30%";
+				right.style.maxWidth = "30%";
+				left.style.flex = "0 0 70%";
+				left.style.maxWidth = "70%";
+				rightleft.style.flex = "0 0 10%";
+				rightleft.style.maxWidth = "10%";
+				rightright.style.flex = "0 0 90%";
+				rightright.style.maxWidth = "90%";
+				rightright.style.display = "flex";
+				open_div.style.display = "flex";
+				close_div1.style.display = "none";
+				expand_button.classList.remove("fa-angle-double-left");
+				expand_button.classList.add("fa-angle-double-right");
+			}
+			
+			else {
+				open_div.style.display = "flex";
+				close_div1.style.display = "none";					
+			}
+			var mapcanvas = document.getElementsByClassName("mapboxgl-canvas")[0];
+			mapcanvas.style.width = '100%';
+			map.resize();
+		}
+		
+		// Open Sidebar
+		sidedivsize_toggle(sdiv2, sdiv1);
+	function applySwitches() {
+		
+		document.getElementById('switch1').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Seaton_Fill_Layer")
+			toggleLayer(isChecked, "Seaton_Boundary_Line_Layer")
+		});
+		document.getElementById('switch2').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Pickering_Boundary_Line_Layer")
+		});
+		document.getElementById('switch3').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Greenbelt_Boundary_Line_Layer")
+			toggleLayer(isChecked, "Greenbelt_Fill_Layer")
+		});
+		document.getElementById('switch4').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Regional_Boundary_Line_Layer")
+		});
+		document.getElementById('switch5').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Durham_Roads_Provincial_Line_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Text_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Border_Layer")
+		});
+		document.getElementById('switch6').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Durham_Roads_Regional_Line_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Text_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Border_Layer")
+		});
+		document.getElementById('switch7').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Durham_Roads_Municicpal_Line_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Text_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Border_Layer")
+		});
+		document.getElementById('switch7.5').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Future_Roads_Layer")
+			
+		});
+		document.getElementById('switch7.6').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "BeyondFuture_Roads_Layer")
+			
+		});
+		document.getElementById('switch8').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Seaton_Fill_Layer2")
+			toggleLayer(isChecked, "Seaton_Boundary_Line_Layer2")
+			//toggleLayer(isChecked, "TO_Wards_Border_Layer")
+		});
+		document.getElementById('switch9').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Veraine_Fill_Layer")
+			toggleLayer(isChecked, "Veraine_Boundary_Line_Layer")
+			//toggleLayer(isChecked, "TO_Wards_Border_Layer")
+		});
+		document.getElementById('switch10').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Durham_Water_Mains_Layer")
+		});
+		document.getElementById('switch11').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Ontario_Railways_Layer")
+			toggleLayer(isChecked, "Ontario_Railways_Layer2")
+		});
+		
+		document.getElementById('switch12').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Future_Bus_Layer_Existing")
+			toggleLayer(isChecked, "Future_Bus_Layer_Future")
+		});
+		
+		document.getElementById('switch13').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "GO_Rail_Existing")
+			toggleLayer(isChecked, "GO_Rail_Future")
+		});
+		
+		document.getElementById('switch14').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "Hwy407_Layer")
+		});
+		
+		document.getElementById('switch15').addEventListener('change', function () {
+			var isChecked = this.checked;
+			toggleLayer(isChecked, "TO_Transit_Layer")
+			toggleLayer(isChecked, "TO_Transit_Existing_Layer")
+		});
+		
+	}
+	function toggleLayer(isChecked, layer) {
+		if (isChecked) {
+			map.setLayoutProperty(layer, 'visibility', 'visible');
+		} else {
+			map.setLayoutProperty(layer, 'visibility', 'none');
+		}
+	}
+	
+</script>
+
+</body>
+</html>
