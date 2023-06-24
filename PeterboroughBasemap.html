@@ -353,74 +353,102 @@
 				var lastTranslateX = 0, lastTranslateY = 0;
 				var dragStart, dragged;
 				
-				canvas.addEventListener('mousedown',function(evt){
-					document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
-					lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
-					lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
-					dragStart = ctx.transformedPoint(lastX,lastY);
-					dragged = false;
-				},false);
-				
-				canvas.addEventListener('mousemove',function(evt){
-					lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
-					lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
-					dragged = true;
-					if (dragStart){
+					canvas.addEventListener('mousedown',function(evt){
+						document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+						lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+						lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+						dragStart = ctx.transformedPoint(lastX,lastY);
+						dragged = false;
+					},false);
+					
+					canvas.addEventListener('mousemove',function(evt){
+						lastX = evt.offsetX || (evt.pageX - canvas.offsetLeft);
+						lastY = evt.offsetY || (evt.pageY - canvas.offsetTop);
+						dragged = true;
+						if (dragStart){
+							var pt = ctx.transformedPoint(lastX,lastY);
+							ctx.translate(pt.x-dragStart.x,pt.y-dragStart.y);
+							redraw();
+						}
+					},false);
+
+					
+					canvas.addEventListener('mouseup',function(evt){
+						dragStart = null;
+						if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
+					},false);
+
+					canvas.addEventListener('touchstart', function(evt) {
+						if (evt.touches.length === 1) {
+							evt.preventDefault();
+							document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+							var touch = evt.touches[0];
+							lastX = touch.pageX - canvas.offsetLeft;
+							lastY = touch.pageY - canvas.offsetTop;
+							dragStart = ctx.transformedPoint(lastX, lastY);
+							dragged = false;
+						}
+					}, false);
+
+					canvas.addEventListener('touchmove', function(evt) {
+					if (evt.touches.length === 1) {
+							evt.preventDefault();
+							var touch = evt.touches[0];
+							lastX = touch.pageX - canvas.offsetLeft;
+							lastY = touch.pageY - canvas.offsetTop;
+							dragged = true;
+							if (dragStart) {
+								var pt = ctx.transformedPoint(lastX, lastY);
+								ctx.translate(pt.x - dragStart.x, pt.y - dragStart.y);
+								redraw();
+							}
+						}
+					}, false);
+					
+					
+					var scaleFactor = 1.1;
+					var minFactor = 0.2;
+					
+					var maxScaleFactor = 2;
+					var minScaleFactor = 0.2;
+					
+					var lastTranslate = {
+						x: 0,
+						y: 0
+					};
+					
+					var zoom = function(clicks){
 						var pt = ctx.transformedPoint(lastX,lastY);
-						ctx.translate(pt.x-dragStart.x,pt.y-dragStart.y);
+						var factor = Math.pow(scaleFactor,clicks);
+						var currentScaleFactor = ctx.getTransform().a;
+						
+						if (factor * currentScaleFactor > maxScaleFactor || factor * currentScaleFactor < minScaleFactor) {
+							return;
+						}
+						
+						ctx.translate(pt.x,pt.y);
+						ctx.scale(factor,factor);
+						ctx.translate(-pt.x,-pt.y);
+						
+						if (factor * currentScaleFactor === maxScaleFactor || factor * currentScaleFactor === minScaleFactor) {
+							var translatePoint = ctx.transformedPoint(lastX, lastY);
+							lastTranslateX = translatePoint.x;
+							lastTranslateY = translatePoint.y;
+						}
+						
 						redraw();
 					}
-				},false);
-				
-				canvas.addEventListener('mouseup',function(evt){
-					dragStart = null;
-					if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
-				},false);
-				
-				
-				var scaleFactor = 1.1;
-				var minFactor = 0.2;
-				
-				var maxScaleFactor = 2;
-				var minScaleFactor = 0.2;
-				
-				var lastTranslate = {
-					x: 0,
-					y: 0
+					
+					
+					var handleScroll = function(evt){
+						var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.detail ? -evt.detail : 0;
+						if (delta) zoom(delta);
+						return evt.preventDefault() && false;
+					};
+					
+					canvas.addEventListener('DOMMouseScroll',handleScroll,false);
+					canvas.addEventListener('mousewheel',handleScroll,false);
 				};
-				
-				var zoom = function(clicks){
-					var pt = ctx.transformedPoint(lastX,lastY);
-					var factor = Math.pow(scaleFactor,clicks);
-					var currentScaleFactor = ctx.getTransform().a;
-					
-					if (factor * currentScaleFactor > maxScaleFactor || factor * currentScaleFactor < minScaleFactor) {
-						return;
-					}
-					
-					ctx.translate(pt.x,pt.y);
-					ctx.scale(factor,factor);
-					ctx.translate(-pt.x,-pt.y);
-					
-					if (factor * currentScaleFactor === maxScaleFactor || factor * currentScaleFactor === minScaleFactor) {
-						var translatePoint = ctx.transformedPoint(lastX, lastY);
-						lastTranslateX = translatePoint.x;
-						lastTranslateY = translatePoint.y;
-					}
-					
-					redraw();
-				}
-				
-				
-				var handleScroll = function(evt){
-					var delta = evt.wheelDelta ? evt.wheelDelta/40 : evt.detail ? -evt.detail : 0;
-					if (delta) zoom(delta);
-					return evt.preventDefault() && false;
-				};
-				
-				canvas.addEventListener('DOMMouseScroll',handleScroll,false);
-				canvas.addEventListener('mousewheel',handleScroll,false);
-			};
 			
 			gkhead.src = './imgs/PeterboroughHeritageBaseMap.jpg';
 			
