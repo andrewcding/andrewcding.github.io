@@ -260,6 +260,8 @@
 			
 			
 			
+			
+			
 		</main>
 		
 		
@@ -283,13 +285,24 @@
 				document.getElementById("cover-spin").style.display = "none";
 			}
 			
+			// show and hide info section
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
-
-				$('button').tooltip().mouseover();
+			
+				$('button').tooltip().mouseover();			
+			
 				$("main").mousedown(function () {
-          			$('[data-toggle="tooltip"]').tooltip("hide");
-       			});
+					$('[data-toggle="tooltip"]').tooltip("hide");
+				});
+				
+				$('main').on('touchstart', function() {
+					$('[data-toggle="tooltip"]').tooltip('hide');
+				});
+				
+				$('button').on('touchend', function() {
+					$('[data-toggle="tooltip"]').tooltip("show");
+				});
+
 			});
 			
 			var canvas = document.getElementsByTagName('canvas')[0];
@@ -297,7 +310,7 @@
 			canvas.height = window.innerHeight-0.15*window.innerHeight;
 			
 			var gkhead = new Image;
-
+			
 			window.onresize = function(){
 				canvas.width = window.innerWidth-0.15*window.innerWidth;
 				canvas.height = window.innerHeight-0.15*window.innerHeight;
@@ -319,6 +332,7 @@
 			}
 			
 			window.onload = function(){		
+				
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
 				ctx.scale(0.07,0.07);
@@ -367,19 +381,19 @@
 					dragStart = null;
 					if (!dragged) zoom(evt.shiftKey ? -1 : 1 );
 				},false);
-
+				
 				canvas.addEventListener('touchstart', function(evt) {
-						if (evt.touches.length === 1) {
-							evt.preventDefault();
-							document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
-							var touch = evt.touches[0];
-							lastX = touch.pageX - canvas.offsetLeft;
-							lastY = touch.pageY - canvas.offsetTop;
-							dragStart = ctx.transformedPoint(lastX, lastY);
-							dragged = false;
-						}
-					}, false);
-
+					if (evt.touches.length === 1) {
+						evt.preventDefault();
+						document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+						var touch = evt.touches[0];
+						lastX = touch.pageX - canvas.offsetLeft;
+						lastY = touch.pageY - canvas.offsetTop;
+						dragStart = ctx.transformedPoint(lastX, lastY);
+						dragged = false;
+					}
+				}, false);
+				
 				canvas.addEventListener('touchmove', function(evt) {
 					if (evt.touches.length === 1) {
 						evt.preventDefault();
@@ -405,7 +419,6 @@
 					x: 0,
 					y: 0
 				};
-				
 				
 				var zoom = function(clicks){
 					var pt = ctx.transformedPoint(lastX,lastY);
@@ -507,3 +520,4 @@
 		</script>
 	</body>
 	</html>
+	

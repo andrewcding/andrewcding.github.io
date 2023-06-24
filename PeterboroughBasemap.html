@@ -285,13 +285,24 @@
 				document.getElementById("cover-spin").style.display = "none";
 			}
 			
+			// show and hide info section
 			$(document).ready(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
-				
-				$('button').tooltip().mouseover();
+			
+				$('button').tooltip().mouseover();			
+			
 				$("main").mousedown(function () {
 					$('[data-toggle="tooltip"]').tooltip("hide");
 				});
+				
+				$('main').on('touchstart', function() {
+					$('[data-toggle="tooltip"]').tooltip('hide');
+				});
+				
+				$('button').on('touchend', function() {
+					$('[data-toggle="tooltip"]').tooltip("show");
+				});
+
 			});
 			
 			
