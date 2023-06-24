@@ -523,6 +523,11 @@ $(document).ready(function(){
 			userInteracting = true;
 			setTimeout(resumeSpin, 200);
 		});
+
+		map.on('touchmove', (e) => {
+    		userInteracting = true;
+    		setTimeout(resumeSpin, 200);
+		});
 		
 		// Restart spinning the globe when interaction is complete
 		map.on('mouseup', () => {
