@@ -48,7 +48,7 @@
         .subtitle {
             position: absolute;
             left: 10.6%;
-            top: 189px;
+            top: 19%;
             
             font-family: 'Inter';
             font-style: normal;
@@ -59,25 +59,35 @@
             color: #E6E6E6;
         }
         
+        /* this somehow makes it so there is no vertical scroll */
+        .container {
+            display: flex;
+            align-items: flex-end;
+            height: 90vh; /* Use viewport height to match the browser height */
+            overflow-y: hidden; /* Hide the vertical scrollbar */
+        }
+
         .content {
-            position: absolute;
-            left: 10.6%;
-            top: 250px;
-            width: 32%;
-            height: 800px;
-            
+            position: relative;
+            width: 33%;
+            left: -23.2%;
+            margin: 0 auto;
+            padding-bottom: 100px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
+            top: -31%;
+
+
             font-family: 'Inter';
             font-style: normal;
             font-weight: 300;
-            font-size: 19px;
-            line-height: 26px;
+            font-size: 0.989583vw;
+            line-height: 1.354167vw;
             color: #E6E6E6;
         }
 
         .photo {
             position: absolute;
             left: 51.6%;
-            top: 195px;
+            top: 19.4%;
         }
         
         .bonus_btns { color: #949794; 
@@ -124,7 +134,7 @@
             height: 100%;
             
             /* Apply animation to this element */	
-            animation: text_up 1s ease-out 1.2s; 
+            animation: text_up 1s ease-out 1.5s; 
         }
         
         
@@ -184,17 +194,16 @@
             100% { opacity: 1; }
         }
 
-        .fade-in-text2 { animation: fadeIn2 3s; }
+        .fade-in-text2 { animation: fadeIn2 3.5s; }
         
         @keyframes fadeIn2 {
             0% { opacity: 0.00; }
             40% { opacity: 0.00; }
             50% { opacity: 0.02; }
-            60% { opacity: 0.1; }
             100% { opacity: 1; }
         }
         
-        .fade-in-text3 { animation: fadeIn3 3s; }
+        .fade-in-text3 { animation: fadeIn3 3.5s; }
         
         @keyframes fadeIn3 {
             0% { opacity: 0.00; }
@@ -243,23 +252,26 @@
                     </div>
                 </div>
                 
-                <!-- typing text subtitle (about me) -->
+
+
+                <div class="container">
+
+                                    <!-- typing text subtitle (about me) -->
                 <div class="fade-in-text subtitle typing-text">
                 </div>
 
-                <div>
                     <div class="text_up fade-in-text2 content">
                         <p>I am an aspiring geospatial data scientist based in Toronto, Canada, driven by the 
                             desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions 
                             within in the intersection of geography, statistics, and urbanism.</p>
-                        <br><br><br><br><br><br>
+                        <br><br><br><br><br>
                         <p>I have showcased my geographic expertise on the global stage, participating in 
                             international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
                             internships across research, public and private sectors, where I have honed my skills 
                             in GIS and data science.</p>
-                        <br><br><br><br><br><br>
+                        <br><br><br><br><br>
                         <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
-                            and have previously worked/studied in Lausanne, Switzerland and Singapore. I 
+                            and have previously worked/studied in Switzerland and Singapore. I 
                             also enjoy hiking, playing board games, and delving into maps.</p>
                     </div>
                 </div>
@@ -286,7 +298,7 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() {
     const text = "about me";
-    const delay = 600; // Delay in milliseconds before typing starts
+    const delay = 800; // Delay in milliseconds before typing starts
 
 let charIndex = 0;
 const typingTextElement = document.querySelector(".typing-text");
@@ -295,7 +307,7 @@ function type() {
     typingTextElement.textContent += text[charIndex];
     charIndex++;
     if (charIndex < text.length) {
-        setTimeout(type, 100);
+        setTimeout(type, 112);
     }
 }
 
