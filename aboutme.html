@@ -211,6 +211,72 @@
             65% { opacity: 0.02; }
             100% { opacity: 1; }
         }
+
+
+        @media only screen and (max-width: 700px) {
+            
+        .subtitle {
+        position: absolute;
+            left: 11%;
+            top: 12.5%;
+            width: 150px;
+            
+            font-size: 28px;
+        }
+        
+        /* this somehow makes it so there is no vertical scroll */
+        .container {
+            display: flex;
+            align-items: flex-end;
+            height: 100vh; /* Use viewport height to match the browser height */
+            overflow-y: hidden; /* Hide the vertical scrollbar */
+        }
+
+        .content {
+            position: relative;
+            width: 80%;
+            left: 0%;
+            padding-bottom: 0px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
+            top: calc(-100% + 580px);
+
+            font-size: 15px;
+            line-height: 26px;
+        }
+
+        .content div.extra-spacing {
+            margin-top: 12vw; /* Adjust the desired spacing between divs */
+        }
+
+        .photo {
+            display:none
+        }
+
+        .bottom_menu {
+            position: relative;
+            left: 10.6%;
+            top: calc(100% - 40px);
+            width: 220px;
+            height: 40px;
+        } 
+        
+    }
+    
+    @media only screen and (max-width: 438px) { 
+        
+        .content div.extra-spacing {
+            margin-top: 24vw; /* Adjust the desired spacing between divs */
+        }
+        
+    }
+    
+    @media only screen and (max-width: 366px) { 
+        
+        .content div.extra-spacing {
+            margin-top: 32vw; /* Adjust the desired spacing between divs */
+        }
+        
+    }
+    
     </style>
     
 </head>
@@ -265,14 +331,18 @@
                             desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions 
                             within in the intersection of geography, statistics, and urbanism.</p>
                         <br><br><br><br><br>
-                        <p>I have showcased my geographic expertise on the global stage, participating in 
+                        <div class="extra-spacing">
+                        <p >I have showcased my geographic expertise on the global stage, participating in 
                             international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
                             internships across research, public and private sectors, where I have honed my skills 
                             in GIS and data science.</p>
+                        </div>
                         <br><br><br><br><br>
-                        <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
-                            and have previously worked/studied in Switzerland and Singapore. I 
-                            also enjoy hiking, playing board games, and delving into maps.</p>
+                        <div class="extra-spacing">
+                            <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
+                                and have previously worked/studied in Switzerland and Singapore. I 
+                                also enjoy hiking, playing board games, and delving into maps.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -297,7 +367,7 @@
         </main>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-    const text = "about me";
+    const text = "about me.";
     const delay = 800; // Delay in milliseconds before typing starts
 
 let charIndex = 0;
@@ -313,6 +383,8 @@ function type() {
 
 setTimeout(type, delay);
 });
+
+
         </script>
     </body>
     </html>
