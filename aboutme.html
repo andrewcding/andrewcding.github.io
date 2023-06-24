@@ -64,6 +64,7 @@
             left: 10.6%;
             top: 250px;
             width: 32%;
+            height: 800px;
             
             font-family: 'Inter';
             font-style: normal;
@@ -105,13 +106,25 @@
             height: 40px;
         } 
         
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        .typing-text {
+            width: 30%;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40, end);
+        }
+        
         .text_up p {
             position: absolute;
             width: 100%;
             height: 100%;
             
             /* Apply animation to this element */	
-            animation: text_up 1s ease-out; 
+            animation: text_up 1s ease-out 1.2s; 
         }
         
         
@@ -170,7 +183,25 @@
             20% { opacity: 0.02; }
             100% { opacity: 1; }
         }
+
+        .fade-in-text2 { animation: fadeIn2 3s; }
         
+        @keyframes fadeIn2 {
+            0% { opacity: 0.00; }
+            40% { opacity: 0.00; }
+            50% { opacity: 0.02; }
+            60% { opacity: 0.1; }
+            100% { opacity: 1; }
+        }
+        
+        .fade-in-text3 { animation: fadeIn3 3s; }
+        
+        @keyframes fadeIn3 {
+            0% { opacity: 0.00; }
+            60% { opacity: 0.00; }
+            65% { opacity: 0.02; }
+            100% { opacity: 1; }
+        }
     </style>
     
 </head>
@@ -212,27 +243,29 @@
                     </div>
                 </div>
                 
-                <div class="fade-in-text subtitle">
-                    about me
-                </div>
-                
-                <div class="fade-in-text content">
-                    <p>I am an aspiring geospatial data scientist based in Toronto, Canada, driven by the 
-                        desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions 
-                        within in the intersection of geography, statistics, and urbanism.</p>
-                    
-                    <p>I have showcased my geographic expertise on the global stage, participating in 
-                        international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
-                        internships across research, public and private sectors, where I have honed my skills 
-                        in GIS and data science.</p>
-                    
-                    <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
-                        and have previously worked/studied in Lausanne, Switzerland and Singapore. I 
-                        also enjoy hiking, playing board games, and delving into maps.</p>
-    
+                <!-- typing text subtitle (about me) -->
+                <div class="fade-in-text subtitle typing-text">
                 </div>
 
-                <div class='photo fade-in-text' >
+                <div>
+                    <div class="text_up fade-in-text2 content">
+                        <p>I am an aspiring geospatial data scientist based in Toronto, Canada, driven by the 
+                            desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions 
+                            within in the intersection of geography, statistics, and urbanism.</p>
+                        <br><br><br><br><br><br>
+                        <p>I have showcased my geographic expertise on the global stage, participating in 
+                            international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
+                            internships across research, public and private sectors, where I have honed my skills 
+                            in GIS and data science.</p>
+                        <br><br><br><br><br><br>
+                        <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
+                            and have previously worked/studied in Lausanne, Switzerland and Singapore. I 
+                            also enjoy hiking, playing board games, and delving into maps.</p>
+                    </div>
+                </div>
+
+
+                <div class='photo fade-in-text3' >
                     <img src="./imgs/aboutme/IMG_8291.JPEG" alt="" style="width:378.24px;height:479.04px;">
                 </div>
                     
@@ -251,7 +284,23 @@
             </div>
         </main>
         <script>
-            
+            document.addEventListener("DOMContentLoaded", function() {
+    const text = "about me";
+    const delay = 600; // Delay in milliseconds before typing starts
+
+let charIndex = 0;
+const typingTextElement = document.querySelector(".typing-text");
+
+function type() {
+    typingTextElement.textContent += text[charIndex];
+    charIndex++;
+    if (charIndex < text.length) {
+        setTimeout(type, 100);
+    }
+}
+
+setTimeout(type, delay);
+});
         </script>
     </body>
     </html>
