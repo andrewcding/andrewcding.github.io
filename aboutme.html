@@ -21,7 +21,7 @@
         @supports (font-variation-settings: light) {
             :root { font-family: 'Inter var', sans-serif; }
         }
-        
+
         body {
             background-color: #29292f;
             color: #e6e6e6;
@@ -63,18 +63,15 @@
         .container {
             display: flex;
             align-items: flex-end;
-            height: 90vh; /* Use viewport height to match the browser height */
             overflow-y: hidden; /* Hide the vertical scrollbar */
         }
 
         .content {
-            position: relative;
+            position: absolute;
             width: 33%;
-            left: -23.2%;
+            left: 10.6%;
             margin: 0 auto;
-            padding-bottom: 100px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
-            top: -31%;
-
+            top: 26%;
 
             font-family: 'Inter';
             font-style: normal;
@@ -132,7 +129,6 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            
             /* Apply animation to this element */	
             animation: text_up 1s ease-out 1.5s; 
         }
@@ -211,14 +207,53 @@
             65% { opacity: 0.02; }
             100% { opacity: 1; }
         }
+        
+        @media only screen and (max-width: 1234px) {
+            
+            .content {
+            font-size: 14px;
+            line-height: 20px;
+            }
 
-
-        @media only screen and (max-width: 700px) {
+            .content div.extra-spacing {
+            padding-top: 4vw; /* Adjust the desired spacing between divs */
+        }
+        
+    }
+    
+    
+    @media only screen and (max-width: 978px) {
+        
+        .content div.extra-spacing {
+            padding-top: 8vw; /* Adjust the desired spacing between divs */
+        }
+        
+        .bottom_menu {
+            top: max(700px, calc(100% - 10px));
+        } 
+        
+    }
+    
+    
+    @media only screen and (max-width: 851px) {
+        
+        .content div.extra-spacing {
+            padding-top: 12vw; /* Adjust the desired spacing between divs */
+        }
+        
+        .bottom_menu {
+            top: max(800px, calc(100% - 0px));
+        } 
+        
+    }
+    
+    
+    @media only screen and (max-width: 700px) {
             
         .subtitle {
         position: absolute;
             left: 11%;
-            top: 12.5%;
+            top: max(12.5%, 100px);
             width: 150px;
             
             font-size: 28px;
@@ -228,23 +263,22 @@
         .container {
             display: flex;
             align-items: flex-end;
-            height: 100vh; /* Use viewport height to match the browser height */
             overflow-y: hidden; /* Hide the vertical scrollbar */
         }
 
         .content {
-            position: relative;
+            position: absolute;
             width: 80%;
-            left: 0%;
+            left: 11%;
             padding-bottom: 0px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
-            top: calc(-100% + 580px);
+            top: max(18%, 140px);
 
             font-size: 15px;
             line-height: 26px;
         }
 
         .content div.extra-spacing {
-            margin-top: 12vw; /* Adjust the desired spacing between divs */
+            padding-top: 12vw; /* Adjust the desired spacing between divs */
         }
 
         .photo {
@@ -253,18 +287,18 @@
 
         .bottom_menu {
             position: relative;
-            left: 10.6%;
-            top: calc(100% - 40px);
+            left: 10%;
+            top: 830px; /* Adjust the value (20px in this example) to set the desired distance */
             width: 220px;
             height: 40px;
-        } 
+        }
         
     }
     
     @media only screen and (max-width: 438px) { 
         
-        .content div.extra-spacing {
-            margin-top: 24vw; /* Adjust the desired spacing between divs */
+        .content div.extra-spacing{
+            padding-top: 24vw; /* Adjust the desired spacing between divs */
         }
         
     }
@@ -272,7 +306,31 @@
     @media only screen and (max-width: 366px) { 
         
         .content div.extra-spacing {
-            margin-top: 32vw; /* Adjust the desired spacing between divs */
+            padding-top: 32vw; /* Adjust the desired spacing between divs */
+        }
+        
+    }
+
+    @media only screen and (max-width: 366px) { 
+        
+        .content div.extra-spacing {
+            padding-top: 32vw; /* Adjust the desired spacing between divs */
+        }
+        .bottom_menu {
+            top: 860px; /* Adjust the value (20px in this example) to set the desired distance */
+
+        }
+        
+    }
+
+    @media only screen and (max-width: 335px) { 
+        
+        .content div.extra-spacing {
+            padding-top: 48vw; /* Adjust the desired spacing between divs */
+        }
+        .bottom_menu {
+            top: 1000px; /* Adjust the value (20px in this example) to set the desired distance */
+
         }
         
     }
@@ -318,39 +376,43 @@
                     </div>
                 </div>
                 
+                
 
 
                 <div class="container">
-
-                                    <!-- typing text subtitle (about me) -->
-                <div class="fade-in-text subtitle typing-text">
-                </div>
-
+                    
+                    <!-- typing text subtitle (about me) -->
+                    <div class="fade-in-text subtitle typing-text">
+                    </div>
+                    
                     <div class="text_up fade-in-text2 content">
                         <p>I am an aspiring geospatial data scientist based in Toronto, Canada, driven by the 
-                            desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions 
+                            desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions lie
                             within in the intersection of geography, statistics, and urbanism.</p>
-                        <br><br><br><br><br>
-                        <div class="extra-spacing">
-                        <p >I have showcased my geographic expertise on the global stage, participating in 
-                            international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
-                            internships across research, public and private sectors, where I have honed my skills 
-                            in GIS and data science.</p>
-                        </div>
-                        <br><br><br><br><br>
-                        <div class="extra-spacing">
-                            <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
-                                and have previously worked/studied in Switzerland and Singapore. I 
-                                also enjoy hiking, playing board games, and delving into maps.</p>
-                        </div>
+                        
+                            <br><br><br><br><br>
+                            <div class="extra-spacing">
+                            
+                                <p >I have showcased my geographic expertise on the global stage, participating in 
+                                    international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
+                                    internships across research, public and private sectors, where I have honed my skills 
+                                    in GIS and data science.</p>
+                                </div>
+                            <br><br><br><br><br>
+                            <div class="extra-spacing">
+                            
+                                    <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">38 different countries</a> 
+                                        and have previously worked/studied in Switzerland and Singapore. I 
+                                        also enjoy hiking, playing board games, and delving into maps.</p>
+                            </div>
                     </div>
                 </div>
-
-
-                <div class='photo fade-in-text3' >
-                    <img src="./imgs/aboutme/IMG_8291.JPEG" alt="" style="width:378.24px;height:479.04px;">
-                </div>
-                    
+                            
+                            
+                    <div class='photo fade-in-text3' >
+                        <img src="./imgs/aboutme/IMG_8291.JPEG" alt="" style="width:19.7vw;height:24.95vw;">
+                    </div>
+                            
                     <div class = 'bottom_menu fade-in-text'>
                         <div class = 'bonus_btns' style = 'position: absolute;
                         left: 0px;
@@ -361,8 +423,8 @@
                         <a class = 'more_btn_open' href="./achievements">achievements</a>&nbsp;
                         <a class = 'more_btn_open' href="./maps">maps</a>&nbsp;
                         <a class = 'more_btn_open' href="./photo">photo</a>
+                        </div>
                     </div>
-                </div>
             </div>
         </main>
         <script>
