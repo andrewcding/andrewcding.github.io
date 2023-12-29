@@ -1179,11 +1179,11 @@
                         <li class="carousel__slide">
                             <figure>
                                 <div>
-                                    <img src="./imgs/photo/placeholder.jpg" data-src="./imgs/photo/IMG_8344.JPEG" alt="">
+                                    <img src="./imgs/photo/placeholder.jpg" data-src="./imgs/photo/IMG_1019.JPEG" alt="">
                                 </div>
                                 <figcaption>
-                                    Strolling through the charming streets of Old Town Dubrovnik.
-                                    <span class="credit">Dubrovnik, Croatia · 2022</span>                            
+                                    Pacific waves crashing into Mile Rock Beach.
+                                    <span class="credit">San Francisco, United States · 2023</span>                            
                                 </figcaption>
                             </figure>
                         </li>
@@ -1350,11 +1350,11 @@
                 <li class="carousel__slide">
                     <figure>
                         <div>
-                            <img src="./imgs/photo/placeholder.jpg" data-src="./imgs/photo/IMG_9812.JPEG" alt="">
+                            <img src="./imgs/photo/placeholder.jpg" data-src="./imgs/photo/IMG_0598.JPEG" alt="">
                         </div>
                         <figcaption>
-                            Cloudy skies and calm lakes amidst the Swiss Alps.
-                            <span class="credit">Switzerland · 2022</span>                            
+                            Towering Art Deco buildings on Wall Street.
+                            <span class="credit">New York City, United States · 2023</span>                            
                         </figcaption>
                     </figure>
                 </li>
@@ -1599,7 +1599,7 @@
                     <label><img src="./imgs/photo/thumbnails/palmtree.jpg" alt="" onclick="goToSlide(68); setActiveThumbnail(68);"></label>
                 </li>
                 <li>
-                    <label><img src="./imgs/photo/thumbnails/dubrovnik2.jpg" alt="" onclick="goToSlide(69); setActiveThumbnail(69);"></label>
+                    <label><img src="./imgs/photo/thumbnails/sf.jpg" alt="" onclick="goToSlide(69); setActiveThumbnail(69);"></label>
                 </li>
                 <li>
                     <label><img src="./imgs/photo/thumbnails/dubrovnik3.jpg" alt="" onclick="goToSlide(70); setActiveThumbnail(70);"></label>
@@ -1650,7 +1650,7 @@
                     <label><img src="./imgs/photo/thumbnails/budapest.jpg" alt="" onclick="goToSlide(83); setActiveThumbnail(83);"></label>
                 </li>
                 <li>
-                    <label><img src="./imgs/photo/thumbnails/mountains1.jpg" alt="" onclick="goToSlide(84); setActiveThumbnail(84);"></label>
+                    <label><img src="./imgs/photo/thumbnails/newyork2.jpg" alt="" onclick="goToSlide(84); setActiveThumbnail(84);"></label>
                 </li>
             </ul>
         </div>
@@ -1916,7 +1916,7 @@
                     <label><img src="./imgs/photo/thumbnails/palmtree.jpg" alt="" onclick="goToSlide(68); setActiveThumbnail(68);"></label>
                 </li>
                 <li>
-                    <label><img src="./imgs/photo/thumbnails/dubrovnik2.jpg" alt="" onclick="goToSlide(69); setActiveThumbnail(69);"></label>
+                    <label><img src="./imgs/photo/thumbnails/sf.jpg" alt="" onclick="goToSlide(69); setActiveThumbnail(69);"></label>
                 </li>
             </ul>
             <ul class="carousel__thumbnails" id="row24m" style="margin-top: 20px;">
@@ -1973,7 +1973,7 @@
                     <label><img src="./imgs/photo/thumbnails/budapest.jpg" alt="" onclick="goToSlide(83); setActiveThumbnail(83);"></label>
                 </li>
                 <li>
-                    <label><img src="./imgs/photo/thumbnails/mountains1.jpg" alt="" onclick="goToSlide(84); setActiveThumbnail(84);"></label>
+                    <label><img src="./imgs/photo/thumbnails/newyork2.jpg" alt="" onclick="goToSlide(84); setActiveThumbnail(84);"></label>
                 </li>
             </ul>
             </div>
@@ -2262,13 +2262,13 @@
         const carouselSlides = document.querySelectorAll('.carousel__slide img[data-src]');
         
         // Load clicked image
-        const clickedImage = carouselSlides[index];
+        const clickedImage = carouselSlides[index-1];
         clickedImage.src = clickedImage.dataset.src;
         clickedImage.removeAttribute('data-src');
         
         // Load remaining images
         carouselSlides.forEach((slide, slideIndex) => {
-            if (slideIndex !== index) {
+            if (slideIndex !== index - 1) {
                 slide.src = slide.dataset.src;
                 slide.removeAttribute('data-src');
             }
