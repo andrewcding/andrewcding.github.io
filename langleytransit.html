@@ -16,7 +16,7 @@
     }
     
     #titleBar {
-      background-color: #333;
+      background-color: #005e95;
       color: #fff;
       padding: 10px;
       text-align: center;
@@ -34,7 +34,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background-color: #333;
+      background-color: #005e95;
       padding: 10px;
       display: flex;
       justify-content: space-between; /* Spread buttons evenly */
@@ -45,10 +45,10 @@
       padding: 8px;
       font-size: 16px;
       color: #fff;
-      background-color: #333; /* Match the background color of the button bar */
+      background-color: #005e95; /* Match the background color of the button bar */
       border: none;
       cursor: pointer;
-      border-right: 1px solid #555; /* Border color between buttons */
+      border-right: 1px solid #fff; /* Border color between buttons */
       font-family: var(--calcite-sans-family);
     }
     
@@ -249,7 +249,14 @@
   
   
   <body>
-    <div id="titleBar">Langley Skytrain Extension</div>
+    <div id="titleBar">The SkyTrain Rapid Transit System in Greater Vancouver</div>
+
+    <div style="position: absolute; top: 5; left: 10;">
+      <a href="./maps">
+        <img src="https://transitpolice.ca/wp-content/uploads/2016/04/translink_logo_white.png" alt="TransLink Logo" style="width: 100px; height: auto;">
+      </a>
+  </div>
+
     <div id="MapContainer"></div>
     <div id="buttonBar">
       <button id='census'>Langley's Transit Need</button>
