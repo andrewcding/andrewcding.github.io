@@ -3843,6 +3843,102 @@
           28.19474944731036
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 231,
+        "PlaceName": "Stoos",
+        "Country": "Switzerland",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.667035204094264,
+          46.98016573006214
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 232,
+        "PlaceName": "Varese",
+        "Country": "Italy",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.82674248937486,
+          45.818194159588515
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 233,
+        "PlaceName": "Aletsch Glacier",
+        "Country": "Switzerland",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.086745900538919,
+          46.44053423144906
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 234,
+        "PlaceName": "Wasserauen",
+        "Country": "Switzerland",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.428482796131004,
+          47.28538564675944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 235,
+        "PlaceName": "Davos Glaris",
+        "Country": "Switzerland",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.780472602671757,
+          46.74614342471808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "OBJECTID": 236,
+        "PlaceName": "Grosser Mythen",
+        "Country": "Switzerland",
+        "Lived": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.68913642642388,
+          47.031292256875766
+        ]
+      }
     }
   ]
 }
