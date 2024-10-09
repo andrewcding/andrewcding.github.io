@@ -3590,354 +3590,376 @@
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 215,
-        "PlaceName": "Killarney Provincial Park",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 215,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -81.36474609375001,
           46.0979953892767
         ]
+      },
+      "properties": {
+        "OBJECTID": 215,
+        "PlaceName": "Killarney Provincial Park",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 216,
-        "PlaceName": "Manitoulin Island",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 216,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -82.29583740234376,
           45.78284835197676
         ]
+      },
+      "properties": {
+        "OBJECTID": 216,
+        "PlaceName": "Manitoulin Island",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 217,
-        "PlaceName": "Gaspé",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 217,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -64.47978973388673,
           48.83246412234097
         ]
+      },
+      "properties": {
+        "OBJECTID": 217,
+        "PlaceName": "Gaspé",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 218,
-        "PlaceName": "Percé",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 218,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -64.21234130859376,
           48.52496127146709
         ]
+      },
+      "properties": {
+        "OBJECTID": 218,
+        "PlaceName": "Percé",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 219,
-        "PlaceName": "Forillon National Park",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 219,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -64.16290283203126,
           48.75055822639991
         ]
+      },
+      "properties": {
+        "OBJECTID": 219,
+        "PlaceName": "Forillon National Park",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 220,
-        "PlaceName": "Gaspésie National Park",
-        "Country": "Canada",
-        "Lived": 0
-      },
+      "id": 220,
       "geometry": {
         "type": "Point",
         "coordinates": [
           -66.02268218994142,
           48.95615726266263
         ]
+      },
+      "properties": {
+        "OBJECTID": 220,
+        "PlaceName": "Gaspésie National Park",
+        "Country": "Canada",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 221,
-        "PlaceName": "Chengdu",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 221,
       "geometry": {
         "type": "Point",
         "coordinates": [
           104.06455993652344,
           30.66597063587313
         ]
+      },
+      "properties": {
+        "OBJECTID": 221,
+        "PlaceName": "Chengdu",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 222,
-        "PlaceName": "Dujiangyan",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 222,
       "geometry": {
         "type": "Point",
         "coordinates": [
           103.6223602294922,
           30.98849957425312
         ]
+      },
+      "properties": {
+        "OBJECTID": 222,
+        "PlaceName": "Dujiangyan",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 223,
-        "PlaceName": "Siguniangshan",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 223,
       "geometry": {
         "type": "Point",
         "coordinates": [
           102.83134460449217,
           30.99615160096609
         ]
+      },
+      "properties": {
+        "OBJECTID": 223,
+        "PlaceName": "Siguniangshan",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 224,
-        "PlaceName": "Jiuzhaigou",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 224,
       "geometry": {
         "type": "Point",
         "coordinates": [
           103.9057731628418,
           33.16313362341225
         ]
+      },
+      "properties": {
+        "OBJECTID": 224,
+        "PlaceName": "Jiuzhaigou",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 225,
-        "PlaceName": "Huanglong",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 225,
       "geometry": {
         "type": "Point",
         "coordinates": [
           103.8362503051758,
           32.71075551627421
         ]
+      },
+      "properties": {
+        "OBJECTID": 225,
+        "PlaceName": "Huanglong",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 226,
-        "PlaceName": "Chongqing",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 226,
       "geometry": {
         "type": "Point",
         "coordinates": [
           106.57974243164064,
           29.56061663205455
         ]
+      },
+      "properties": {
+        "OBJECTID": 226,
+        "PlaceName": "Chongqing",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 227,
-        "PlaceName": "Wulong Karst",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 227,
       "geometry": {
         "type": "Point",
         "coordinates": [
           107.79991149902347,
           29.43630861260199
         ]
+      },
+      "properties": {
+        "OBJECTID": 227,
+        "PlaceName": "Wulong Karst",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 228,
-        "PlaceName": "Zhangjiajie",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 228,
       "geometry": {
         "type": "Point",
         "coordinates": [
           110.44040679931642,
           29.3539005341718
         ]
+      },
+      "properties": {
+        "OBJECTID": 228,
+        "PlaceName": "Zhangjiajie",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 229,
-        "PlaceName": "Tianmenshan",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 229,
       "geometry": {
         "type": "Point",
         "coordinates": [
           110.47903060913086,
           29.05106764657997
         ]
+      },
+      "properties": {
+        "OBJECTID": 229,
+        "PlaceName": "Tianmenshan",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 230,
-        "PlaceName": "Changsha",
-        "Country": "China",
-        "Lived": 0
-      },
+      "id": 230,
       "geometry": {
         "type": "Point",
         "coordinates": [
           112.97704696655273,
           28.19474944731036
         ]
+      },
+      "properties": {
+        "OBJECTID": 230,
+        "PlaceName": "Changsha",
+        "Country": "China",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 231,
-        "PlaceName": "Stoos",
-        "Country": "Switzerland",
-        "Lived": 0
-      },
+      "id": 231,
       "geometry": {
         "type": "Point",
         "coordinates": [
           8.667035204094264,
           46.98016573006214
         ]
+      },
+      "properties": {
+        "OBJECTID": 231,
+        "PlaceName": "Stoos",
+        "Country": "Switzerland",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 232,
-        "PlaceName": "Varese",
-        "Country": "Italy",
-        "Lived": 0
-      },
+      "id": 232,
       "geometry": {
         "type": "Point",
         "coordinates": [
           8.82674248937486,
           45.818194159588515
         ]
+      },
+      "properties": {
+        "OBJECTID": 232,
+        "PlaceName": "Varese",
+        "Country": "Italy",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 233,
-        "PlaceName": "Aletsch Glacier",
-        "Country": "Switzerland",
-        "Lived": 0
-      },
+      "id": 233,
       "geometry": {
         "type": "Point",
         "coordinates": [
           8.086745900538919,
           46.44053423144906
         ]
+      },
+      "properties": {
+        "OBJECTID": 233,
+        "PlaceName": "Aletsch Glacier",
+        "Country": "Switzerland",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 234,
-        "PlaceName": "Wasserauen",
-        "Country": "Switzerland",
-        "Lived": 0
-      },
+      "id": 234,
       "geometry": {
         "type": "Point",
         "coordinates": [
           9.428482796131004,
           47.28538564675944
         ]
+      },
+      "properties": {
+        "OBJECTID": 234,
+        "PlaceName": "Wasserauen",
+        "Country": "Switzerland",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 235,
-        "PlaceName": "Davos Glaris",
-        "Country": "Switzerland",
-        "Lived": 0
-      },
+      "id": 235,
       "geometry": {
         "type": "Point",
         "coordinates": [
           9.780472602671757,
           46.74614342471808
         ]
+      },
+      "properties": {
+        "OBJECTID": 235,
+        "PlaceName": "Davos Glaris",
+        "Country": "Switzerland",
+        "Lived": 0
       }
     },
     {
       "type": "Feature",
-      "properties": {
-        "OBJECTID": 236,
-        "PlaceName": "Grosser Mythen",
-        "Country": "Switzerland",
-        "Lived": 0
-      },
+      "id": 236,
       "geometry": {
         "type": "Point",
         "coordinates": [
           8.68913642642388,
           47.031292256875766
         ]
+      },
+      "properties": {
+        "OBJECTID": 236,
+        "PlaceName": "Grosser Mythen",
+        "Country": "Switzerland",
+        "Lived": 0
       }
     }
   ]
