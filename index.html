@@ -1,17 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/flightisochrones/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flight Isochrones</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/flightisochrones/assets/index-_vHixG5t.js"></script>
-    <link rel="modulepreload" crossorigin href="/flightisochrones/assets/mapbox-CgLwq3p-.js">
-    <link rel="modulepreload" crossorigin href="/flightisochrones/assets/turf-DJicuqKk.js">
-    <link rel="stylesheet" crossorigin href="/flightisochrones/assets/index-zW7ho-sF.css">
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Andrew Ding</title>
+    
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    
+    <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
+    
+    <style>
+        :root { font-family: 'Inter', sans-serif; }
+        @supports (font-variation-settings: light) {
+            :root { font-family: 'Inter var', sans-serif; }
+        }
+        
+        body {
+            background-color: #29292f;
+            color: #e6e6e6;
+        }
+        
+        .link { color: #e6e6e6; 
+            text-decoration:none;
+        } 
+        
+        .link:hover { color: #949794; 
+        }
+        
+        .link2 { color: #e6e6e6; 
+            text-decoration:none;
+            line-height: 90px;
+        } 
+        
+        .link2:hover { color: #949794; 
+        }
+        
+        .more_btn_open { color: #949794; 
+            text-decoration:none;
+            cursor: pointer;
+        } 
+        
+        .more_btn_open:hover { color: #e6e6e6; 
+        }
+        
+        .side_open {
+            position: absolute;
+            left: 40px;
+            top: max(630px, calc(100% - 40px));
+            width: 220px;
+            height: 40px;
+        } 
+        
+        .bonus_btns { color: #949794; 
+            text-decoration:none;
+            cursor: default;
+            display: block;
+            position: absolute;
+            left: 40px;
+            padding-bottom: 30px;
+            z-index: 1;
+        } 
+        
+        .side_open:hover .bonus_btns {
+            display: block;
+        }
+        
+        .alt_text { color: #949794; } 
+        
+        
+        .bottom_line {
+            position: absolute;
+            width: 1872px;
+            height: 0px;
+            left: 24px;
+            top: 935px;
+            border: 0.5px solid #949794;
+        }
+        
+        .text_up p {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            
+            /* Apply animation to this element */	
+            animation: text_up 1s ease-out; 
+        }
+        
+        .text_up hr {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+            /* Apply animation to this element */	
+            animation: text_up 1s ease-out; 
+        }
+        
+        .text_down p {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+            /* Apply animation to this element */	
+            animation: text_down 1s ease-out; 
+        }
+        
+        .text_down i {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            
+            /* Apply animation to this element */	
+            animation: text_down 1s ease-out; 
+        }
+        
+        /* Move it (define the animation) */
+        @keyframes text_up {
+            0%   { 
+                transform: translateY(50%); 		
+            }
+            100% { 
+                transform: translateY(0%); 
+            }
+        }
+        
+        /* Move it (define the animation) */
+        @keyframes text_down {
+            0%   { 
+                transform: translateY(-100%); 		
+            }
+            100% { 
+                transform: translateY(0%); 
+            }
+        }
+        
+        .fade-in-text { animation: fadeIn 1.4s; }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0.00; }
+            20% { opacity: 0.02; }
+            100% { opacity: 1; }
+        }
+        
+        .big_links {
+            position: absolute;
+            width: min-content;
+            height: 77px;
+            left: 66%;
+            top: max(182px, 35%);
+            
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 39px;
+            
+            color: #E6E6E6;
+        }
+        
+        .desc {
+            position: absolute;
+            width: 287px;
+            height: 341px;
+            left: 22%;
+            top: max(150px, 35%);
+            
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            
+            color: #E6E6E6;
+        }
+        
+        @media only screen and (max-width: 1000px) {
+            .desc {
+                font-size: 20px !important;
+                width: 210px !important;
+            }
+            .big_links{
+                top: max(152px, 32%);
+                font-size: 20px;
+            }
+        }
+        
+        @media only screen and (max-width: 700px) {
+            
+            .desc {
+                top: 120px;
+                font-size: 20px;
+                width: 210px;
+                left: 17.71%;
+            }
+            .big_links{
+                left: 17.71%;
+                top: 430px;
+                font-size: 20px;
+            }
+            
+            .link2 {
+                line-height: 50px;
+            } 
+            
+            .side_open {
+                position: absolute;
+                left: 17.71%;
+                width: 218px;
+                height: 30px;
+            } 
+        }
+    </style>
+    
+</head>
+<body>
+    <main>
+        <a href="./" class="link">
+            <div class ='text_down fade-in-text'>
+                <p style="position: absolute;
+                width: 186px;
+                height: 76px;
+                left: 38px;
+                top: 5px;
+                
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 20px;
+                line-height: 24px;"
+                >Andrew<br>Ding.</p>
+                
+            </div>
+        </a>
+        <div>
+            <div class="text_up fade-in-text desc">
+                <p>
+                    I am currently a Data Science Master's student at ETH Zürich.<br><br>
+                    My passion involves using data to enhance our society through a <span class="alt_text">geographic approach.</span>
+                </p>
+            </div>
+            
+            <div class="text_up fade-in-text big_links">
+                
+                <a class="link2 fade-in-text" href="./aboutme">
+                    about me
+                </a> 
+                <br>
+                <a class="link2 fade-in-text" href="./experience">
+                    experience
+                </a>
+                <br>
+                <a class="link2 fade-in-text" href="./achievements">
+                    achievements
+                </a>
+                
+            </div>
+        </div>
+        
+        <div class ='text_down fade-in-text'>
+            <a class="link" href="https://www.linkedin.com/in/andrewcding/" target="_blank"><i class="fa-brands fa-linkedin fa-lg"  
+                style="position: absolute;
+                width: 15px;
+                height: 15px;
+                right: 50px;
+                top: 40px;"></i>
+            </a>
+            
+            <a class="link" href="mailto:anding@student.ethz.ch"><i class="fa-solid fa-envelope fa-lg"  
+                style="position: absolute;
+                width: 15px;
+                height: 15px;
+                right: 90px;
+                top: 40px;"></i>
+            </a>
+            
+        </div>
+        
+        <div class = 'side_open fade-in-text'>
+            
+            
+            <div class = 'bonus_btns' style = 'position: absolute;
+            left: 0px;
+            bottom: 0px;'>
+            <a class = 'more_btn_open' href="./pdfs/Resume (Dec 2023).pdf">resume</a>&nbsp;
+            <a class = 'more_btn_open' href="./maps">maps</a>&nbsp;
+            <a class = 'more_btn_open' href="./travelmap">travel</a>&nbsp;
+            <a class = 'more_btn_open' href="./photo">photo</a>
+        </div>
+    </div>
+    
+</main>
+<script>
+</script>
+</body>
 </html>
