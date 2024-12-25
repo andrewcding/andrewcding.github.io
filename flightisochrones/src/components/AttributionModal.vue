@@ -71,7 +71,7 @@ export default {
 }
 
 .modal-content{
-  background: rgb(35 55 75 / 90%);
+  background: rgb(35 55 75);
   padding: 20px;
   width: 80%;
   height: 80%;

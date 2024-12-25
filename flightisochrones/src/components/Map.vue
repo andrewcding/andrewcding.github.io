@@ -503,7 +503,7 @@ export default {
                             }
                             
                             popupContent = `
-                                <div style="font-family: 'Open Sans', sans-serif; font-size: 13px; color: black;">
+                                <div style="font-family: 'Open Sans', sans-serif; font-size: 13px; color: rgb(44, 62, 80);">
                                     ${properties.Departure_Airport} → ${properties.Destination_Code} (${properties.Destination_Name})
                                     <br>
                                     Duration Difference: ${durationDiffString} ${fasterOrSlower} reverse direction
