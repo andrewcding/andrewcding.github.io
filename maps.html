@@ -143,7 +143,7 @@
             
             animation: fadeIn 1.4s; 
         }
-
+        
         .accordion_pub:hover {
             color: #949794;
         }
@@ -238,6 +238,12 @@
         .alt_link:hover { color: #e6e6e6;
         } 
         
+        /* Scrollbar styling for the entire page */
+        html, body {
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #555 #222; /* Thumb color and track color */
+        }
+        
     </style>
     
 </head>
@@ -263,6 +269,7 @@
             </a>
             
             <div
+            class="content"
             style="position: relative;
             left: 5%;
             top: 150px;
@@ -276,12 +283,18 @@
             
             <h2 class="subtitle">Maps</h2>
             
+            <span class="year">2025</span>
+            
+            <a href="./flightisochrones/" target="_blank">
+                <button class="accordion_pub">Flight Isochrones</button>
+            </a>
+            
             <span class="year">2024</span>
-
+            
             <a href="https://metrobooming.vercel.app/" target="_blank">
                 <button class="accordion_pub">ESRI ECCE App Challenge - Metro Booming</button>
             </a>
-
+            
             <a href="./langleytransit" target="_blank">
                 <button class="accordion_pub">Langley Skytrain Extension</button>
             </a>
@@ -291,15 +304,15 @@
             <a href="./BAdemographics" target="_blank">
                 <button class="accordion_pub">BA Group - Demographics Module</button>
             </a>
-
+            
             <a href="./BAdurham" target="_blank">
                 <button class="accordion_pub">BA Group - Durham Regional Development Module</button>
             </a>
-
+            
             <a href="./travelmap">
                 <button class="accordion_pub">Travel Map</button>
             </a>
-
+            
             <span class="year">2021</span>
             
             <a href="./pdfs/OperationsMap.pdf" target="_blank">
@@ -313,25 +326,25 @@
                     Bathymetric Map of the Great Lakes
                 </button>
             </a>
-
+            
             <a href="https://webmap.peterborough.ca/heritagewalkingtour/" target="_blank">
                 <button class="accordion_pub">
                     City of Peterborough - Interactive Walking Tour Web App
                 </button>
             </a>
-
+            
             <a href="./PeterboroughBasemap">
                 <button class="accordion_pub">
                     City of Peterborough - Heritage Styled Basemap
                 </button>
             </a>
-
+            
             <span class="year">2019</span>
             
             <a href="./pdfs/iGeo2019Poster_Canada.pdf" target="_blank">
                 <button class="accordion_pub">2019 International Geography Olympiad - Poster Competition Submission</button>
             </a>
-
+            
             <a href="https://public.tableau.com/app/profile/andrew.ding/viz/AnAnalysisofGlobalFlightRoutes/Dashboard1" target="_blank">
                 <button class="accordion_pub">Tableau Student Viz Contest - An Analysis of Global Flight Routes</button>
             </a>
@@ -360,12 +373,12 @@
     </div>
     
     <!-- 
-        <p class ="filter"
-        onclick="myFunction()">Show All</p> -->
-        <!-- <hr class = 'bottom_line' style="opacity: 0.25"> -->
-    </main>
-    <script>
-        
-    </script>
+    <p class ="filter"
+    onclick="myFunction()">Show All</p> -->
+    <!-- <hr class = 'bottom_line' style="opacity: 0.25"> -->
+</main>
+<script>
+    
+</script>
 </body>
 </html>

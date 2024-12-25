@@ -202,6 +202,11 @@
             }
         }
         
+        /* Scrollbar styling for the entire page */
+        html, body {
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #555 #222; /* Thumb color and track color */
+        }
     </style>
     
 </head>
@@ -257,6 +262,11 @@
 
             <h2 class="subtitle">Professional</h2>
 
+            <button class="accordion">Center for Sustainable Future Mobility - ETH Zürich <span class="alt_text"><br>Research Assistant · Dec 2024 - Present</span></button>
+            <div class="panel">
+                <div class="float-child">Currently working on the <a href="https://csfm.ethz.ch/en/research/integrative-projects/digital-twin.html" class ='alt_link' target="_blank">Digital Twin of Switzerland</a> project.
+                </div>
+            </div>
             <button class="accordion">Capital One <span class="alt_text"><br>Co-op/Intern Data Science · May 2023 - Aug 2023</span></button>
             <div class="panel">
                 <div class="float-child">Adapted a Markov chain model by overhauling the process of training and validating transition matrices. These matrices forecast customer charge-off rates by predicting future delinquency progression over several statements.
@@ -269,7 +279,7 @@
                 <div class="float-child">Streamlined transit reach modeling and analysis efforts by developing an automation script that converts GTFS files into a Network Dataset, resulting in more efficient and accurate transit network analysis.
                 </div>
             </div>
-            <button class="accordion">École polytechnique fédérale de Lausanne (EPFL) <span class="alt_text"><br>Research Intern · May 2022 - Jul 2022</span></button>
+            <button class="accordion">Urban Demography Lab - EPFL <span class="alt_text"><br>Research Intern · May 2022 - Jul 2022</span></button>
             <div class="panel">
                 <div class="float-child">Conducted in-depth exploratory spatial analysis using R and various packages such as sf, raster, and ggplot, utilizing a combination of raster and microdata to analyze demographic trends over different temporal periods.
                 </div>

@@ -21,7 +21,7 @@
         @supports (font-variation-settings: light) {
             :root { font-family: 'Inter var', sans-serif; }
         }
-
+        
         body {
             background-color: #29292f;
             color: #e6e6e6;
@@ -65,14 +65,14 @@
             align-items: flex-end;
             overflow-y: hidden; /* Hide the vertical scrollbar */
         }
-
+        
         .content {
             position: absolute;
             width: 33%;
             left: 10.6%;
             margin: 0 auto;
             top: 26%;
-
+            
             font-family: 'Inter';
             font-style: normal;
             font-weight: 300;
@@ -80,7 +80,7 @@
             line-height: 1.354167vw;
             color: #E6E6E6;
         }
-
+        
         .photo {
             position: absolute;
             left: 51.6%;
@@ -189,7 +189,7 @@
             20% { opacity: 0.02; }
             100% { opacity: 1; }
         }
-
+        
         .fade-in-text2 { animation: fadeIn2 3.5s; }
         
         @keyframes fadeIn2 {
@@ -211,130 +211,135 @@
         @media only screen and (max-width: 1234px) {
             
             .content {
-            font-size: 14px;
-            line-height: 20px;
+                font-size: 14px;
+                line-height: 20px;
             }
-
+            
             .content div.extra-spacing {
-            padding-top: 4vw; /* Adjust the desired spacing between divs */
-        }
-        
-    }
-    
-    
-    @media only screen and (max-width: 978px) {
-        
-        .content div.extra-spacing {
-            padding-top: 8vw; /* Adjust the desired spacing between divs */
-        }
-        
-        .bottom_menu {
-            top: max(700px, calc(100% - 10px));
-        } 
-        
-    }
-    
-    
-    @media only screen and (max-width: 851px) {
-        
-        .content div.extra-spacing {
-            padding-top: 12vw; /* Adjust the desired spacing between divs */
-        }
-        
-        .bottom_menu {
-            top: max(800px, calc(100% - 0px));
-        } 
-        
-    }
-    
-    
-    @media only screen and (max-width: 700px) {
+                padding-top: 4vw; /* Adjust the desired spacing between divs */
+            }
             
-        .subtitle {
-        position: absolute;
-            left: 11%;
-            top: max(12.5%, 100px);
-            width: 150px;
+        }
+        
+        
+        @media only screen and (max-width: 978px) {
             
-            font-size: 28px;
+            .content div.extra-spacing {
+                padding-top: 8vw; /* Adjust the desired spacing between divs */
+            }
+            
+            .bottom_menu {
+                top: max(700px, calc(100% - 10px));
+            } 
+            
         }
         
-        /* this somehow makes it so there is no vertical scroll */
-        .container {
-            display: flex;
-            align-items: flex-end;
-            overflow-y: hidden; /* Hide the vertical scrollbar */
-        }
-
-        .content {
-            position: absolute;
-            width: 80%;
-            left: 11%;
-            padding-bottom: 0px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
-            top: max(18%, 140px);
-
-            font-size: 15px;
-            line-height: 26px;
-        }
-
-        .content div.extra-spacing {
-            padding-top: 12vw; /* Adjust the desired spacing between divs */
-        }
-
-        .photo {
-            display:none
-        }
-
-        .bottom_menu {
-            position: relative;
-            left: 10%;
-            top: 830px; /* Adjust the value (20px in this example) to set the desired distance */
-            width: 220px;
-            height: 40px;
+        
+        @media only screen and (max-width: 851px) {
+            
+            .content div.extra-spacing {
+                padding-top: 12vw; /* Adjust the desired spacing between divs */
+            }
+            
+            .bottom_menu {
+                top: max(800px, calc(100% - 0px));
+            } 
+            
         }
         
-    }
-    
-    @media only screen and (max-width: 438px) { 
         
-        .content div.extra-spacing{
-            padding-top: 24vw; /* Adjust the desired spacing between divs */
+        @media only screen and (max-width: 700px) {
+            
+            .subtitle {
+                position: absolute;
+                left: 11%;
+                top: max(12.5%, 100px);
+                width: 150px;
+                
+                font-size: 28px;
+            }
+            
+            /* this somehow makes it so there is no vertical scroll */
+            .container {
+                display: flex;
+                align-items: flex-end;
+                overflow-y: hidden; /* Hide the vertical scrollbar */
+            }
+            
+            .content {
+                position: absolute;
+                width: 80%;
+                left: 11%;
+                padding-bottom: 0px; /* Adjust the padding value to leave space at the bottom for the content to animate up */
+                top: max(18%, 140px);
+                
+                font-size: 15px;
+                line-height: 26px;
+            }
+            
+            .content div.extra-spacing {
+                padding-top: 12vw; /* Adjust the desired spacing between divs */
+            }
+            
+            .photo {
+                display:none
+            }
+            
+            .bottom_menu {
+                position: relative;
+                left: 10%;
+                top: 830px; /* Adjust the value (20px in this example) to set the desired distance */
+                width: 220px;
+                height: 40px;
+            }
+            
         }
         
-    }
-    
-    @media only screen and (max-width: 366px) { 
-        
-        .content div.extra-spacing {
-            padding-top: 32vw; /* Adjust the desired spacing between divs */
+        @media only screen and (max-width: 438px) { 
+            
+            .content div.extra-spacing{
+                padding-top: 24vw; /* Adjust the desired spacing between divs */
+            }
+            
         }
         
-    }
-
-    @media only screen and (max-width: 366px) { 
-        
-        .content div.extra-spacing {
-            padding-top: 32vw; /* Adjust the desired spacing between divs */
-        }
-        .bottom_menu {
-            top: 860px; /* Adjust the value (20px in this example) to set the desired distance */
-
+        @media only screen and (max-width: 366px) { 
+            
+            .content div.extra-spacing {
+                padding-top: 32vw; /* Adjust the desired spacing between divs */
+            }
+            
         }
         
-    }
-
-    @media only screen and (max-width: 335px) { 
-        
-        .content div.extra-spacing {
-            padding-top: 48vw; /* Adjust the desired spacing between divs */
+        @media only screen and (max-width: 366px) { 
+            
+            .content div.extra-spacing {
+                padding-top: 32vw; /* Adjust the desired spacing between divs */
+            }
+            .bottom_menu {
+                top: 860px; /* Adjust the value (20px in this example) to set the desired distance */
+                
+            }
+            
         }
-        .bottom_menu {
-            top: 1000px; /* Adjust the value (20px in this example) to set the desired distance */
-
+        
+        @media only screen and (max-width: 335px) { 
+            
+            .content div.extra-spacing {
+                padding-top: 48vw; /* Adjust the desired spacing between divs */
+            }
+            .bottom_menu {
+                top: 1000px; /* Adjust the value (20px in this example) to set the desired distance */
+                
+            }
+            
         }
         
-    }
-    
+        /* Scrollbar styling for the entire page */
+        html, body {
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: #555 #222; /* Thumb color and track color */
+        }
     </style>
     
 </head>
@@ -377,8 +382,8 @@
                 </div>
                 
                 
-
-
+                
+                
                 <div class="container">
                     
                     <!-- typing text subtitle (about me) -->
@@ -389,66 +394,66 @@
                         <p>I am a geospatial data scientist based in Zürich, Switzerland, driven by the 
                             desire to leverage geographic information in the form of effective data visualization for positive global impact. My passions lie
                             within in the intersection of geography, statistics, and urbanism.</p>
-                        
+                            
                             <br><br><br><br><br>
                             <div class="extra-spacing">
-                            
+                                
                                 <p >I have showcased my geographic expertise on the global stage, participating in 
                                     international geography competitions. Moreover, my <a class = 'more_btn_open' href="./experience">work experience</a> encompasses 
                                     internships across research, public and private sectors, where I have honed my skills 
                                     in GIS and data science.</p>
                                 </div>
-                            <br><br><br><br><br>
-                            <div class="extra-spacing">
-                            
+                                <br><br><br><br><br>
+                                <div class="extra-spacing">
+                                    
                                     <p>In my free time, you might find me planning my next trip. I have been to <a class = 'more_btn_open' href="./travelmap">40 different countries</a> 
                                         and have previously worked/studied in Switzerland and Singapore. I 
                                         also enjoy hiking, playing board games, and delving into maps.</p>
+                                    </div>
+                                </div>
                             </div>
-                    </div>
-                </div>
                             
                             
-                    <div class='photo fade-in-text3' >
-                        <img src="./imgs/aboutme/IMG_8291.JPEG" alt="" style="width:19.7vw;height:24.95vw;">
-                    </div>
+                            <div class='photo fade-in-text3' >
+                                <img src="./imgs/aboutme/IMG_8291.JPEG" alt="" style="width:19.7vw;height:24.95vw;">
+                            </div>
                             
-                    <div class = 'bottom_menu fade-in-text'>
-                        <div class = 'bonus_btns' style = 'position: absolute;
-                        width: 225px;
-                        left: 0px;
-                        bottom: 0px;'>
-                        <a class = 'more_btn_open' href="./">home</a>&nbsp;
-                        <a class = 'more_btn_open' href="./aboutme">about me</a>&nbsp;
-                        <a class = 'more_btn_open' href="./experience">experience</a>&nbsp;
-                        <a class = 'more_btn_open' href="./achievements">achievements</a>&nbsp;
-                        <a class = 'more_btn_open' href="./maps">maps</a>&nbsp;
-                        <a class = 'more_btn_open' href="./photo">photo</a>
+                            <div class = 'bottom_menu fade-in-text'>
+                                <div class = 'bonus_btns' style = 'position: absolute;
+                                width: 225px;
+                                left: 0px;
+                                bottom: 0px;'>
+                                <a class = 'more_btn_open' href="./">home</a>&nbsp;
+                                <a class = 'more_btn_open' href="./aboutme">about me</a>&nbsp;
+                                <a class = 'more_btn_open' href="./experience">experience</a>&nbsp;
+                                <a class = 'more_btn_open' href="./achievements">achievements</a>&nbsp;
+                                <a class = 'more_btn_open' href="./maps">maps</a>&nbsp;
+                                <a class = 'more_btn_open' href="./photo">photo</a>
+                            </div>
                         </div>
                     </div>
-            </div>
-        </main>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-    const text = "about me.";
-    const delay = 800; // Delay in milliseconds before typing starts
-
-let charIndex = 0;
-const typingTextElement = document.querySelector(".typing-text");
-
-function type() {
-    typingTextElement.textContent += text[charIndex];
-    charIndex++;
-    if (charIndex < text.length) {
-        setTimeout(type, 112);
-    }
-}
-
-setTimeout(type, delay);
-});
-
-
-        </script>
-    </body>
-    </html>
-    
+                </main>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const text = "about me.";
+                        const delay = 800; // Delay in milliseconds before typing starts
+                        
+                        let charIndex = 0;
+                        const typingTextElement = document.querySelector(".typing-text");
+                        
+                        function type() {
+                            typingTextElement.textContent += text[charIndex];
+                            charIndex++;
+                            if (charIndex < text.length) {
+                                setTimeout(type, 112);
+                            }
+                        }
+                        
+                        setTimeout(type, delay);
+                    });
+                    
+                    
+                </script>
+            </body>
+            </html>
+            
