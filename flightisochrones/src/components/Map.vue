@@ -195,7 +195,7 @@ export default {
             // Airports layer
             map.addSource('airports', {
                 type: 'geojson',
-                data: '/project/anding/geojson/Airports.geojson'
+                data: 'https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/Airports.geojson'
             });
             
             // Circle portion of symbology
@@ -364,13 +364,13 @@ export default {
             map.setLayoutProperty('airport-labels', 'visibility', 'none');
             
             // Get URLs for the GeoJSON data for selected airport
-            const routesURL = `/project/anding/geojson/${airportCode}_lines_reduced.geojson`;
-            const outputExtentURL = `/project/anding/geojson/${airportCode}_output_extent.geojson`;
-            const pointsURL = `/project/anding/geojson/${airportCode}_flight_routes.geojson`;
-            const departingIsoURL = `/project/anding/geojson/${airportCode}_Departing_Isochrone_Contours.geojson`;
-            const arrivingIsoURL = `/project/anding/geojson/${airportCode}_Arriving_Isochrone_Contours.geojson`;
-            const departingPolygon = `/project/anding/geojson/${airportCode}_Departing_Isochrone_Polygons.geojson`;
-            const arrivingPolygon = `/project/anding/geojson/${airportCode}_Arriving_Isochrone_Polygons.geojson`;
+            const routesURL = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_lines_reduced.geojson`;
+            const outputExtentURL = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_output_extent.geojson`;
+            const pointsURL = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_flight_routes.geojson`;
+            const departingIsoURL = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_Departing_Isochrone_Contours.geojson`;
+            const arrivingIsoURL = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_Arriving_Isochrone_Contours.geojson`;
+            const departingPolygon = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_Departing_Isochrone_Polygons.geojson`;
+            const arrivingPolygon = `https://raw.githubusercontent.com/andrewcding/GeoJSON-Data/refs/heads/main/Airport%20Isochrones/${airportCode}_Arriving_Isochrone_Polygons.geojson`;
             
             // Remove existing layers and sources to avoid duplicates
             const layersToRemove = ['points-labels', 'points-dest', 'routes', 'output-extent', 'departing-isochrones', 
