@@ -3961,6 +3961,57 @@
         "Country": "Switzerland",
         "Lived": 0
       }
-    }
+    },
+    {
+      "type": "Feature",
+      "id": 237,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.32749449821637,
+          45.43710372342593
+        ]
+      },
+      "properties": {
+        "OBJECTID": 237,
+        "PlaceName": "Venice",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 238,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.628785344679362,
+          46.38004272112555
+        ]
+      },
+      "properties": {
+        "OBJECTID": 238,
+        "PlaceName": "Leukerbad",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 239,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.550967689119533,
+          47.31844576991173
+        ]
+      },
+      "properties": {
+        "OBJECTID": 239,
+        "PlaceName": "Kilchberg",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
   ]
 }
