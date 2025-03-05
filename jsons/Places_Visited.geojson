@@ -4012,6 +4012,40 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 240,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.47955890861677,
+          50.3493391640412
+        ]
+      },
+      "properties": {
+        "OBJECTID": 240,
+        "PlaceName": "Joffre Lakes",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 241,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.406627988141652,
+          46.81989313810664
+        ]
+      },
+      "properties": {
+        "OBJECTID": 241,
+        "PlaceName": "Engelberg",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
     }
   ]
 }
