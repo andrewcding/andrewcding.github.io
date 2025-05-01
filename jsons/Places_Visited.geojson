@@ -4046,6 +4046,176 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 242,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.009926680750475,
+          52.2281544409701
+        ]
+      },
+      "properties": {
+        "OBJECTID": 242,
+        "PlaceName": "Warsaw",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 243,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.939513043786654,
+          50.06335640242508
+        ]
+      },
+      "properties": {
+        "OBJECTID": 243,
+        "PlaceName": "Krakow",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 244,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.950453454216575,
+          49.29864422638001
+        ]
+      },
+      "properties": {
+        "OBJECTID": 244,
+        "PlaceName": "Zakopane",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 245,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.07005806944779,
+          49.197015109732554
+        ]
+      },
+      "properties": {
+        "OBJECTID": 245,
+        "PlaceName": "Morskie Oko",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 246,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.203921920706392,
+          50.02670028185334
+        ]
+      },
+      "properties": {
+        "OBJECTID": 246,
+        "PlaceName": "Auschwitz Memorial",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 247,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.60696637048153,
+          53.01115986216391
+        ]
+      },
+      "properties": {
+        "OBJECTID": 247,
+        "PlaceName": "Torun",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 248,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.655213117780782,
+          54.34933266820246
+        ]
+      },
+      "properties": {
+        "OBJECTID": 248,
+        "PlaceName": "Gdansk",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 249,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.56942269624858,
+          54.44592949884693
+        ]
+      },
+      "properties": {
+        "OBJECTID": 249,
+        "PlaceName": "Sopot",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 250,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.546287460692497,
+          54.51927953651621
+        ]
+      },
+      "properties": {
+        "OBJECTID": 250,
+        "PlaceName": "Gdynia",
+        "Country": "Poland",
+        "Lived": 0
+      }
+    },
+        {
+      "type": "Feature",
+      "id": 251,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.516154467585586,
+          54.64067253630566
+        ]
+      },
+      "properties": {
+        "OBJECTID": 251,
+        "PlaceName": "Cypel Rewski",
+        "Country": "Poland",
+        "Lived": 0
+      }
     }
   ]
 }
