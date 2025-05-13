@@ -4200,7 +4200,7 @@
         "Lived": 0
       }
     },
-        {
+    {
       "type": "Feature",
       "id": 251,
       "geometry": {
@@ -4214,6 +4214,23 @@
         "OBJECTID": 251,
         "PlaceName": "Cypel Rewski",
         "Country": "Poland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 252,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.422038380208447,
+          50.08457249946099
+        ]
+      },
+      "properties": {
+        "OBJECTID": 252,
+        "PlaceName": "Prague",
+        "Country": "Czechia",
         "Lived": 0
       }
     }
