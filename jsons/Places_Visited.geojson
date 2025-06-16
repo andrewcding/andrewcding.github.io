@@ -4233,6 +4233,329 @@
         "Country": "Czechia",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 253,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.820222271453737,
+          41.32685304138412
+        ]
+      },
+      "properties": {
+        "OBJECTID": 253,
+        "PlaceName": "Tirana",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 254,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.20164481464247,
+          41.92460863764579
+        ]
+      },
+      "properties": {
+        "OBJECTID": 254,
+        "PlaceName": "Ulcinj",
+        "Country": "Montenegro",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 255,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.006797675900685,
+          39.874490806631506
+        ]
+      },
+      "properties": {
+        "OBJECTID": 255,
+        "PlaceName": "Saranda",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 256,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.998306170320035,
+          39.7659880781124
+        ]
+      },
+      "properties": {
+        "OBJECTID": 256,
+        "PlaceName": "Ksamil",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 257,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.264796260530883,
+          39.50589233778147
+        ]
+      },
+      "properties": {
+        "OBJECTID": 257,
+        "PlaceName": "Igoumenitsa",
+        "Country": "Greece",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 258,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.192655379531157,
+          39.923513020020664
+        ]
+      },
+      "properties": {
+        "OBJECTID": 258,
+        "PlaceName": "Blue Eye",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 259,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.744854536445033,
+          42.209600690513334
+        ]
+      },
+      "properties": {
+        "OBJECTID": 259,
+        "PlaceName": "Prizren",
+        "Country": "Kosovo",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 260,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.427807644896617,
+          41.99779870482419
+        ]
+      },
+      "properties": {
+        "OBJECTID": 260,
+        "PlaceName": "Skopje",
+        "Country": "North Macedonia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 261,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.298763286244636,
+          41.9524541898771
+        ]
+      },
+      "properties": {
+        "OBJECTID": 261,
+        "PlaceName": "Matka Canyon",
+        "Country": "North Macedonia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 262,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.795946316431174,
+          41.11262305627088
+        ]
+      },
+      "properties": {
+        "OBJECTID": 262,
+        "PlaceName": "Ohrid",
+        "Country": "North Macedonia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 263,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.80763402463151,
+          42.198575184199235
+        ]
+      },
+      "properties": {
+        "OBJECTID": 263,
+        "PlaceName": "Lumi i Shales",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 264,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.767891643599338,
+          42.404525742356164
+        ]
+      },
+      "properties": {
+        "OBJECTID": 264,
+        "PlaceName": "Theth",
+        "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 265,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.77160548514371,
+          42.42467140143334
+        ]
+      },
+      "properties": {
+        "OBJECTID": 265,
+        "PlaceName": "Kotor",
+        "Country": "Montenegro",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 266,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.69798814943595,
+          42.486374460664614
+        ]
+      },
+      "properties": {
+        "OBJECTID": 266,
+        "PlaceName": "Perast",
+        "Country": "Montenegro",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 267,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.608045740138234,
+          43.15600602857809
+        ]
+      },
+      "properties": {
+        "OBJECTID": 267,
+        "PlaceName": "Kravica Waterfall",
+        "Country": "Bosnia and Herzegovina",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 268,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.81428992017427,
+          43.33795633399506
+        ]
+      },
+      "properties": {
+        "OBJECTID": 268,
+        "PlaceName": "Mostar",
+        "Country": "Bosnia and Herzegovina",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 269,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          17.732335315500745,
+          43.14168091447396
+        ]
+      },
+      "properties": {
+        "OBJECTID": 269,
+        "PlaceName": "Počitelj",
+        "Country": "Bosnia and Herzegovina",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 270,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.21840595975264,
+          42.58112082308308
+        ]
+      },
+      "properties": {
+        "OBJECTID": 270,
+        "PlaceName": "Cavtat",
+        "Country": "Croatia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 271,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.49537279902673,
+          42.04760682892298 
+        ]
+      },
+      "properties": {
+        "OBJECTID": 271,
+        "PlaceName": "Shkodër",
+        "Country": "Albania",
+        "Lived": 0
+      }
     }
   ]
 }
