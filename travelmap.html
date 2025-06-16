@@ -280,7 +280,7 @@
 		' class = 'control_buttons'
 		onclick="spinEnabled = false; spinGlobe();">
 		<i class="fa fa-pause"></i></button> 
-
+		
 		<button style = 'position: absolute;
 		right: 20px;
 		bottom: 20px;
@@ -295,292 +295,330 @@
 			<br> Alternatively, the rotation will automatically be paused past a certain zoom.
 			<br> Use the scroll wheel or the zoom buttons to zoom in and out of the map. 
 			<br> For more info on a point or country, hover over it.</p>">
-		<i class="fa-solid fa-question"></i></button> 
-		
-		
-	</main>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-
-
-	<script>
-
-		// show and hide info section
-		$(document).ready(function(){
-			$('[data-toggle="tooltip"]').tooltip();   
-		
-			$('button').tooltip().mouseover();			
-		
-			$("main").mousedown(function () {
-				$('[data-toggle="tooltip"]').tooltip("hide");
-			});
+			<i class="fa-solid fa-question"></i></button> 
 			
-			$('main').on('touchstart', function() {
-				$('[data-toggle="tooltip"]').tooltip('hide');
-			});
 			
-			$('control_buttons').on('touchend', function() {
+		</main>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+		
+		
+		<script>
+			
+			// show and hide info section
+			$(document).ready(function(){
+				$('[data-toggle="tooltip"]').tooltip();   
+				
+				$('button').tooltip().mouseover();			
+				
+				$("main").mousedown(function () {
+					$('[data-toggle="tooltip"]').tooltip("hide");
+				});
+				
+				$('main').on('touchstart', function() {
+					$('[data-toggle="tooltip"]').tooltip('hide');
+				});
+				
+				$('control_buttons').on('touchend', function() {
 					$('[data-toggle="tooltip"]').tooltip("show");
-			});
-
-		});
-
-		mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kd29vIiwiYSI6ImNrMjlnYnNkdTEwMHozaG5wamJvZHJyangifQ.6M4eeri_Ubmo7NedQT7NuQ';
-		
-		var zoom = 2;
-		const map = new mapboxgl.Map({
-			container: 'map', // container ID
-			// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-			style: 'mapbox://styles/andwoo/clfyuy060000701p957fa8iwz', // style URL w labels( mapbox://styles/mapbox/light-v11)
-			center: [0, 20], // starting position [lng, lat]
-			zoom: zoom, // starting zoom
-			attributionControl: false,
-			maxZoom: 6,
-			minZoom: 0
-			
-		});
-		
-		
-		map.on('style.load', () => {
-			map.setFog({
-				color: 'rgb(186, 210, 235)', // Lower atmosphere
-				'high-color': '#29292f', // Upper atmosphere
-				'horizon-blend': 0.02, // Atmosphere thickness (default 0.2 at low zooms)
-				'space-color': '#29292f', // Background color
-				'star-intensity': 0. // Background star brightness (default 0.35 at low zoooms )
-			});
-		});
-		
-		map.on('load', async () => {
-			
-			// COUNTRIES -----------------------------------
-			map.addSource("countries_source", {
-				"type": "geojson",
-				"data": "https://andrewding.ca/jsons/Countries_Visited.geojson"
+				});
+				
 			});
 			
-			map.addLayer(
-			{
-				'id': 'countries-fill',
-				'type': 'fill',
-				'source': 'countries_source',
-				'layout': {
-					'visibility': 'visible'
-				},
-				'paint': {
-					'fill-color' : ['match', ['get', 'Visited'], // get the property
-					0, '#e6e6e6',              
-					1, '#d6c8ae',              
-					'black'] ,
-					"fill-opacity": ["case",
-					["boolean", ["feature-state", "hover"], false],
-					0.6,
-					1
-					] 
-				}         
+			mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kd29vIiwiYSI6ImNrMjlnYnNkdTEwMHozaG5wamJvZHJyangifQ.6M4eeri_Ubmo7NedQT7NuQ';
+			
+			var zoom = 2;
+			const map = new mapboxgl.Map({
+				container: 'map', // container ID
+				// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+				style: 'mapbox://styles/andwoo/clfyuy060000701p957fa8iwz', // style URL w labels( mapbox://styles/mapbox/light-v11)
+				center: [0, 20], // starting position [lng, lat]
+				zoom: zoom, // starting zoom
+				attributionControl: false,
+				maxZoom: 6,
+				minZoom: 0
+				
 			});
 			
-			map.addLayer({
-				'id': 'countries-border',
-				'type': 'line',	
-				'source': 'countries_source',
-				'layout': {
-					'visibility': 'visible'
-				},
-				'paint': {
-					'line-color': '#FFFFFF',
-					'line-width': [
-					'interpolate', 
-					['linear'], 
-					['zoom'],
-					10, 0.4, 
-					19, 1
-					]
-				}
+			
+			map.on('style.load', () => {
+				map.setFog({
+					color: 'rgb(186, 210, 235)', // Lower atmosphere
+					'high-color': '#29292f', // Upper atmosphere
+					'horizon-blend': 0.02, // Atmosphere thickness (default 0.2 at low zooms)
+					'space-color': '#29292f', // Background color
+					'star-intensity': 0. // Background star brightness (default 0.35 at low zoooms )
+				});
 			});
 			
-			// PLACES -----------------------------------
-			
-			map.addSource("places_source", {
-				"type": "geojson",
-				"data": "https://andrewding.ca/jsons/Places_Visited.geojson"
+			map.on('load', async () => {
+				
+				// COUNTRIES -----------------------------------
+				map.addSource("countries_source", {
+					"type": "geojson",
+					"data": "https://andrewding.ca/jsons/Countries_Visited.geojson"
+				});
+				
+				map.addLayer(
+				{
+					'id': 'countries-fill',
+					'type': 'fill',
+					'source': 'countries_source',
+					'layout': {
+						'visibility': 'visible'
+					},
+					'paint': {
+						'fill-color' : ['match', ['get', 'Visited'], // get the property
+						0, '#e6e6e6',              
+						1, '#d6c8ae',              
+						'black'] ,
+						"fill-opacity": ["case",
+						["boolean", ["feature-state", "hover"], false],
+						0.6,
+						1
+						] 
+					}         
+				});
+				
+				map.addLayer({
+					'id': 'countries-border',
+					'type': 'line',	
+					'source': 'countries_source',
+					'layout': {
+						'visibility': 'visible'
+					},
+					'paint': {
+						'line-color': '#FFFFFF',
+						'line-width': [
+						'interpolate', 
+						['linear'], 
+						['zoom'],
+						10, 0.4, 
+						19, 1
+						]
+					}
+				});
+				
+				// PLACES -----------------------------------
+				
+				map.addSource("places_source", {
+					"type": "geojson",
+					"data": "https://andrewding.ca/jsons/Places_Visited.geojson"
+				});
+				
+				map.addLayer({
+					'id': 'places_point',
+					'type': 'circle',	
+					'source': 'places_source',
+					'layout': {
+						'visibility': 'visible'
+					},
+					'paint': {
+						'circle-color': '#736854',
+						'circle-radius': 2
+					}
+				});
+				
+				// this layer makes it easier to hover over a point, by making an invisible point with larger radius
+				map.addLayer({
+					'id': 'places_visited',
+					'type': 'circle',	
+					'source': 'places_source',
+					'layout': {
+						'visibility': 'visible'
+					},
+					'paint': {
+						// if lived, make it match background colour (colour of country) to hide popup
+						'circle-color': ['match', ['get', 'Lived'], // get the property
+						0, '#736854',              
+						1, '#d6c8ae',              
+						'#736854'],
+						'circle-radius': ["case",
+						["boolean", ["feature-state", "hover"], false],
+						8,
+						8
+						],
+						'circle-opacity': ["case",
+						["boolean", ["feature-state", "hover"], false],
+						1,
+						0
+						]  
+					}
+				});
+				
+				map.addLayer({
+					'id': 'places_lived',
+					'type': 'symbol',	
+					'source': 'places_source',
+					'layout': {
+						'visibility': 'visible',
+						'text-field': '✦',
+						'text-size': 12
+					},
+					'paint': {
+						'text-color': '#fff',
+						'text-halo-color': '#000',
+						'text-halo-width': 0.5
+					}
+				});
+				
+				map.setFilter('places_lived', ['==', ['get', 'Lived'], 1]);
+				
 			});
 			
-			map.addLayer({
-				'id': 'places_point',
-				'type': 'circle',	
-				'source': 'places_source',
-				'layout': {
-					'visibility': 'visible'
-				},
-				'paint': {
-					'circle-color': '#736854',
-					'circle-radius': 2
-				}
-			});
-
-			// this layer makes it easier to hover over a point, by making an invisible point with larger radius
-			map.addLayer({
-				'id': 'places_visited',
-				'type': 'circle',	
-				'source': 'places_source',
-				'layout': {
-					'visibility': 'visible'
-				},
-				'paint': {
-					// if lived, make it match background colour (colour of country) to hide popup
-					'circle-color': ['match', ['get', 'Lived'], // get the property
-					0, '#736854',              
-					1, '#d6c8ae',              
-					'#736854'],
-					'circle-radius': ["case",
-					["boolean", ["feature-state", "hover"], false],
-					8,
-					8
-					],
-					'circle-opacity': ["case",
-					["boolean", ["feature-state", "hover"], false],
-					1,
-					0
-					]  
-				}
-			});
+			// The following values can be changed to control rotation speed:
 			
-			map.addLayer({
-				'id': 'places_lived',
-				'type': 'symbol',	
-				'source': 'places_source',
-				'layout': {
-					'visibility': 'visible',
-					'text-field': '✦',
-					'text-size': 12
-				},
-				'paint': {
-					'text-color': '#fff',
-					'text-halo-color': '#000',
-					'text-halo-width': 0.5
-				}
-			});
+			// At low zooms, complete a revolution every two minutes.
+			const secondsPerRevolution = 60;
+			// Above zoom level 8, do not rotate.
+			const maxSpinZoom = 5;
+			// Rotate at intermediate speeds between zoom levels 3 and 5.
+			const slowSpinZoom = 2;
 			
-			map.setFilter('places_lived', ['==', ['get', 'Lived'], 1]);
+			let userInteracting = false;
+			let spinEnabled = false;
 			
-		});
-		
-		// The following values can be changed to control rotation speed:
-		
-		// At low zooms, complete a revolution every two minutes.
-		const secondsPerRevolution = 60;
-		// Above zoom level 8, do not rotate.
-		const maxSpinZoom = 5;
-		// Rotate at intermediate speeds between zoom levels 3 and 5.
-		const slowSpinZoom = 2;
-		
-		let userInteracting = false;
-		let spinEnabled = true;
-		
-		function spinGlobe() {
-			const zoom = map.getZoom();
-			if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
-				let distancePerSecond = 360 / secondsPerRevolution;
-				if (zoom > slowSpinZoom) {
-					// Slow spinning at higher zooms
-					const zoomDif =
-					(maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
-					distancePerSecond *= zoomDif*0.8;
-				}
-				const center = map.getCenter();
-				center.lng -= distancePerSecond;
-				// Smoothly animate the map over one second.
-				// When this animation is complete, it calls a 'moveend' event.
-				map.easeTo({ center, duration: 1000, easing: (n) => n });
-			}
-		}
-		
-		function resumeSpin() {
-			userInteracting = false;
-			spinGlobe();
-		}
-		
-		document.body.onkeyup = function(e) {
-			if (e.key == " " ||
-			e.code == "Space" ||      
-			e.keyCode == 32      
-			) {
-
-				if(spinEnabled){
-					spinEnabled = false;
-					spinGlobe();
-				} else {
-					spinEnabled = true;
-					resumeSpin()	
+			function spinGlobe() {
+				const zoom = map.getZoom();
+				if (spinEnabled && !userInteracting && zoom < maxSpinZoom) {
+					let distancePerSecond = 360 / secondsPerRevolution;
+					if (zoom > slowSpinZoom) {
+						// Slow spinning at higher zooms
+						const zoomDif =
+						(maxSpinZoom - zoom) / (maxSpinZoom - slowSpinZoom);
+						distancePerSecond *= zoomDif*0.8;
+					}
+					const center = map.getCenter();
+					center.lng -= distancePerSecond;
+					// Smoothly animate the map over one second.
+					// When this animation is complete, it calls a 'moveend' event.
+					map.easeTo({ center, duration: 1000, easing: (n) => n });
 				}
 			}
-		}
-		
-		// Pause spinning on interaction
-		map.on('mousedown', () => {
-			userInteracting = true;
-		});
-		
-		map.on('wheel', (e) => {
-			userInteracting = true;
-			setTimeout(resumeSpin, 200);
-		});
-
-		map.on('touchmove', (e) => {
-    		userInteracting = true;
-    		setTimeout(resumeSpin, 250);
-		});
-		
-		// Restart spinning the globe when interaction is complete
-		map.on('mouseup', () => {
-			userInteracting = false;
-			spinGlobe();
-		});
-		
-		// These events account for cases where the mouse has moved
-		// off the map, so 'mouseup' will not be fired.
-		map.on('dragend', () => {
-			userInteracting = false;
-			spinGlobe();
-		});
-		map.on('pitchend', () => {
-			userInteracting = false;
-			spinGlobe();
-		});
-		map.on('rotateend', () => {
-			userInteracting = false;
-			spinGlobe();
-		});
-		
-		// When animation is complete, start spinning if there is no ongoing interaction
-		map.on('moveend', () => {
-			spinGlobe();
-		});
-		
-		spinGlobe();
-		
-		// popups
-		
-		var popup = new mapboxgl.Popup({
-			closeButton: false,
-			closeOnClick: false
-		});
-		
-		var hoveredStateId = null;
-		var hoveredStateId2 = null;
-		
-		
-		map.on('mousemove', 'countries-fill', function (e) {
-
+			
+			function spinIntro(duration = 5000) {
+				const start = performance.now();
+				const startLng = map.getCenter().lng;
+				
+				// Exponential ease-out
+				function exponentialEaseOut(t) {
+					return 1 - Math.pow(2, -10 * t); // Fast at first, slows to a stop
+				}
+				
+				const spinRange = 90;           // total degrees to spin
+				const minDelta = 0.1;          // floor to prevent micro-movement
+				
+				let lastLng = startLng;
+				
+				function animate(timestamp) {
+					const elapsed = timestamp - start;
+					const t = Math.min(elapsed / duration, 1);
+					const eased = exponentialEaseOut(t);
+					
+					const newLng = startLng - eased * spinRange;
+					const delta = Math.abs(newLng - lastLng);
+					
+					if (delta < minDelta || t >= 1) {
+						return; // stop early if spin too small
+					}
+					
+					lastLng = newLng;
+					map.jumpTo({ center: { lng: newLng, lat: map.getCenter().lat } });
+					
+					requestAnimationFrame(animate);
+				}
+				
+				requestAnimationFrame(animate);
+			}
+			
+			
+			
+			
+			function resumeSpin() {
+				userInteracting = false;
+				spinGlobe();
+			}
+			
+			document.body.onkeyup = function(e) {
+				if (e.key == " " ||
+				e.code == "Space" ||      
+				e.keyCode == 32      
+				) {
+					
+					if(spinEnabled){
+						spinEnabled = false;
+						spinGlobe();
+					} else {
+						spinEnabled = true;
+						resumeSpin()	
+					}
+				}
+			}
+			
+			// Pause spinning on interaction
+			map.on('mousedown', () => {
+				userInteracting = true;
+			});
+			
+			map.on('wheel', (e) => {
+				userInteracting = true;
+				setTimeout(resumeSpin, 200);
+			});
+			
+			map.on('touchmove', (e) => {
+				userInteracting = true;
+				setTimeout(resumeSpin, 250);
+			});
+			
+			// Restart spinning the globe when interaction is complete
+			map.on('mouseup', () => {
+				userInteracting = false;
+				spinGlobe();
+			});
+			
+			// These events account for cases where the mouse has moved
+			// off the map, so 'mouseup' will not be fired.
+			map.on('dragend', () => {
+				userInteracting = false;
+				spinGlobe();
+			});
+			map.on('pitchend', () => {
+				userInteracting = false;
+				spinGlobe();
+			});
+			map.on('rotateend', () => {
+				userInteracting = false;
+				spinGlobe();
+			});
+			
+			// When animation is complete, start spinning if there is no ongoing interaction
+			map.on('moveend', () => {
+				spinGlobe();
+			});
+			
+			spinIntro(5000);
+			
+			// popups
+			
+			var popup = new mapboxgl.Popup({
+				closeButton: false,
+				closeOnClick: false
+			});
+			
+			var hoveredStateId = null;
+			var hoveredStateId2 = null;
+			
+			
+			map.on('mousemove', 'countries-fill', function (e) {
+				
 				map.getCanvas().style.cursor = "pointer";
 				
 				var coordinates = e.features[0].geometry.coordinates.slice();
@@ -608,12 +646,12 @@
 					hover: true
 				});
 				
+				
+			});
 			
-		});
-		
-		
-		map.on('mouseleave', 'countries-fill', function () {
-
+			
+			map.on('mouseleave', 'countries-fill', function () {
+				
 				map.getCanvas().style.cursor = '';
 				if (hoveredStateId) {
 					map.setFeatureState({
@@ -625,12 +663,12 @@
 				}
 				hoveredStateId = null;
 				popup.remove();
-
-		});
-		
-		
-		map.on('mousemove', 'places_visited', function (e) {
-
+				
+			});
+			
+			
+			map.on('mousemove', 'places_visited', function (e) {
+				
 				map.getCanvas().style.cursor = "pointer";
 				
 				var coordinates = e.features[0].geometry.coordinates.slice();
@@ -657,12 +695,12 @@
 				}, {
 					hover: true
 				});
+				
+				
+			});
 			
-			
-		});
-		
-		map.on('mouseleave', 'places_visited', function () {
-
+			map.on('mouseleave', 'places_visited', function () {
+				
 				map.getCanvas().style.cursor = '';
 				if (hoveredStateId2) {
 					map.setFeatureState({
@@ -674,12 +712,13 @@
 				}
 				hoveredStateId2 = null;
 				popup.remove();
+				
+			});
 			
-		});
-		
-		
-		
-		
-	</script>
-</body>
-</html>
+			
+			
+			
+		</script>
+	</body>
+	</html>
+	
