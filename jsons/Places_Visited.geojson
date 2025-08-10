@@ -4547,13 +4547,166 @@
         "type": "Point",
         "coordinates": [
           19.49537279902673,
-          42.04760682892298 
+          42.04760682892298
         ]
       },
       "properties": {
         "OBJECTID": 271,
         "PlaceName": "Shkodër",
         "Country": "Albania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 272,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.94286901683066,
+          49.165154295358754
+        ]
+      },
+      "properties": {
+        "OBJECTID": 272,
+        "PlaceName": "Nanaimo",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 273,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.31702165029576,
+          49.31978519672101
+        ]
+      },
+      "properties": {
+        "OBJECTID": 273,
+        "PlaceName": "Parksville",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 274,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -125.90690293934425,
+          49.15256404395531
+        ]
+      },
+      "properties": {
+        "OBJECTID": 274,
+        "PlaceName": "Tofino",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 275,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.36496244510887,
+          48.42867439381557
+        ]
+      },
+      "properties": {
+        "OBJECTID": 275,
+        "PlaceName": "Victoria",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 276,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.81944608539487,
+          47.47885299997557
+        ]
+      },
+      "properties": {
+        "OBJECTID": 276,
+        "PlaceName": "The Enchantments Traverse",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 277,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.66513430934307,
+          47.598142291652664
+        ]
+      },
+      "properties": {
+        "OBJECTID": 277,
+        "PlaceName": "Leavenworth",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 278,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.33725714321261,
+          47.61243300155236
+        ]
+      },
+      "properties": {
+        "OBJECTID": 278,
+        "PlaceName": "Seattle",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 279,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.939151520357452,
+          46.16430022390113
+        ]
+      },
+      "properties": {
+        "OBJECTID": 279,
+        "PlaceName": "Dents du Midi",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 280,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.213385818548161,
+          47.1459693309561
+        ]
+      },
+      "properties": {
+        "OBJECTID": 280,
+        "PlaceName": "Leistchamm",
+        "Country": "Switzerland",
         "Lived": 0
       }
     }
