@@ -4709,6 +4709,261 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 281,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.281103364857533,
+          47.09305977841231
+        ]
+      },
+      "properties": {
+        "OBJECTID": 281,
+        "PlaceName": "Flumserberg",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 282,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.2364550234663625,
+          46.19934867211694
+        ]
+      },
+      "properties": {
+        "OBJECTID": 282,
+        "PlaceName": "Annemasse",
+        "Country": "France",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 283,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.124287505007253,
+          45.90026380892172
+        ]
+      },
+      "properties": {
+        "OBJECTID": 283,
+        "PlaceName": "Annecy",
+        "Country": "France",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 284,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.393492193709012,
+          47.267228447070075
+        ]
+      },
+      "properties": {
+        "OBJECTID": 284,
+        "PlaceName": "Innsbruck",
+        "Country": "Austria",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 285,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.652910035627828,
+          46.7107600809892
+        ]
+      },
+      "properties": {
+        "OBJECTID": 285,
+        "PlaceName": "Brixen",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 286,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.724497533175512,
+          46.59829912577926
+        ]
+      },
+      "properties": {
+        "OBJECTID": 286,
+        "PlaceName": "Seceda",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 287,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.756891998519539,
+          46.55582388661985
+        ]
+      },
+      "properties": {
+        "OBJECTID": 287,
+        "PlaceName": "Selva di Val Gardena",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 288,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.301003424766197,
+          46.61818907906129
+        ]
+      },
+      "properties": {
+        "OBJECTID": 288,
+        "PlaceName": "Tre Cime di Lavaredo",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 289,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.22317450541833,
+          46.5205032255442
+        ]
+      },
+      "properties": {
+        "OBJECTID": 289,
+        "PlaceName": "Lake Sorapis",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 290,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.13459126261937,
+          46.54031336067699
+        ]
+      },
+      "properties": {
+        "OBJECTID": 290,
+        "PlaceName": "Cortina d'Ampezzo",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 291,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.670337538415435,
+          46.57510498390644
+        ]
+      },
+      "properties": {
+        "OBJECTID": 291,
+        "PlaceName": "Urtijëi",
+        "Country": "Italy",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 292,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.520533196214462,
+          42.50667960355296
+        ]
+      },
+      "properties": {
+        "OBJECTID": 292,
+        "PlaceName": "Andorra la Vella",
+        "Country": "Andorra",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 293,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.6702797943250203,
+          42.61303207254908
+        ]
+      },
+      "properties": {
+        "OBJECTID": 293,
+        "PlaceName": "Estany de Cabana Sorda",
+        "Country": "Andorra",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 294,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.57327484180632,
+          47.65437224285896
+        ]
+      },
+      "properties": {
+        "OBJECTID": 294,
+        "PlaceName": "Jestetten",
+        "Country": "Germany",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 295,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.634217174173568,
+          47.69716786153227
+        ]
+      },
+      "properties": {
+        "OBJECTID": 295,
+        "PlaceName": "Schaffhausen",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
     }
   ]
 }
