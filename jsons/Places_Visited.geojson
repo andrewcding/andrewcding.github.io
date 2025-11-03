@@ -4964,6 +4964,74 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 296,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.326462752054155, 
+          42.69739054305241
+        ]
+      },
+      "properties": {
+        "OBJECTID": 296,
+        "PlaceName": "Sofia",
+        "Country": "Bulgaria",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 297,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.747796606756495,
+          42.148805949012456
+        ]
+      },
+      "properties": {
+        "OBJECTID": 297,
+        "PlaceName": "Plovdiv",
+        "Country": "Bulgaria",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 298,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.311106560989366,
+          42.198504105534546
+        ]
+      },
+      "properties": {
+        "OBJECTID": 298,
+        "PlaceName": "Seven Rila Lakes",
+        "Country": "Bulgaria",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 299,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.340152734200576,
+          42.13351366320405
+        ]
+      },
+      "properties": {
+        "OBJECTID": 299,
+        "PlaceName": "Rila Monastery",
+        "Country": "Bulgaria",
+        "Lived": 0
+      }
     }
   ]
 }
