@@ -5032,6 +5032,57 @@
         "Country": "Bulgaria",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 300,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.248210061484293,
+          36.04404942696761 
+        ]
+      },
+      "properties": {
+        "OBJECTID": 300,
+        "PlaceName": "Gozo",
+        "Country": "Malta",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 301,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.513760405292317,
+          35.89917160031688
+        ]
+      },
+      "properties": {
+        "OBJECTID": 301,
+        "PlaceName": "Valletta",
+        "Country": "Malta",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 302,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.40288235203074,
+          35.88629992214791
+        ]
+      },
+      "properties": {
+        "OBJECTID": 302,
+        "PlaceName": "Mdina",
+        "Country": "Malta",
+        "Lived": 0
+      }
     }
   ]
 }
