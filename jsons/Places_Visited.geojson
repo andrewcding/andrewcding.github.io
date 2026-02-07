@@ -5083,6 +5083,176 @@
         "Country": "Malta",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 303,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.122438728153487,
+          33.918650626264956
+        ]
+      },
+      "properties": {
+        "OBJECTID": 303,
+        "PlaceName": "Tozeur",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 304,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.282669336938113,
+          34.035545167054224
+        ]
+      },
+      "properties": {
+        "OBJECTID": 304,
+        "PlaceName": "Sidi Bouhlel Canyon",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 305,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.940022365070181,
+          34.321996963133905
+        ]
+      },
+      "properties": {
+        "OBJECTID": 305,
+        "PlaceName": "Chebika",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 306,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.933419113409948,
+          34.381408833360666
+        ]
+      },
+      "properties": {
+        "OBJECTID": 306,
+        "PlaceName": "Tamaghza",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 307,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.927594711278091,
+          34.41223925167958
+        ]
+      },
+      "properties": {
+        "OBJECTID": 307,
+        "PlaceName": "Midès",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 308,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.912316736662474,
+          34.01605083164822
+        ]
+      },
+      "properties": {
+        "OBJECTID": 308,
+        "PlaceName": "Ong Jmal",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 309,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.842809118574509,
+          33.99423609246459
+        ]
+      },
+      "properties": {
+        "OBJECTID": 309,
+        "PlaceName": "Mos Espa",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 310,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.634342135090384,
+          35.82500316147719
+        ]
+      },
+      "properties": {
+        "OBJECTID": 310,
+        "PlaceName": "Sousse",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 311,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.100358170753157,
+          35.671534529811304
+        ]
+      },
+      "properties": {
+        "OBJECTID": 311,
+        "PlaceName": "Kairouan",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 312,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.179203226914941,
+          36.80809922430226
+        ]
+      },
+      "properties": {
+        "OBJECTID": 312,
+        "PlaceName": "Tunis",
+        "Country": "Tunisia",
+        "Lived": 0
+      }
     }
   ]
 }
