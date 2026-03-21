@@ -4971,7 +4971,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          23.326462752054155, 
+          23.326462752054155,
           42.69739054305241
         ]
       },
@@ -5040,7 +5040,7 @@
         "type": "Point",
         "coordinates": [
           14.248210061484293,
-          36.04404942696761 
+          36.04404942696761
         ]
       },
       "properties": {
@@ -5251,6 +5251,91 @@
         "OBJECTID": 312,
         "PlaceName": "Tunis",
         "Country": "Tunisia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 313,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.458230766442455,
+          44.81704421895214
+        ]
+      },
+      "properties": {
+        "OBJECTID": 313,
+        "PlaceName": "Belgrade",
+        "Country": "Serbia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 314,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.8810779228869,
+          45.243942751753046
+        ]
+      },
+      "properties": {
+        "OBJECTID": 314,
+        "PlaceName": "Petrovaradin",
+        "Country": "Serbia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 315,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.846327266080586,
+          45.25655700621142
+        ]
+      },
+      "properties": {
+        "OBJECTID": 315,
+        "PlaceName": "Novi Sad",
+        "Country": "Serbia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 316,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.934013998693665,
+          45.202523811913736
+        ]
+      },
+      "properties": {
+        "OBJECTID": 316,
+        "PlaceName": "Sremski Karlovci",
+        "Country": "Serbia",
+        "Lived": 0
+      }
+    },
+        {
+      "type": "Feature",
+      "id": 317,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.296715735863458,
+          45.11908467188653
+        ]
+      },
+      "properties": {
+        "OBJECTID": 317,
+        "PlaceName": "Vrsac",
+        "Country": "Serbia",
         "Lived": 0
       }
     }
