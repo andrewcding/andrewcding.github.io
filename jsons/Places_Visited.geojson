@@ -5322,7 +5322,7 @@
         "Lived": 0
       }
     },
-        {
+    {
       "type": "Feature",
       "id": 317,
       "geometry": {
@@ -5336,6 +5336,23 @@
         "OBJECTID": 317,
         "PlaceName": "Vrsac",
         "Country": "Serbia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 318,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.628098230897665,
+          46.75782388117972 
+        ]
+      },
+      "properties": {
+        "OBJECTID": 318,
+        "PlaceName": "Thun",
+        "Country": "Switzerland",
         "Lived": 0
       }
     }
