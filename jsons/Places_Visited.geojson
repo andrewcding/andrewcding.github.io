@@ -5355,6 +5355,74 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 319,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.121314121699932,
+          56.9562293980041
+        ]
+      },
+      "properties": {
+        "OBJECTID": 319,
+        "PlaceName": "Riga",
+        "Country": "Latvia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 320,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.41636830394834,
+          56.01534057431826
+        ]
+      },
+      "properties": {
+        "OBJECTID": 320,
+        "PlaceName": "Hill of Crosses",
+        "Country": "Lithuania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 321,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          25.27958728397954,
+          54.686954262686235
+        ]
+      },
+      "properties": {
+        "OBJECTID": 321,
+        "PlaceName": "Vilnius",
+        "Country": "Lithuania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 322,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          24.933749928587467,
+          54.65237364777697
+        ]
+      },
+      "properties": {
+        "OBJECTID": 322,
+        "PlaceName": "Trakai",
+        "Country": "Lithuania",
+        "Lived": 0
+      }
     }
   ]
 }
