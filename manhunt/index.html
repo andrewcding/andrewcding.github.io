@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Andrew Ding · Manhunt</title>
+
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
+
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+
+	<style>
+		:root { font-family: 'Inter', sans-serif; }
+		@supports (font-variation-settings: light) {
+			:root { font-family: 'Inter var', sans-serif; }
+		}
+
+		body {
+			background-color: #29292f;
+			color: #e6e6e6;
+			margin: 0;
+		}
+
+		#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+		.link { color: #e6e6e6; text-decoration: none; }
+		.link:hover { color: #949794; }
+
+		.back_button {
+			color: #949794;
+			cursor: pointer;
+			font-family: 'Inter';
+			font-weight: 300;
+			font-size: 20px;
+			line-height: 24px;
+			background: none;
+			border: none;
+			outline: none;
+			animation: fadeIn 1.4s;
+		}
+		.back_button:hover { color: #e6e6e6; }
+
+		.control_buttons {
+			color: #949794;
+			cursor: pointer;
+			border: none;
+			background: none;
+			outline: none;
+			animation: fadeIn 1.4s;
+		}
+		.control_buttons:hover { color: #e6e6e6; }
+
+		.fade-in-text { animation: fadeIn 1.4s; }
+		@keyframes fadeIn {
+			0% { opacity: 0; }
+			100% { opacity: 1; }
+		}
+
+		.text_down p, .text_down i {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			animation: text_down 1s ease-out;
+		}
+		@keyframes text_down {
+			0% { transform: translateY(-100%); }
+			100% { transform: translateY(0%); }
+		}
+
+		#hud {
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			bottom: 30px;
+			background: rgba(41, 41, 47, 0.85);
+			border: 1px solid rgba(230, 230, 230, 0.15);
+			backdrop-filter: blur(6px);
+			-webkit-backdrop-filter: blur(6px);
+			border-radius: 10px;
+			padding: 14px 22px;
+			width: min(440px, calc(100vw - 24px));
+			box-sizing: border-box;
+			color: #e6e6e6;
+			font-weight: 300;
+			animation: fadeIn 1.4s;
+			z-index: 5;
+		}
+
+		#hud .row {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+
+		#hud .clock {
+			font-variant-numeric: tabular-nums;
+			font-size: 26px;
+			font-weight: 250;
+			letter-spacing: 0.04em;
+			min-width: 88px;
+			text-align: center;
+		}
+
+		#hud .legend {
+			display: flex;
+			gap: 12px;
+			margin-top: 8px;
+			font-size: 13px;
+			color: #c8c8c8;
+			flex-wrap: wrap;
+		}
+
+		#scrubber { min-width: 120px; }
+
+		@media (max-width: 420px) {
+			#hud { padding: 10px 14px; bottom: 16px; }
+			#hud .clock { font-size: 22px; min-width: 76px; }
+			#hud .legend { font-size: 12px; gap: 8px; }
+			.speed_select { font-size: 11px; padding: 3px 4px; }
+			.hud_btn { padding: 4px 6px; }
+		}
+
+		#hud .legend .swatch {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			margin-right: 6px;
+			vertical-align: middle;
+		}
+
+		#hud .runner-time {
+			font-variant-numeric: tabular-nums;
+			color: #949794;
+			margin-left: 4px;
+		}
+
+		#scrubber {
+			-webkit-appearance: none;
+			appearance: none;
+			flex: 1;
+			height: 4px;
+			background: #44444c;
+			border-radius: 4px;
+			outline: none;
+		}
+		#scrubber::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: #e6e6e6;
+			cursor: pointer;
+			border: none;
+		}
+		#scrubber::-moz-range-thumb {
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: #e6e6e6;
+			cursor: pointer;
+			border: none;
+		}
+
+		.hud_btn {
+			background: none;
+			border: none;
+			color: #c8c8c8;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 6px 10px;
+			outline: none;
+		}
+		.hud_btn:hover { color: #fff; }
+
+		.speed_select {
+			background: rgba(255,255,255,0.05);
+			color: #e6e6e6;
+			border: 1px solid rgba(230,230,230,0.15);
+			border-radius: 6px;
+			padding: 4px 6px;
+			font-family: inherit;
+			font-size: 12px;
+			outline: none;
+		}
+
+		.tooltip-inner {
+			background-color: #29292f;
+			opacity: 1 !important;
+			padding: 10px;
+		}
+
+		.loader {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: #949794;
+			font-weight: 300;
+			letter-spacing: 0.1em;
+			z-index: 4;
+		}
+	</style>
+</head>
+<body>
+<main>
+	<div id="map"></div>
+	<div class="loader" id="loader">LOADING TRACKS…</div>
+
+	<div id="hud">
+		<div class="row">
+			<button class="hud_btn" id="btn-play"><i class="fa fa-play"></i></button>
+			<div class="clock" id="clock">13:00</div>
+			<input id="scrubber" type="range" min="0" max="1000" value="0" step="1">
+			<select id="speed" class="speed_select" title="playback speed">
+				<option value="30">30×</option>
+				<option value="60" selected>60×</option>
+				<option value="120">120×</option>
+				<option value="300">300×</option>
+				<option value="600">600×</option>
+			</select>
+		</div>
+		<div class="legend">
+			<span><span class="swatch" style="background:#ff8c42"></span>Dani <span class="runner-time" id="dani-status">— 13:00</span></span>
+			<span><span class="swatch" style="background:#4fc3f7"></span>Kau <span class="runner-time" id="kau-status">— starts 13:30</span></span>
+			<span><span class="swatch" style="background:#b388ff"></span>Nandi <span class="runner-time" id="nandi-status">— starts 13:30</span></span>
+		</div>
+	</div>
+</main>
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYW5kd29vIiwiYSI6ImNrMjlnYnNkdTEwMHozaG5wamJvZHJyangifQ.6M4eeri_Ubmo7NedQT7NuQ';
+
+	const DANI_COLOR  = '#ff8c42';
+	const KAU_COLOR   = '#4fc3f7';
+	const NANDI_COLOR = '#b388ff';
+
+	const map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/mapbox/dark-v11',
+		center: [8.553, 47.382],
+		zoom: 13,
+		attributionControl: false,
+		pitch: 0
+	});
+
+	// ---------- helpers ----------
+	function haversine(a, b) {
+		const R = 6371000;
+		const toRad = d => d * Math.PI / 180;
+		const dLat = toRad(b[1] - a[1]);
+		const dLon = toRad(b[0] - a[0]);
+		const lat1 = toRad(a[1]);
+		const lat2 = toRad(b[1]);
+		const x = Math.sin(dLat/2)**2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon/2)**2;
+		return 2 * R * Math.asin(Math.sqrt(x));
+	}
+
+	function parseGpx(xmlText) {
+		const xml = new DOMParser().parseFromString(xmlText, 'application/xml');
+		const pts = xml.getElementsByTagName('trkpt');
+		const coords = [];
+		const rawTimes = [];
+		let allHaveTimes = pts.length > 0;
+		for (let i = 0; i < pts.length; i++) {
+			const lat = parseFloat(pts[i].getAttribute('lat'));
+			const lon = parseFloat(pts[i].getAttribute('lon'));
+			if (isNaN(lat) || isNaN(lon)) continue;
+			coords.push([lon, lat]);
+			const tEl = pts[i].getElementsByTagName('time')[0];
+			if (tEl) {
+				rawTimes.push(new Date(tEl.textContent).getTime());
+			} else {
+				rawTimes.push(NaN);
+				allHaveTimes = false;
+			}
+		}
+		return { coords, rawTimes: allHaveTimes ? rawTimes : null };
+	}
+
+	// Strava timestamps occasionally arrive non-monotonic or with runs of
+	// identical seconds (jitter / paused recording). For each tied run, spread
+	// time across the block by distance so the dot moves smoothly instead of
+	// teleporting.
+	function smoothRawTimes(coords, rawTimes) {
+		const t = rawTimes.slice();
+		for (let i = 1; i < t.length; i++) {
+			if (!Number.isFinite(t[i]) || t[i] < t[i - 1]) t[i] = t[i - 1];
+		}
+		let i = 0;
+		while (i < t.length) {
+			let j = i;
+			while (j + 1 < t.length && t[j + 1] === t[i]) j++;
+			if (j > i && j + 1 < t.length) {
+				const tA = t[i], tB = t[j + 1];
+				let total = 0;
+				const seg = [0];
+				for (let k = i + 1; k <= j + 1; k++) {
+					total += haversine(coords[k - 1], coords[k]);
+					seg.push(total);
+				}
+				if (total > 0) {
+					for (let k = i + 1; k <= j; k++) {
+						t[k] = tA + (seg[k - i] / total) * (tB - tA);
+					}
+				}
+			}
+			i = j + 1;
+		}
+		return t;
+	}
+
+	// Convert millisecond GPX timestamps to "minutes since midnight", shifting
+	// so the first sample lands at startTime. Preserves real per-vertex pacing;
+	// linear lerp in positionAtTime handles gaps as smooth motion across them.
+	function buildTimesFromRaw(coords, rawTimes, startTime) {
+		const smoothed = smoothRawTimes(coords, rawTimes);
+		const t0 = smoothed[0];
+		return smoothed.map(ms => startTime + (ms - t0) / 60000);
+	}
+
+	function cumulativeDist(coords) {
+		const c = new Array(coords.length);
+		c[0] = 0;
+		for (let i = 1; i < coords.length; i++) {
+			c[i] = c[i-1] + haversine(coords[i-1], coords[i]);
+		}
+		return c;
+	}
+
+	function nearestIndex(coords, target, fromIdx = 0) {
+		let best = fromIdx, bestD = Infinity;
+		for (let i = fromIdx; i < coords.length; i++) {
+			const d = haversine(coords[i], target);
+			if (d < bestD) { bestD = d; best = i; }
+		}
+		return best;
+	}
+
+	// First index from fromIdx where the path is within `threshold` meters of
+	// `target`. If none, returns the global nearestIndex from fromIdx onward.
+	function firstNearIndex(coords, target, fromIdx, threshold) {
+		for (let i = fromIdx; i < coords.length; i++) {
+			if (haversine(coords[i], target) < threshold) return i;
+		}
+		return nearestIndex(coords, target, fromIdx);
+	}
+
+	// minutes since midnight
+	function hm(h, m) { return h * 60 + m; }
+
+	function fmtClock(minutesFloat) {
+		const total = Math.floor(minutesFloat);
+		const h = Math.floor(total / 60);
+		const m = total % 60;
+		const s = Math.floor((minutesFloat - total) * 60);
+		return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+	}
+	function fmtClockShort(minutesFloat) {
+		const total = Math.floor(minutesFloat);
+		const h = Math.floor(total / 60);
+		const m = total % 60;
+		return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+	}
+
+	// Dani's GPX has a prepended tram-chain segment (no Strava data) followed
+	// by the actual Strava recording starting at idxStrava. The pre-Strava
+	// section is timed linearly by cumulative distance from chainStart to
+	// stravaStart; the Strava section uses Dani's per-km splits.
+	function buildDaniTimes(cum, idxStrava, splits, fracLast, chainStart, stravaStart) {
+		const N = cum.length;
+		const t = new Array(N);
+
+		// pre-Strava: linear by cumDist from chainStart to stravaStart
+		const dEnd = cum[idxStrava] - cum[0];
+		for (let i = 0; i <= idxStrava; i++) {
+			const f = dEnd > 0 ? (cum[i] - cum[0]) / dEnd : 0;
+			t[i] = chainStart + f * (stravaStart - chainStart);
+		}
+
+		// Strava: per-km splits, distances measured from idxStrava
+		const cumT = [0];
+		for (let i = 0; i < splits.length; i++) cumT.push(cumT[i] + splits[i]);
+		const lastPace = fracLast ? fracLast.pace : splits[splits.length - 1];
+		const totalKmFull = splits.length;
+		const totalKm = totalKmFull + (fracLast ? fracLast.km : 0);
+		const totalT = cumT[totalKmFull] + (fracLast ? fracLast.km * fracLast.pace : 0);
+
+		for (let i = idxStrava + 1; i < N; i++) {
+			const km = (cum[i] - cum[idxStrava]) / 1000;
+			let off;
+			if (km <= totalKmFull) {
+				const k = Math.floor(km);
+				const frac = km - k;
+				const pace = (k < splits.length) ? splits[k] : lastPace;
+				off = cumT[k] + frac * pace;
+			} else if (fracLast && km <= totalKm) {
+				off = cumT[totalKmFull] + (km - totalKmFull) * fracLast.pace;
+			} else {
+				off = totalT + (km - totalKm) * lastPace;
+			}
+			t[i] = stravaStart + off;
+		}
+
+		for (let i = 1; i < N; i++) if (t[i] < t[i-1]) t[i] = t[i-1];
+		return t;
+	}
+
+	// Apply per-km Strava splits to a track. `splits` is an array of pace (in
+	// minutes per km) for km 1..N. `fracLast` is an optional { km, pace } for
+	// the trailing fractional km. Past the splits' total length, time
+	// extrapolates at the last known pace.
+	function paceMin(m, s) { return m + s / 60; }
+
+	function buildSplitTimes(cum, splits, fracLast, startTime, anchor) {
+		const N = cum.length;
+		const cumT = [0];
+		for (let i = 0; i < splits.length; i++) cumT.push(cumT[i] + splits[i]);
+		const lastPace = fracLast ? fracLast.pace : splits[splits.length - 1];
+		const totalKmFull = splits.length;
+		const totalKm = totalKmFull + (fracLast ? fracLast.km : 0);
+		const totalT = cumT[totalKmFull] + (fracLast ? fracLast.km * fracLast.pace : 0);
+
+		const t = new Array(N);
+		for (let i = 0; i < N; i++) {
+			const km = cum[i] / 1000;
+			let off;
+			if (km <= totalKmFull) {
+				const k = Math.floor(km);
+				const frac = km - k;
+				const pace = (k < splits.length) ? splits[k] : lastPace;
+				off = cumT[k] + frac * pace;
+			} else if (fracLast && km <= totalKm) {
+				off = cumT[totalKmFull] + (km - totalKmFull) * fracLast.pace;
+			} else {
+				off = totalT + (km - totalKm) * lastPace;
+			}
+			t[i] = startTime + off;
+		}
+
+		// Optional hard anchor: stretch/compress the pre-anchor section to land
+		// at anchor.time at anchor.idx; shift the post-anchor section to keep
+		// the splits' relative pacing past that point.
+		if (anchor && anchor.idx > 0 && anchor.idx < N) {
+			const tPred = t[anchor.idx];
+			const predOff = tPred - startTime;
+			const desiredOff = anchor.time - startTime;
+			if (predOff > 0) {
+				const scale = desiredOff / predOff;
+				for (let i = 0; i <= anchor.idx; i++) {
+					t[i] = startTime + (t[i] - startTime) * scale;
+				}
+				const shift = anchor.time - tPred;
+				for (let i = anchor.idx + 1; i < N; i++) t[i] += shift;
+			}
+		}
+
+		for (let i = 1; i < N; i++) if (t[i] < t[i-1]) t[i] = t[i-1];
+		return t;
+	}
+
+	// Find position at time T given coords[] and times[] (monotonic)
+	// Returns null if T < times[0]; clamps to last point if T > times[last].
+	function positionAtTime(coords, times, T) {
+		if (T < times[0]) return null;
+		if (T >= times[times.length - 1]) {
+			return { coord: coords[coords.length - 1], idx: coords.length - 1, frac: 0 };
+		}
+		// binary search
+		let lo = 0, hi = times.length - 1;
+		while (hi - lo > 1) {
+			const mid = (lo + hi) >> 1;
+			if (times[mid] <= T) lo = mid; else hi = mid;
+		}
+		const span = times[hi] - times[lo];
+		const f = span > 0 ? (T - times[lo]) / span : 0;
+		const x = coords[lo][0] + f * (coords[hi][0] - coords[lo][0]);
+		const y = coords[lo][1] + f * (coords[hi][1] - coords[lo][1]);
+		return { coord: [x, y], idx: lo, frac: f };
+	}
+
+	// ---------- Dani waypoints (provided) ----------
+	// 47°23'12.2"N 8°33'03.9"E @ 13:31
+	// 47°22'53.1"N 8°33'28.0"E @ 13:44
+	// 47°22'37.8"N 8°33'33.3"E @ 13:59
+	// 47°22'35.7"N 8°32'23.0"E @ 14:15
+	// Strava start point — matches the seam between the prepended tram chain
+	// and the original Strava recording. (Dani was here at 13:31.)
+	const DANI_STRAVA_START = {
+		lon: 8 + 33/60 + 3.9/3600,
+		lat: 47 + 23/60 + 12.2/3600,
+		t: hm(13, 31)
+	};
+
+	const DANI_SPLITS = [
+		paceMin(11, 40), paceMin(8, 25), paceMin(8, 0),  paceMin(4, 4),
+		paceMin(5, 27),  paceMin(9, 23), paceMin(8, 2)
+	];
+	const DANI_FRAC = { km: 0.74, pace: paceMin(10, 50) };
+
+	// Strava splits — pace in min/km per km. KM3 missing for Kau is filled
+	// with the average of its neighbors.
+	const NANDI_SPLITS = [
+		paceMin(1, 51), paceMin(2, 55), paceMin(2, 1),  paceMin(2, 5),
+		paceMin(3, 42), paceMin(9, 11), paceMin(11, 51), paceMin(9, 29),
+		paceMin(8, 37), paceMin(2, 35)
+	];
+	const NANDI_FRAC = { km: 0.30, pace: paceMin(2, 42) };
+
+	const KAU_SPLITS = [
+		paceMin(10, 36), paceMin(0, 57), null,           paceMin(4, 14),
+		paceMin(2, 50),  paceMin(2, 57), paceMin(6, 14), paceMin(0, 7),
+		paceMin(10, 22), paceMin(12, 31)
+	];
+	KAU_SPLITS[2] = (KAU_SPLITS[1] + KAU_SPLITS[3]) / 2;
+	const KAU_FRAC = null;
+
+	// Both Kau and Nandi were at Milchbuck (Zurich) at 13:42.
+	const MILCHBUCK = [8.5407, 47.4011];
+	const MILCHBUCK_TIME = hm(13, 42);
+
+	// ---------- runtime state ----------
+	let dani  = null;
+	let kau   = null;
+	let nandi = null;
+	let tStart = hm(13, 0);
+	let tEnd   = hm(14, 30);
+	let tNow   = tStart;
+	let playing = false;
+	let lastFrameMs = 0;
+	let speed = 60; // sim minutes per real second... actually we use multiplier of real time
+
+	// ---------- map setup ----------
+	map.on('load', async () => {
+		try {
+			const [daniText, kauText, nandiText] = await Promise.all([
+				fetch('data/Dani.gpx').then(r => r.text()),
+				fetch('data/Kau.gpx').then(r => r.text()),
+				fetch('data/Nandi.gpx').then(r => r.text())
+			]);
+
+			const daniParsed  = parseGpx(daniText);
+			const kauParsed   = parseGpx(kauText);
+			const nandiParsed = parseGpx(nandiText);
+			const daniCoords  = daniParsed.coords;
+			const kauCoords   = kauParsed.coords;
+			const nandiCoords = nandiParsed.coords;
+
+			const daniCum  = cumulativeDist(daniCoords);
+			const kauCum   = cumulativeDist(kauCoords);
+			const nandiCum = cumulativeDist(nandiCoords);
+
+			// Locate the seam between the prepended tram chain and the start of
+			// Dani's Strava recording (the first vertex within 40 m of the
+			// 13:31 strava-start coord, scanned after index 0).
+			const idxStrava = firstNearIndex(
+				daniCoords,
+				[DANI_STRAVA_START.lon, DANI_STRAVA_START.lat],
+				1,
+				40
+			);
+			const daniTimes = buildDaniTimes(
+				daniCum, idxStrava,
+				DANI_SPLITS, DANI_FRAC,
+				hm(13, 0), DANI_STRAVA_START.t
+			);
+			// Kau: use real GPX timestamps when present; otherwise fall back to
+			// per-km splits anchored at Milchbuck.
+			const kauTimes = kauParsed.rawTimes
+				? buildTimesFromRaw(kauCoords, kauParsed.rawTimes, hm(13,30))
+				: buildSplitTimes(kauCum, KAU_SPLITS, KAU_FRAC, hm(13,30),
+					{ idx: firstNearIndex(kauCoords, MILCHBUCK, 1, 200), time: MILCHBUCK_TIME });
+
+			const nandiTimes = nandiParsed.rawTimes
+				? buildTimesFromRaw(nandiCoords, nandiParsed.rawTimes, hm(13,30))
+				: buildSplitTimes(nandiCum, NANDI_SPLITS, NANDI_FRAC, hm(13,30),
+					{ idx: firstNearIndex(nandiCoords, MILCHBUCK, 1, 200), time: MILCHBUCK_TIME });
+
+			dani  = { coords: daniCoords,  times: daniTimes };
+			kau   = { coords: kauCoords,   times: kauTimes };
+			nandi = { coords: nandiCoords, times: nandiTimes };
+
+			tStart = Math.min(daniTimes[0], kauTimes[0], nandiTimes[0]);
+			tEnd   = Math.max(daniTimes[daniTimes.length-1], kauTimes[kauTimes.length-1], nandiTimes[nandiTimes.length-1]);
+			tNow   = tStart;
+
+			const bounds = new mapboxgl.LngLatBounds();
+			daniCoords.forEach(c => bounds.extend(c));
+			kauCoords.forEach(c => bounds.extend(c));
+			nandiCoords.forEach(c => bounds.extend(c));
+			map.fitBounds(bounds, { padding: 80, duration: 0 });
+
+			// faded full routes
+			map.addSource('dani-full',  { type: 'geojson', data: lineFeature(daniCoords) });
+			map.addSource('kau-full',   { type: 'geojson', data: lineFeature(kauCoords) });
+			map.addSource('nandi-full', { type: 'geojson', data: lineFeature(nandiCoords) });
+
+			map.addLayer({ id: 'dani-full',  type: 'line', source: 'dani-full',
+				paint: { 'line-color': DANI_COLOR,  'line-width': 2, 'line-opacity': 0.18 }});
+			map.addLayer({ id: 'kau-full',   type: 'line', source: 'kau-full',
+				paint: { 'line-color': KAU_COLOR,   'line-width': 2, 'line-opacity': 0.18 }});
+			map.addLayer({ id: 'nandi-full', type: 'line', source: 'nandi-full',
+				paint: { 'line-color': NANDI_COLOR, 'line-width': 2, 'line-opacity': 0.18 }});
+
+			// active trail
+			map.addSource('dani-trail',  { type: 'geojson', data: emptyLine() });
+			map.addSource('kau-trail',   { type: 'geojson', data: emptyLine() });
+			map.addSource('nandi-trail', { type: 'geojson', data: emptyLine() });
+
+			map.addLayer({ id: 'dani-trail-glow', type: 'line', source: 'dani-trail',
+				paint: { 'line-color': DANI_COLOR, 'line-width': 8, 'line-opacity': 0.18, 'line-blur': 3 }});
+			map.addLayer({ id: 'dani-trail', type: 'line', source: 'dani-trail',
+				paint: { 'line-color': DANI_COLOR, 'line-width': 3 }});
+
+			map.addLayer({ id: 'kau-trail-glow', type: 'line', source: 'kau-trail',
+				paint: { 'line-color': KAU_COLOR, 'line-width': 8, 'line-opacity': 0.18, 'line-blur': 3 }});
+			map.addLayer({ id: 'kau-trail', type: 'line', source: 'kau-trail',
+				paint: { 'line-color': KAU_COLOR, 'line-width': 3 }});
+
+			map.addLayer({ id: 'nandi-trail-glow', type: 'line', source: 'nandi-trail',
+				paint: { 'line-color': NANDI_COLOR, 'line-width': 8, 'line-opacity': 0.18, 'line-blur': 3 }});
+			map.addLayer({ id: 'nandi-trail', type: 'line', source: 'nandi-trail',
+				paint: { 'line-color': NANDI_COLOR, 'line-width': 3 }});
+
+			// runners (dots)
+			map.addSource('runners', { type: 'geojson', data: { type: 'FeatureCollection', features: [] }});
+
+			map.addLayer({
+				id: 'runners-halo', type: 'circle', source: 'runners',
+				paint: {
+					'circle-color': ['get', 'color'],
+					'circle-radius': 14,
+					'circle-opacity': 0.18,
+					'circle-blur': 0.5
+				}
+			});
+			map.addLayer({
+				id: 'runners-dot', type: 'circle', source: 'runners',
+				paint: {
+					'circle-color': ['get', 'color'],
+					'circle-radius': 6,
+					'circle-stroke-color': '#fff',
+					'circle-stroke-width': 1.5
+				}
+			});
+			map.addLayer({
+				id: 'runners-label', type: 'symbol', source: 'runners',
+				layout: {
+					'text-field': ['get', 'name'],
+					'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+					'text-size': 13,
+					'text-offset': [0, -1.4],
+					'text-anchor': 'bottom'
+				},
+				paint: {
+					'text-color': '#fff',
+					'text-halo-color': '#29292f',
+					'text-halo-width': 1.5
+				}
+			});
+
+			document.getElementById('loader').style.display = 'none';
+
+			// kick the first render and autoplay
+			renderAt(tNow);
+			setPlaying(true);
+		} catch (err) {
+			console.error(err);
+			document.getElementById('loader').textContent = 'FAILED TO LOAD TRACKS';
+		}
+	});
+
+	function lineFeature(coords) {
+		return { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: coords }};
+	}
+	function emptyLine() {
+		return { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: [] }};
+	}
+
+	function trailUpToTime(coords, times, T) {
+		if (T < times[0]) return [];
+		if (T >= times[times.length - 1]) return coords.slice();
+		// binary search
+		let lo = 0, hi = times.length - 1;
+		while (hi - lo > 1) {
+			const mid = (lo + hi) >> 1;
+			if (times[mid] <= T) lo = mid; else hi = mid;
+		}
+		const span = times[hi] - times[lo];
+		const f = span > 0 ? (T - times[lo]) / span : 0;
+		const x = coords[lo][0] + f * (coords[hi][0] - coords[lo][0]);
+		const y = coords[lo][1] + f * (coords[hi][1] - coords[lo][1]);
+		const out = coords.slice(0, lo + 1);
+		out.push([x, y]);
+		return out;
+	}
+
+	function renderAt(T) {
+		if (!dani || !kau || !nandi) return;
+
+		const daniLine  = trailUpToTime(dani.coords,  dani.times,  T);
+		const kauLine   = trailUpToTime(kau.coords,   kau.times,   T);
+		const nandiLine = trailUpToTime(nandi.coords, nandi.times, T);
+
+		map.getSource('dani-trail').setData(lineFeature(daniLine));
+		map.getSource('kau-trail').setData(lineFeature(kauLine));
+		map.getSource('nandi-trail').setData(lineFeature(nandiLine));
+
+		const features = [];
+		const pushDot = (runner, line, name, color) => {
+			if (T < runner.times[0]) return;
+			const tip = line.length ? line[line.length - 1] : runner.coords[0];
+			features.push({
+				type: 'Feature',
+				properties: { name, color },
+				geometry: { type: 'Point', coordinates: tip }
+			});
+		};
+		pushDot(dani,  daniLine,  'Dani',  DANI_COLOR);
+		pushDot(kau,   kauLine,   'Kau',   KAU_COLOR);
+		pushDot(nandi, nandiLine, 'Nandi', NANDI_COLOR);
+		map.getSource('runners').setData({ type: 'FeatureCollection', features });
+
+		document.getElementById('clock').textContent = fmtClock(T);
+		const status = (r) =>
+			(T < r.times[0]) ? '— starts ' + fmtClockShort(r.times[0]) :
+			(T >= r.times[r.times.length - 1]) ? '— finished ' + fmtClockShort(r.times[r.times.length-1]) :
+			'— ' + fmtClockShort(T);
+		document.getElementById('dani-status').textContent  = status(dani);
+		document.getElementById('kau-status').textContent   = status(kau);
+		document.getElementById('nandi-status').textContent = status(nandi);
+
+		const span = tEnd - tStart;
+		const v = span > 0 ? Math.round((T - tStart) / span * 1000) : 0;
+		const sc = document.getElementById('scrubber');
+		if (document.activeElement !== sc) sc.value = v;
+	}
+
+	function tick(now) {
+		if (!playing) return;
+		const dt = (now - lastFrameMs) / 1000;
+		lastFrameMs = now;
+		tNow += dt * (speed / 60);
+		if (tNow >= tEnd) {
+			tNow = tEnd;
+			renderAt(tNow);
+			setPlaying(false);
+			return;
+		}
+		renderAt(tNow);
+		requestAnimationFrame(tick);
+	}
+
+	function setPlaying(p) {
+		playing = p;
+		const btn = document.getElementById('btn-play');
+		btn.innerHTML = p ? '<i class="fa fa-pause"></i>' : '<i class="fa fa-play"></i>';
+		if (p) {
+			if (tNow >= tEnd) tNow = tStart;
+			lastFrameMs = performance.now();
+			requestAnimationFrame(tick);
+		}
+	}
+
+	document.getElementById('btn-play').addEventListener('click', () => setPlaying(!playing));
+
+	document.getElementById('scrubber').addEventListener('input', (e) => {
+		const v = parseInt(e.target.value, 10);
+		tNow = tStart + (v / 1000) * (tEnd - tStart);
+		renderAt(tNow);
+	});
+
+	document.getElementById('speed').addEventListener('change', (e) => {
+		speed = parseFloat(e.target.value);
+	});
+
+	document.body.addEventListener('keyup', (e) => {
+		if (e.code === 'Space' || e.key === ' ') {
+			setPlaying(!playing);
+			e.preventDefault();
+		}
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/c/Users/toron/anaconda3/python *)"
+    ]
+  }
+}
