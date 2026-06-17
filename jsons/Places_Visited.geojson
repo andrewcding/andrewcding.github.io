@@ -5346,7 +5346,7 @@
         "type": "Point",
         "coordinates": [
           7.628098230897665,
-          46.75782388117972 
+          46.75782388117972
         ]
       },
       "properties": {
@@ -5421,6 +5421,618 @@
         "OBJECTID": 322,
         "PlaceName": "Trakai",
         "Country": "Lithuania",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 323,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.9625501864629795,
+          46.71164762120789
+        ]
+      },
+      "properties": {
+        "OBJECTID": 323,
+        "PlaceName": "Iseltwald",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 324,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.162174768065276,
+          46.806280149961225
+        ]
+      },
+      "properties": {
+        "OBJECTID": 324,
+        "PlaceName": "Fribourg",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 325,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.154365398541461,
+          46.78222184896358
+        ]
+      },
+      "properties": {
+        "OBJECTID": 325,
+        "PlaceName": "Lungern",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 326,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.376928286613067,
+          47.42426622948425
+        ]
+      },
+      "properties": {
+        "OBJECTID": 326,
+        "PlaceName": "St. Gallen",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 327,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.83560315362683,
+          46.490815458887546
+        ]
+      },
+      "properties": {
+        "OBJECTID": 327,
+        "PlaceName": "St. Moritz",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 328,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.49242911467793,
+          49.88510031187388
+        ]
+      },
+      "properties": {
+        "OBJECTID": 328,
+        "PlaceName": "Kelowna",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 329,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.4676267016021,
+          49.03159899817765
+        ]
+      },
+      "properties": {
+        "OBJECTID": 329,
+        "PlaceName": "Osoyoos",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 330,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.92672424863389,
+          49.05190884080079
+        ]
+      },
+      "properties": {
+        "OBJECTID": 330,
+        "PlaceName": "Kettle Valley",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 331,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.57257747751747,
+          49.344991206715804
+        ]
+      },
+      "properties": {
+        "OBJECTID": 331,
+        "PlaceName": "Okanagan Falls",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 332,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.59441499171088,
+          49.49890983721762
+        ]
+      },
+      "properties": {
+        "OBJECTID": 332,
+        "PlaceName": "Penticton",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 333,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.43665101477124,
+          49.38391159766203
+        ]
+      },
+      "properties": {
+        "OBJECTID": 333,
+        "PlaceName": "Hope",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 334,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8057669922986,
+          49.024454231922014
+        ]
+      },
+      "properties": {
+        "OBJECTID": 334,
+        "PlaceName": "White Rock",
+        "Country": "Canada",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 335,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.1833679512756796,
+          55.95098065845828
+        ]
+      },
+      "properties": {
+        "OBJECTID": 335,
+        "PlaceName": "Edinburgh",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 336,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.225739169574509,
+          57.477617277964285
+        ]
+      },
+      "properties": {
+        "OBJECTID": 336,
+        "PlaceName": "Inverness",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 337,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.451536573165241,
+          57.33114307870184
+        ]
+      },
+      "properties": {
+        "OBJECTID": 337,
+        "PlaceName": "Loch Ness",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 338,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.9457401569521577,
+          57.981779673113884
+        ]
+      },
+      "properties": {
+        "OBJECTID": 338,
+        "PlaceName": "Dunrobin Castle",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 339,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.1615931924161464,
+          58.34562680275276
+        ]
+      },
+      "properties": {
+        "OBJECTID": 339,
+        "PlaceName": "Whaligoe Steps",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 340,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.428481112097518,
+          57.59548181724731
+        ]
+      },
+      "properties": {
+        "OBJECTID": 340,
+        "PlaceName": "Dingwall",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 341,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.0250709757958743,
+          58.6440703184751
+        ]
+      },
+      "properties": {
+        "OBJECTID": 341,
+        "PlaceName": "Duncansby Head",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 342,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.554097286691929,
+          58.61037264101493
+        ]
+      },
+      "properties": {
+        "OBJECTID": 342,
+        "PlaceName": "Scrabster",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 343,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.679198299115361,
+          58.5500938947279
+        ]
+      },
+      "properties": {
+        "OBJECTID": 343,
+        "PlaceName": "Ceannabeinne Beach",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 344,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.720447098578535,
+          58.5630096132185
+        ]
+      },
+      "properties": {
+        "OBJECTID": 344,
+        "PlaceName": "Smoo Cave",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 345,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.766446381841744,
+          58.57809819149916
+        ]
+      },
+      "properties": {
+        "OBJECTID": 345,
+        "PlaceName": "Balnakeil Beach",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 346,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.049687572229089,
+          58.45868589406964
+        ]
+      },
+      "properties": {
+        "OBJECTID": 346,
+        "PlaceName": "Kinlochbervie",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 347,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.018140443555797,
+          58.25743224853581
+        ]
+      },
+      "properties": {
+        "OBJECTID": 347,
+        "PlaceName": "Kylesku",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 348,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.9940950329776586,
+          58.16628015194485
+        ]
+      },
+      "properties": {
+        "OBJECTID": 348,
+        "PlaceName": "Ardvreck Castle",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 349,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.16146755175762,
+          57.89522386499391
+        ]
+      },
+      "properties": {
+        "OBJECTID": 349,
+        "PlaceName": "Ullapool",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 350,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.206133993073741,
+          58.0431116060909
+        ]
+      },
+      "properties": {
+        "OBJECTID": 350,
+        "PlaceName": "Stac Pollaidh",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 351,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.814937245477,
+          57.431912537252515
+        ]
+      },
+      "properties": {
+        "OBJECTID": 351,
+        "PlaceName": "Applecross",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 352,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.174814832164612,
+          57.507193588702826
+        ]
+      },
+      "properties": {
+        "OBJECTID": 352,
+        "PlaceName": "Storr",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 353,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.197130018999337,
+          57.413212501671
+        ]
+      },
+      "properties": {
+        "OBJECTID": 353,
+        "PlaceName": "Portree",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 354,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.5165168970035685,
+          57.273189164170404
+        ]
+      },
+      "properties": {
+        "OBJECTID": 354,
+        "PlaceName": "Eilean Donan",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 355,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.474425498798771,
+          56.41232677789426
+        ]
+      },
+      "properties": {
+        "OBJECTID": 355,
+        "PlaceName": "Oban",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 356,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.433336943204226,
+          56.875975908556825
+        ]
+      },
+      "properties": {
+        "OBJECTID": 356,
+        "PlaceName": "Glenfinnan Viaduct",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 357,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.255011484330584,
+          55.85714300146925
+        ]
+      },
+      "properties": {
+        "OBJECTID": 357,
+        "PlaceName": "Glasgow",
+        "Country": "United Kingdom",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 358,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.1214605006221441,
+          52.205098784910916
+        ]
+      },
+      "properties": {
+        "OBJECTID": 358,
+        "PlaceName": "Cambridge",
+        "Country": "United Kingdom",
         "Lived": 0
       }
     }
