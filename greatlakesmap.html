@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
 	
 	<style>
@@ -283,8 +282,6 @@
 		
 		<script>
 			
-			setTimeout(showPage, 1000);
-			
 			function showPage() {
 				document.getElementById("loader").style.display = "none";
 				document.getElementById("cover-spin").style.display = "none";
@@ -314,16 +311,32 @@
 			canvas.width = window.innerWidth-0.15*window.innerWidth;
 			canvas.height = window.innerHeight-0.15*window.innerHeight;
 			
+			// Full-resolution poster dimensions (drawing coordinates are based on these,
+			// so the low-res preview can be drawn in the same space before it loads)
+			var FULL_W = 14400;
+			var FULL_H = 10800;
+
 			var gkhead = new Image;
-			
+			var previewImg = new Image;
+			var fullReady = false;
+			var globalRedraw = null;
+
+			function drawPoster(ctx){
+				if (fullReady) {
+					ctx.drawImage(gkhead,0,0);
+				} else {
+					ctx.drawImage(previewImg,0,0,FULL_W,FULL_H);
+				}
+			}
+
 			window.onresize = function(){
 				canvas.width = window.innerWidth-0.15*window.innerWidth;
 				canvas.height = window.innerHeight-0.15*window.innerHeight;
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
 				ctx.scale(0.07,0.07);
-				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
-				
+				ctx.translate((canvas.width-FULL_W*0.07)*7,canvas.height*0.4);
+
 				// Clear the entire canvas
 				var p1 = ctx.transformedPoint(0,0);
 				var p2 = ctx.transformedPoint(canvas.width,canvas.height);
@@ -332,19 +345,19 @@
 				ctx.setTransform(1,0,0,1,0,0);
 				ctx.clearRect(0,0,canvas.width,canvas.height);
 				ctx.restore();
-				
-				ctx.drawImage(gkhead,0,0);
+
+				drawPoster(ctx);
 			}
-			
-			window.onload = function(){		
-				
+
+			function initMap(){
+
 				var ctx = canvas.getContext('2d');
 				trackTransforms(ctx);
 				ctx.scale(0.07,0.07);
-				ctx.translate((canvas.width-gkhead.width*0.07)*7,canvas.height*0.4);
-				
+				ctx.translate((canvas.width-FULL_W*0.07)*7,canvas.height*0.4);
+
 				function redraw(){
-					
+
 					// Clear the entire canvas
 					var p1 = ctx.transformedPoint(0,0);
 					var p2 = ctx.transformedPoint(canvas.width,canvas.height);
@@ -353,11 +366,13 @@
 					ctx.setTransform(1,0,0,1,0,0);
 					ctx.clearRect(0,0,canvas.width,canvas.height);
 					ctx.restore();
-					
-					ctx.drawImage(gkhead,0,0);
-					
+
+					drawPoster(ctx);
+
 				}
+				globalRedraw = redraw;
 				redraw();
+				showPage();
 				
 				var lastX=canvas.width/2, lastY=canvas.height/2;
 				
@@ -455,9 +470,32 @@
 				
 				canvas.addEventListener('DOMMouseScroll',handleScroll,false);
 				canvas.addEventListener('mousewheel',handleScroll,false);
+			}
+
+			// Two-stage load: draw the small preview immediately, then swap in the
+			// full-resolution poster once the browser has downloaded and decoded it.
+			previewImg.onload = initMap;
+			previewImg.onerror = function(){
+				// preview missing: wait for the full image instead
+				if (fullReady) initMap();
+				else previewFailed = true;
 			};
-			
+			var previewFailed = false;
+			previewImg.src = './imgs/finalposter_preview.jpg';
+
 			gkhead.src = './imgs/finalposter.jpg';
+			gkhead.decode().then(function(){
+				fullReady = true;
+				if (globalRedraw) globalRedraw();
+				else if (previewFailed) initMap();
+			}).catch(function(){
+				// decode() unsupported or failed; fall back to onload
+				gkhead.onload = function(){
+					fullReady = true;
+					if (globalRedraw) globalRedraw();
+					else if (previewFailed) initMap();
+				};
+			});
 			
 			// Adds ctx.getTransform() - returns an SVGMatrix
 			// Adds ctx.transformedPoint(x,y) - returns an SVGPoint

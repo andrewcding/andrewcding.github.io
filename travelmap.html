@@ -12,7 +12,6 @@
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	
 	<!-- Font Awesome-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/baa8a15a0c.js" crossorigin="anonymous"></script>
 	
 	<!-- Mapbox-->
@@ -364,7 +363,7 @@
 				// COUNTRIES -----------------------------------
 				map.addSource("countries_source", {
 					"type": "geojson",
-					"data": "https://andrewding.ca/jsons/Countries_Visited.geojson"
+					"data": "./jsons/Countries_Visited.geojson"
 				});
 				
 				map.addLayer(
@@ -411,7 +410,7 @@
 				
 				map.addSource("places_source", {
 					"type": "geojson",
-					"data": "https://andrewding.ca/jsons/Places_Visited.geojson"
+					"data": "./jsons/Places_Visited.geojson"
 				});
 				
 				map.addLayer({

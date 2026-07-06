@@ -6035,6 +6035,57 @@
         "Country": "United Kingdom",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 359,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.8455311,
+          44.8702281
+        ]
+      },
+      "properties": {
+        "OBJECTID": 359,
+        "PlaceName": "Pula",
+        "Country": "Croatia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 360,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.9772795,
+          45.8130967
+        ]
+      },
+      "properties": {
+        "OBJECTID": 360,
+        "PlaceName": "Zagreb",
+        "Country": "Croatia",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 361,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.610270964876777,
+          44.90211807185661
+        ]
+      },
+      "properties": {
+        "OBJECTID": 361,
+        "PlaceName": "Plitvice Lakes National Park",
+        "Country": "Croatia",
+        "Lived": 0
+      }
     }
   ]
 }
