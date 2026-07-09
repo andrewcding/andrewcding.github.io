@@ -6086,6 +6086,23 @@
         "Country": "Croatia",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 362,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1296751,
+          49.8158683
+        ]
+      },
+      "properties": {
+        "OBJECTID": 362,
+        "PlaceName": "Luxembourg",
+        "Country": "Luxembourg",
+        "Lived": 0
+      }
     }
   ]
 }
