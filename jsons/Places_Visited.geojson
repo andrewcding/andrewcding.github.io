@@ -6103,6 +6103,23 @@
         "Country": "Luxembourg",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 363,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.5878261,
+          47.5581077
+        ]
+      },
+      "properties": {
+        "OBJECTID": 363,
+        "PlaceName": "Basel",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
     }
   ]
 }
