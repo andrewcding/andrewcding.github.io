@@ -6120,6 +6120,108 @@
         "Country": "Switzerland",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 364,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.9247055,
+          46.107342
+        ]
+      },
+      "properties": {
+        "OBJECTID": 364,
+        "PlaceName": "Saas-Fee",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 365,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.029307,
+          46.8403661
+        ]
+      },
+      "properties": {
+        "OBJECTID": 365,
+        "PlaceName": "Kistenpasshütte",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 366,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.8412948,
+          47.9977308
+        ]
+      },
+      "properties": {
+        "OBJECTID": 366,
+        "PlaceName": "Freiburg im Breisgau",
+        "Country": "Germany",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 367,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.510312,
+          47.1663397
+        ]
+      },
+      "properties": {
+        "OBJECTID": 367,
+        "PlaceName": "Schaan",
+        "Country": "Liechtenstein",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 368,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.424809986252004,
+          47.247240261958304
+        ]
+      },
+      "properties": {
+        "OBJECTID": 368,
+        "PlaceName": "Saxer Lücke",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 369,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.01498015533615,
+          46.85189558262511
+        ]
+      },
+      "properties": {
+        "OBJECTID": 369,
+        "PlaceName": "Limmernsee",
+        "Country": "Switzerland",
+        "Lived": 0
+      }
     }
   ]
 }
