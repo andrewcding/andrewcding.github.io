@@ -6324,6 +6324,57 @@
         "Country": "Slovakia",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 376,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.0578303,
+          42.3588336
+        ]
+      },
+      "properties": {
+        "OBJECTID": 376,
+        "PlaceName": "Boston",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 377,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.1040018,
+          42.3656347
+        ]
+      },
+      "properties": {
+        "OBJECTID": 377,
+        "PlaceName": "Cambridge",
+        "Country": "United States",
+        "Lived": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 378,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.6177486,
+          42.6572112
+        ]
+      },
+      "properties": {
+        "OBJECTID": 378,
+        "PlaceName": "Rockport",
+        "Country": "United States",
+        "Lived": 0
+      }
     }
   ]
 }
