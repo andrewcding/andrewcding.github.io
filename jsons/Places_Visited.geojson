@@ -6375,6 +6375,91 @@
         "Country": "United States",
         "Lived": 0
       }
+    },
+    {
+      "type": "Feature",
+      "id": 379,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4038956,
+          44.2083684
+        ]
+      },
+      "properties": {
+        "OBJECTID": 379,
+        "PlaceName": "Crawford Notch",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 380,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.1810703,
+          44.4696602
+        ]
+      },
+      "properties": {
+        "OBJECTID": 380,
+        "PlaceName": "Berlin, NH",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 381,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.6435555,
+          44.1447329
+        ]
+      },
+      "properties": {
+        "OBJECTID": 381,
+        "PlaceName": "Franconia Ridge",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 382,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4128343,
+          41.8239891
+        ]
+      },
+      "properties": {
+        "OBJECTID": 382,
+        "PlaceName": "Providence",
+        "Country": "United States",
+        "Lived": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 383,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.3137707,
+          41.4899827
+        ]
+      },
+      "properties": {
+        "OBJECTID": 383,
+        "PlaceName": "Newport, RI",
+        "Country": "United States",
+        "Lived": 0
+      }
     }
   ]
 }
